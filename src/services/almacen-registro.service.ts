@@ -1,0 +1,39 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import {AlmacenRequestDTO} from "../dto/almacen-request-dto";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AlmacenRegistroService {
+  private apiUrl = 'http://localhost:8081/almacenes';
+  private provinciasUrl = 'http://localhost:8081/provincias/lista';
+  private usuarioUrl = 'http://localhost:8081/usuarios';
+
+  constructor(private http: HttpClient) {}
+
+  // Obtener un almacén por su ID
+  obtenerAlmacenPorId(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`);
+  }
+
+  // Actualizar un almacén
+  actualizarAlmacen(id: number, datos: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/editar/${id}`, datos);
+  }
+
+  // Obtener lista de provincias
+  obtenerProvincias(): Observable<any[]> {
+    return this.http.get<any[]>(this.provinciasUrl);
+  }
+
+  // Obtener un usuario por su ID
+  obtenerUsuarioPorId(id: number): Observable<any> {
+    return this.http.get(`${this.usuarioUrl}/${id}`);
+  }
+  guardarAlmacen(data: AlmacenRequestDTO): Observable<any> {
+    return this.http.post<any>(this.apiUrl, data); // Cambia el tipo de respuesta si lo necesitas
+  }
+
+}
