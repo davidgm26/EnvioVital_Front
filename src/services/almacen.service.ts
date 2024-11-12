@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class AlmacenService {
   private apiUrl = 'http://localhost:8081/almacenes';
   private provinciasUrl = 'http://localhost:8081/provincias/lista';
+  private usuarioUrl = 'http://localhost:8081/usuarios';
 
   constructor(private http: HttpClient) {}
 
@@ -24,5 +25,10 @@ export class AlmacenService {
   // Obtener lista de provincias
   obtenerProvincias(): Observable<any[]> {
     return this.http.get<any[]>(this.provinciasUrl);
+  }
+
+  // Obtener un usuario por su ID
+  obtenerUsuarioPorId(id: number): Observable<any> {
+    return this.http.get(`${this.usuarioUrl}/${id}`);
   }
 }

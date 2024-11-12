@@ -40,13 +40,15 @@
 
     <!-- Input de tipo número para idProvincia -->
     <div>
-      <label class="block text-gray-700 font-semibold mb-2">ID Provincia</label>
-      <input
-        type="number"
+      <label class="block text-gray-700 font-semibold mb-2">Provincia</label>
+      <select
         formControlName="idProvincia"
         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        placeholder="Introduce el ID de la provincia"
-      />
+      >
+        <option *ngFor="let provincia of provincias" [value]="provincia.id">
+          {{ provincia.nombre }}
+        </option>
+      </select>
     </div>
 
     <div class="flex items-center mb-2">
@@ -64,6 +66,7 @@
         type="text"
         formControlName="username"
         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        readonly
       />
 
       <label class="block text-gray-700 font-semibold mb-2 mt-4">Password</label>

@@ -37,6 +37,7 @@ export class AlmacenFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarProvincias();   // Cargar provincias primero, luego cargar datos del almacén
+    this.cargarUsuario();      // Cargar datos del usuario
   }
 
   // Cargar provincias desde el servicio
@@ -86,6 +87,26 @@ export class AlmacenFormComponent implements OnInit {
       },
       (error) => {
         console.error("Error al cargar los datos del almacén:", error);
+      }
+    );
+  }
+
+  // Cargar datos del usuario
+  cargarUsuario(): void {
+    this.almacenService.obtenerUsuarioPorId(1).subscribe(
+      (usuario) => {
+        if (usuario) {
+          this.formulario.patchValue({
+            usuario: {
+              username: usuario.username,
+              password: '' // Mantener vacío el campo de password por seguridad
+            }
+          });
+          console.log("Datos del usuario cargados en el formulario:", usuario);
+        }
+      },
+      (error) => {
+        console.error("Error al cargar los datos del usuario:", error);
       }
     );
   }
