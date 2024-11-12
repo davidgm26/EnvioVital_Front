@@ -13,25 +13,6 @@ export class AlmacenRegistroService {
 
   constructor(private http: HttpClient) {}
 
-  // Obtener un almacén por su ID
-  obtenerAlmacenPorId(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`);
-  }
-
-  // Actualizar un almacén
-  actualizarAlmacen(id: number, datos: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/editar/${id}`, datos);
-  }
-
-  // Obtener lista de provincias
-  obtenerProvincias(): Observable<any[]> {
-    return this.http.get<any[]>(this.provinciasUrl);
-  }
-
-  // Obtener un usuario por su ID
-  obtenerUsuarioPorId(id: number): Observable<any> {
-    return this.http.get(`${this.usuarioUrl}/${id}`);
-  }
   guardarAlmacen(data: AlmacenRequestDTO): Observable<any> {
     return this.http.post<any>(this.apiUrl, data); // Cambia el tipo de respuesta si lo necesitas
   }

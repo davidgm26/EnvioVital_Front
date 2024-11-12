@@ -1,13 +1,14 @@
-// src/app/registro-almacen/registro-almacen.component.ts
+
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { AlmacenRegistroService } from '../../services/almacen-registro.service';
 import {CommonModule} from "@angular/common";
+import {HttpClientModule} from "@angular/common/http";
 
 @Component({
   selector: 'app-registro-almacen',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule,HttpCl], // Asegúrate de importar HttpClientModule y ReactiveFormsModule si estás usando standalone components
+  imports: [ReactiveFormsModule,CommonModule,HttpClientModule],
   templateUrl: './registro-almacen.component.html',
   styleUrls: ['./registro-almacen.component.css']
 })
@@ -16,7 +17,7 @@ export class RegistroAlmacenComponent {
 
   constructor(
     private fb: FormBuilder,
-    private almacenRegistroService: AlmacenRegistroService // Inyecta el servicio aquí
+    private almacenRegistroService: AlmacenRegistroService
   ) {
     this.registroForm = this.fb.group({
       nombre: [''],
