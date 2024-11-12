@@ -1,0 +1,20 @@
+<div class="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 mt-10">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Detalles del Almacén</h2>
+
+  <div *ngIf="almacen">
+    <p><strong>Nombre:</strong> {{ almacen.nombre }}</p>
+    <p><strong>Descripción:</strong> {{ almacen.descripcion }}</p>
+    <p><strong>Dirección:</strong> {{ almacen.direccion }}</p>
+    <p><strong>Email:</strong> {{ almacen.email }}</p>
+    <p><strong>Provincia:</strong> {{ provinciaNombre }}</p>
+    <p><strong>Estado Activo:</strong> {{ almacen.esActivo ? 'Sí' : 'No' }}</p>
+    <p><strong>Usuario:</strong> {{ usuarioUsername }}</p>
+
+    <button
+      class="w-full bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600 transition duration-200 mt-4"
+      (click)="editarAlmacen()"
+    >
+      Editar Almacén
+    </button>
+  </div>
+</div>

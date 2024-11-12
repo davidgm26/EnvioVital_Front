@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlmacenService } from '../../services/almacen.service';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -14,11 +15,15 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class AlmacenFormComponent implements OnInit {
   formulario: FormGroup;
-  provincias: any[] = [];  // Lista de provincias
-  nombreProvincia: string | null = null; // Nombre de la provincia seleccionada
+  provincias: any[] = [];
+  nombreProvincia: string | null = null;
+  almacenId!: number;
+  userId!: number; // Añadir una propiedad para almacenar el id del usuario
 
   constructor(
     private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
     private almacenService: AlmacenService
   ) {
     this.formulario = this.fb.group({
@@ -27,7 +32,7 @@ export class AlmacenFormComponent implements OnInit {
       direccion: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       esActivo: [true, Validators.required],
-      idProvincia: [null, Validators.required], // ID de provincia
+      idProvincia: [null, Validators.required],
       usuario: this.fb.group({
         username: ['', Validators.required],
         password: ['', Validators.required]
@@ -36,17 +41,21 @@ export class AlmacenFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarProvincias();   // Cargar provincias primero, luego cargar datos del almacén
-    this.cargarUsuario();      // Cargar datos del usuario
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.almacenId = +id;
+      this.cargarProvincias();
+    } else {
+      console.error('No almacenId provided');
+      this.router.navigate(['/']); // Redirigir a una ruta válida
+    }
   }
 
-  // Cargar provincias desde el servicio
   cargarProvincias(): void {
     this.almacenService.obtenerProvincias().subscribe(
       (provincias) => {
         this.provincias = provincias;
-        console.log("Provincias cargadas:", provincias);
-        this.cargarDatosAlmacen();  // Cargar datos del almacén solo después de que se hayan cargado las provincias
+        this.cargarDatosAlmacen();
       },
       (error) => {
         console.error("Error al cargar las provincias:", error);
@@ -54,35 +63,30 @@ export class AlmacenFormComponent implements OnInit {
     );
   }
 
-  // Cargar datos del almacén
   cargarDatosAlmacen(): void {
-    const almacenId = 1; // Suponiendo que obtienes el ID de alguna forma (ej., ruta o variable de estado)
-
-    this.almacenService.obtenerAlmacenPorId(almacenId).subscribe(
+    this.almacenService.obtenerAlmacenPorId(this.almacenId).subscribe(
       (almacen) => {
         if (almacen) {
-          // Cargar valores directamente en el formulario usando los datos del DTO
           this.formulario.patchValue({
             nombre: almacen.nombre,
             descripcion: almacen.descripcion,
             direccion: almacen.direccion,
             email: almacen.email,
             esActivo: almacen.esActivo,
-            idProvincia: almacen.idProvincia, // Asignar el idProvincia directamente
-            usuario: {
-              username: almacen.usuario?.username || '',
-              password: '' // Mantener vacío el campo de password por seguridad
-            }
+            idProvincia: almacen.idProvincia
           });
 
-          // Buscar el nombre de la provincia usando el idProvincia
+          this.userId = almacen.idUsuario; // Almacenar el idUsuario para cargar los datos del usuario
+
           const provinciaSeleccionada = this.provincias.find(
             (provincia) => provincia.id === almacen.idProvincia
           );
           this.nombreProvincia = provinciaSeleccionada ? provinciaSeleccionada.nombre : 'Provincia desconocida';
 
-          console.log("Datos del almacén cargados en el formulario:", almacen);
-          console.log("Nombre de la provincia cargado:", this.nombreProvincia);
+          // Cargar datos del usuario si existe idUsuario
+          if (this.userId) {
+            this.cargarUsuario(this.userId);
+          }
         }
       },
       (error) => {
@@ -91,15 +95,14 @@ export class AlmacenFormComponent implements OnInit {
     );
   }
 
-  // Cargar datos del usuario
-  cargarUsuario(): void {
-    this.almacenService.obtenerUsuarioPorId(1).subscribe(
+  cargarUsuario(userId: number): void {
+    this.almacenService.obtenerUsuarioPorId(userId).subscribe(
       (usuario) => {
         if (usuario) {
           this.formulario.patchValue({
             usuario: {
               username: usuario.username,
-              password: '' // Mantener vacío el campo de password por seguridad
+              password: '' // Deja la contraseña vacía por seguridad
             }
           });
           console.log("Datos del usuario cargados en el formulario:", usuario);
@@ -111,7 +114,6 @@ export class AlmacenFormComponent implements OnInit {
     );
   }
 
-  // Enviar el formulario
   onSubmit(): void {
     if (this.formulario.invalid) {
       console.warn('Formulario inválido');
@@ -124,7 +126,7 @@ export class AlmacenFormComponent implements OnInit {
       direccion: this.formulario.value.direccion,
       email: this.formulario.value.email,
       esActivo: this.formulario.value.esActivo,
-      idProvincia: this.formulario.value.idProvincia, // Aseguramos que solo el ID se envíe
+      idProvincia: this.formulario.value.idProvincia,
       usuario: {
         username: this.formulario.value.usuario.username,
         password: this.formulario.value.usuario.password
@@ -132,11 +134,16 @@ export class AlmacenFormComponent implements OnInit {
     };
 
     const datosFiltrados = JSON.parse(JSON.stringify(datosAEnviar));
-    console.log("Datos finales a enviar:", datosFiltrados);
 
-    this.almacenService.actualizarAlmacen(1, datosFiltrados).subscribe(
+    this.almacenService.actualizarAlmacen(this.almacenId, datosFiltrados).subscribe(
       (response) => {
         console.log("Almacén actualizado:", response);
+
+        // Mostrar mensaje de confirmación
+        window.alert('Almacén actualizado exitosamente');
+
+        // Redirigir al usuario a la vista de almacen-view con el id correspondiente
+        this.router.navigate([`/almacen-view/${this.almacenId}`]);
       },
       (error) => {
         console.error("Error al actualizar el almacén:", error);
