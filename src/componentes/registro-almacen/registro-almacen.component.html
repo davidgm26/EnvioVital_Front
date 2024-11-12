@@ -1,0 +1,42 @@
+<h2>Registrar Almacén</h2>
+
+<form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="nombre">Nombre del Almacén:</label>
+    <input id="nombre" formControlName="nombre" type="text" />
+  </div>
+
+  <div>
+    <label for="direccion">Dirección:</label>
+    <input id="direccion" formControlName="direccion" type="text" />
+  </div>
+
+  <div>
+    <label for="email">Email:</label>
+    <input id="email" formControlName="email" type="email" />
+  </div>
+
+  <div>
+    <label for="idProvincia">ID de Provincia:</label>
+    <input id="idProvincia" formControlName="idProvincia" type="number" />
+  </div>
+
+  <div>
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" formControlName="descripcion"></textarea>
+  </div>
+
+  <!-- Si tienes datos de usuario, aquí iría el subgrupo -->
+  <fieldset formGroupName="usuario">
+    <legend>Datos del Usuario</legend>
+
+    <div>
+      <label for="nombreUsuario">Nombre de Usuario:</label>
+      <input id="nombreUsuario" formControlName="nombreUsuario" type="text" />
+    </div>
+
+    <!-- Añade otros campos de usuario aquí si es necesario -->
+  </fieldset>
+
+  <button type="submit">Registrar</button>
+</form>
