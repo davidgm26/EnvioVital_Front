@@ -5,7 +5,8 @@ export interface AlmacenRequestDTO {
   email: string;
   idProvincia: number;
   descripcion: string;
-  usuario: { nombreUsuario: string;
+  usuario: { username: string;
+            password: string;
     // Otros campos de usuario, si es necesario
   };
 }

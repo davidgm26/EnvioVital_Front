@@ -10,7 +10,8 @@ import {HttpClientModule} from "@angular/common/http";
   standalone: true,
   imports: [ReactiveFormsModule,CommonModule,HttpClientModule],
   templateUrl: './registro-almacen.component.html',
-  styleUrls: ['./registro-almacen.component.css']
+  styleUrls: ['./registro-almacen.component.css'],
+  providers: [AlmacenRegistroService]
 })
 export class RegistroAlmacenComponent {
   registroForm: FormGroup;
@@ -26,7 +27,8 @@ export class RegistroAlmacenComponent {
       idProvincia: [null],
       descripcion: [''],
       usuario: this.fb.group({
-        nombreUsuario: ['']
+        username: [''],
+        password:['']
       })
     });
   }
