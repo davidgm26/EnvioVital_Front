@@ -1,4 +1,5 @@
 export interface AlmacenRegistrado {
+  id: number;
   nombreAlmacen: string;
   direccionAlmacen: string;
   nombreEvento: string;
