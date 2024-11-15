@@ -1,16 +1,25 @@
 <header class="w-full bg-white py-4 shadow-md fixed top-0 left-0 flex justify-center items-center px-6">
   <div class="container flex items-center justify-between max-w-5xl w-full">
     <img src="assets/logo_ev_1-removebg-preview.png" alt="Logo" class="h-12 absolute left-4 sm:left-10">
-    <h2 class="text-3xl font-semibold text-blue-600 text-center flex-grow">ALMACÉN</h2>
+    <h2 class="text-3xl font-semibold text-[#009FB7] text-center flex-grow">CONDUCTOR/A</h2>
     <div class="w-10"></div>
   </div>
 </header>
 
-<div class="w-full max-w-3xl bg-blue-500 p-6 sm:p-8 rounded-lg shadow-lg mt-32 mx-auto text-white space-y-6 relative z-10">
+<div class="w-full max-w-3xl bg-[#009FB7] p-6 sm:p-8 rounded-lg shadow-lg mt-32 mx-auto text-white space-y-6 relative z-10">
   <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       <div class="relative">
         <input id="nombre" formControlName="nombre" type="text" placeholder="Nombre" class="input-field" />
+      </div>
+      <div class="relative">
+        <input id="apellidos" formControlName="apellidos" type="text" placeholder="Apellidos" class="input-field" />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="relative">
+        <input id="dni" formControlName="dni" type="text" placeholder="DNI" class="input-field" />
       </div>
       <div class="relative">
         <input id="direccion" formControlName="direccion" type="text" placeholder="Dirección" class="input-field" />
@@ -19,29 +28,15 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       <div class="relative">
-        <input id="email" formControlName="email" type="email" placeholder="E-mail" class="input-field" />
+        <input id="telefono" formControlName="telefono" type="tel" placeholder="Teléfono" class="input-field" />
       </div>
-
       <div class="relative">
-        <span class="absolute top-3 left-3 text-white opacity-80 pointer-events-none"
-              [class.hidden]="registroForm.get('idProvincia')?.value">
-      Provincia
-    </span>
-        <select
-          formControlName="idProvincia"
-          class="input-field bg-transparent appearance-none text-white border-b-2 border-white focus:outline-none focus:border-white"
-        >
-          <option class="bg-blue-500 text-white" *ngFor="let provincia of provincias" [value]="provincia.id">
-            {{ provincia.nombre }}
-          </option>
-        </select>
+        <input id="fechaNacimiento" formControlName="fechaNacimiento" type="date" placeholder="Fecha de Nacimiento" class="input-field" />
       </div>
     </div>
 
-
-
-    <div>
-      <textarea id="descripcion" formControlName="descripcion" placeholder="Escribe una descripción..." class="input-field h-24"></textarea>
+    <div class="relative">
+      <input id="email" formControlName="email" type="email" placeholder="E-mail" class="input-field" />
     </div>
 
     <fieldset formGroupName="usuario">
