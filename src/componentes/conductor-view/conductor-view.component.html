@@ -1,0 +1,38 @@
+<div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6 mt-10 space-y-8">
+  <!-- Título -->
+  <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center">Detalles del Conductor</h2>
+
+  <!-- Detalles del Conductor -->
+  <div *ngIf="conductor" class="space-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <p><strong>Nombre:</strong> {{ conductor.nombre }}</p>
+        <p><strong>Apellidos:</strong> {{ conductor.apellidos }}</p>
+        <p><strong>DNI:</strong> {{ conductor.dni }}</p>
+        <p><strong>Dirección:</strong> {{ conductor.direccion }}</p>
+        <p><strong>Teléfono:</strong> {{ conductor.telefono }}</p>
+      </div>
+
+      <div>
+        <p><strong>Fecha de Nacimiento:</strong> {{ conductor.fechaNacimiento | date }}</p>
+        <p><strong>Email:</strong> {{ conductor.email }}</p>
+      </div>
+    </div>
+
+    <!-- Botón para editar -->
+    <div class="mt-4 flex justify-center">
+      <button
+        class="w-full md:w-64 bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600 transition duration-200 mt-4"
+        (click)="editarConductor()"
+      >
+        Editar Conductor
+      </button>
+    </div>
+  </div>
+
+  <!-- Separador entre la vista de detalles y la lista de almacenes registrados -->
+  <div class="border-t border-gray-300 pt-8">
+    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Almacenes Registrados</h3>
+    <app-lista-almacenes-registrados [almacenes]="almacenesRegistrados"></app-lista-almacenes-registrados>
+  </div>
+</div>

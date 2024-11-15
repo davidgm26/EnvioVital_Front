@@ -5,7 +5,7 @@ import {ConductorFormComponent} from "../componentes/conductor-form/conductor-fo
 import {ConductorViewComponent} from "../componentes/conductor-view/conductor-view.component";
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/almacen-view/1', pathMatch: 'full' }, // Default route
+  { path: '', redirectTo: '/conductor-view/1', pathMatch: 'full' }, // Default route
   { path: 'almacen/:id', component: AlmacenFormComponent },
   { path: 'almacen-view/:id', component: AlmacenViewComponent },
   { path: 'conductor/:id', component: ConductorFormComponent },
