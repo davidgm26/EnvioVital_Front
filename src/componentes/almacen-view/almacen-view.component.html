@@ -1,0 +1,37 @@
+<div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6 mt-10 space-y-8">
+  <!-- Titulo -->
+  <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center">Detalles del Almacén</h2>
+
+  <!-- Detalles del Almacén -->
+  <div *ngIf="almacen" class="space-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <p><strong>Usuario:</strong> {{ usuarioUsername }}</p>
+        <p><strong>Nombre:</strong> {{ almacen.nombre }}</p>
+        <p><strong>Descripción:</strong> {{ almacen.descripcion }}</p>
+        <p><strong>Dirección:</strong> {{ almacen.direccion }}</p>
+        <p><strong>Email:</strong> {{ almacen.email }}</p>
+      </div>
+
+      <div>
+        <p><strong>Provincia:</strong> {{ provinciaNombre }}</p>
+        <p><strong>Estado Activo:</strong> {{ almacen.esActivo ? 'Sí' : 'No' }}</p>
+      </div>
+    </div>
+
+    <div class="mt-4 flex justify-center">
+      <button
+        class="w-full md:w-64 bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600 transition duration-200 mt-4"
+        (click)="editarAlmacen()"
+      >
+        Editar Almacén
+      </button>
+    </div>
+  </div>
+
+  <!-- Separador entre la vista de detalles y la lista de eventos -->
+  <div class="border-t border-gray-300 pt-8">
+    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Lista de Eventos</h3>
+    <app-lista-eventos [eventos]="eventos"></app-lista-eventos>
+  </div>
+</div>
