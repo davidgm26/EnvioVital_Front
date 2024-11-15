@@ -1,36 +1,47 @@
-<div class="overflow-x-auto mt-6">
-  <table mat-table [dataSource]="almacenes" class="min-w-full bg-white shadow rounded-lg">
-    <ng-container matColumnDef="idAlmacen">
-      <th mat-header-cell *matHeaderCellDef> ID Almacén </th>
-      <td mat-cell *matCellDef="let almacen"> {{ almacen.idAlmacen }} </td>
-    </ng-container>
+<div class="border-t border-gray-300 pt-8">
+  <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Almacenes Registrados</h3>
+  <div class="overflow-x-auto bg-teal-500 p-4 rounded-lg shadow-md">
+    <table mat-table [dataSource]="almacenes" class="min-w-full bg-white rounded-lg">
 
-    <ng-container matColumnDef="nombreAlmacen">
-      <th mat-header-cell *matHeaderCellDef> Nombre Almacén </th>
-      <td mat-cell *matCellDef="let almacen"> {{ almacen.nombreAlmacen }} </td>
-    </ng-container>
+      <ng-container matColumnDef="idAlmacen">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">ID Almacén</th>
+        <td mat-cell *matCellDef="let almacen" class="py-2 px-4">{{ almacen.idAlmacen }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="direccionAlmacen">
-      <th mat-header-cell *matHeaderCellDef> Dirección </th>
-      <td mat-cell *matCellDef="let almacen"> {{ almacen.direccionAlmacen }} </td>
-    </ng-container>
+      <ng-container matColumnDef="nombreAlmacen">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Nombre Almacén</th>
+        <td mat-cell *matCellDef="let almacen" class="py-2 px-4">{{ almacen.nombreAlmacen }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="nombreEvento">
-      <th mat-header-cell *matHeaderCellDef> Evento </th>
-      <td mat-cell *matCellDef="let almacen"> {{ almacen.nombreEvento }} </td>
-    </ng-container>
+      <ng-container matColumnDef="direccionAlmacen">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Dirección</th>
+        <td mat-cell *matCellDef="let almacen" class="py-2 px-4">{{ almacen.direccionAlmacen }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="descripcionEvento">
-      <th mat-header-cell *matHeaderCellDef> Descripción del Evento </th>
-      <td mat-cell *matCellDef="let almacen"> {{ almacen.descripcionEvento }} </td>
-    </ng-container>
+      <ng-container matColumnDef="nombreEvento">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Evento</th>
+        <td mat-cell *matCellDef="let almacen" class="py-2 px-4">{{ almacen.nombreEvento }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="nombreProvincia">
-      <th mat-header-cell *matHeaderCellDef> Provincia </th>
-      <td mat-cell *matCellDef="let almacen"> {{ almacen.nombreProvincia }} </td>
-    </ng-container>
+      <ng-container matColumnDef="descripcionEvento">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Descripción del Evento</th>
+        <td mat-cell *matCellDef="let almacen" class="py-2 px-4">{{ almacen.descripcionEvento }}</td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <ng-container matColumnDef="nombreProvincia">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Provincia</th>
+        <td mat-cell *matCellDef="let almacen" class="py-2 px-4">{{ almacen.nombreProvincia }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Estado</th>
+        <td mat-cell *matCellDef="let almacen" class="py-2 px-4" [ngClass]="{'text-green-500': almacen.estado, 'text-red-500': !almacen.estado}">
+          {{ almacen.estado ? 'Activo' : 'Desactivado' }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
 </div>

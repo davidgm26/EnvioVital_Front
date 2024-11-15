@@ -13,7 +13,7 @@ import {ListaAlmacenesRegistradosComponent} from "../lista-almacenes-registrados
   styleUrls: ['./conductor-view.component.css']
 })
 export class ConductorViewComponent implements OnInit {
-  conductor: any;
+  conductor: any = {};
   conductorId!: number;
   almacenesRegistrados: AlmacenRegistrado[] = [];
 

@@ -4,4 +4,5 @@ export interface AlmacenRegistrado {
   nombreEvento: string;
   descripcionEvento: string;
   nombreProvincia: string;
+  estado: boolean;
 }
