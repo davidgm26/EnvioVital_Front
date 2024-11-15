@@ -31,4 +31,7 @@ export class AlmacenService {
   obtenerUsuarioPorId(id: number): Observable<any> {
     return this.http.get(`${this.usuarioUrl}/${id}`);
   }
+  obtenerListaEventos(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/listaEventos/${id}`);
+  }
 }

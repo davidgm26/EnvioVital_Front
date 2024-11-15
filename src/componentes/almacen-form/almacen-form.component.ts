@@ -18,7 +18,7 @@ export class AlmacenFormComponent implements OnInit {
   provincias: any[] = [];
   nombreProvincia: string | null = null;
   almacenId!: number;
-  userId!: number; // Añadir una propiedad para almacenar el id del usuario
+  userId!: number;
 
   constructor(
     private fb: FormBuilder,
@@ -26,46 +26,43 @@ export class AlmacenFormComponent implements OnInit {
     private router: Router,
     private almacenService: AlmacenService
   ) {
-    this.formulario = this.fb.group({
+    this.formulario = this.crearFormulario();
+  }
+
+  ngOnInit(): void {
+    this.almacenId = Number(this.route.snapshot.paramMap.get('id'));
+    this.almacenId ? this.cargarProvincias() : this.redirigirAInicio();
+  }
+
+  private crearFormulario(): FormGroup {
+    return this.fb.group({
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
       direccion: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       esActivo: [true, Validators.required],
       idProvincia: [null, Validators.required],
-      usuario: this.fb.group({
-        username: ['', Validators.required],
-        password: ['', Validators.required]
-      })
     });
   }
 
-  ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.almacenId = +id;
-      this.cargarProvincias();
-    } else {
-      console.error('No almacenId provided');
-      this.router.navigate(['/']); // Redirigir a una ruta válida
-    }
+  private redirigirAInicio(): void {
+    console.error('No almacenId provided');
+    this.router.navigate(['/']);
   }
 
-  cargarProvincias(): void {
-    this.almacenService.obtenerProvincias().subscribe(
-      (provincias) => {
+  private cargarProvincias(): void {
+    this.almacenService.obtenerProvincias().subscribe({
+      next: (provincias) => {
         this.provincias = provincias;
         this.cargarDatosAlmacen();
       },
-      (error) => {
-        console.error("Error al cargar las provincias:", error);
-      }
-    );
+      error: (error) => console.error("Error al cargar las provincias:", error)
+    });
   }
 
-  cargarDatosAlmacen(): void {
-    this.almacenService.obtenerAlmacenPorId(this.almacenId).subscribe(
-      (almacen) => {
+  private cargarDatosAlmacen(): void {
+    this.almacenService.obtenerAlmacenPorId(this.almacenId).subscribe({
+      next: (almacen) => {
         if (almacen) {
           this.formulario.patchValue({
             nombre: almacen.nombre,
@@ -75,29 +72,23 @@ export class AlmacenFormComponent implements OnInit {
             esActivo: almacen.esActivo,
             idProvincia: almacen.idProvincia
           });
-
-          this.userId = almacen.idUsuario; // Almacenar el idUsuario para cargar los datos del usuario
-
-          const provinciaSeleccionada = this.provincias.find(
-            (provincia) => provincia.id === almacen.idProvincia
-          );
-          this.nombreProvincia = provinciaSeleccionada ? provinciaSeleccionada.nombre : 'Provincia desconocida';
-
-          // Cargar datos del usuario si existe idUsuario
-          if (this.userId) {
-            this.cargarUsuario(this.userId);
-          }
+          this.userId = almacen.idUsuario;
+          this.nombreProvincia = this.obtenerNombreProvincia(almacen.idProvincia);
+          this.userId && this.cargarUsuario(this.userId);
         }
       },
-      (error) => {
-        console.error("Error al cargar los datos del almacén:", error);
-      }
-    );
+      error: (error) => console.error("Error al cargar los datos del almacén:", error)
+    });
   }
 
-  cargarUsuario(userId: number): void {
-    this.almacenService.obtenerUsuarioPorId(userId).subscribe(
-      (usuario) => {
+  private obtenerNombreProvincia(idProvincia: number): string | null {
+    const provincia = this.provincias.find((prov) => prov.id === idProvincia);
+    return provincia ? provincia.nombre : 'Provincia desconocida';
+  }
+
+  private cargarUsuario(userId: number): void {
+    this.almacenService.obtenerUsuarioPorId(userId).subscribe({
+      next: (usuario) => {
         if (usuario) {
           this.formulario.patchValue({
             usuario: {
@@ -108,10 +99,8 @@ export class AlmacenFormComponent implements OnInit {
           console.log("Datos del usuario cargados en el formulario:", usuario);
         }
       },
-      (error) => {
-        console.error("Error al cargar los datos del usuario:", error);
-      }
-    );
+      error: (error) => console.error("Error al cargar los datos del usuario:", error)
+    });
   }
 
   onSubmit(): void {
@@ -120,34 +109,20 @@ export class AlmacenFormComponent implements OnInit {
       return;
     }
 
-    const datosAEnviar = {
-      nombre: this.formulario.value.nombre,
-      descripcion: this.formulario.value.descripcion,
-      direccion: this.formulario.value.direccion,
-      email: this.formulario.value.email,
-      esActivo: this.formulario.value.esActivo,
-      idProvincia: this.formulario.value.idProvincia,
-      usuario: {
-        username: this.formulario.value.usuario.username,
-        password: this.formulario.value.usuario.password
-      }
-    };
+    const datosAEnviar = this.prepararDatosAEnviar();
 
-    const datosFiltrados = JSON.parse(JSON.stringify(datosAEnviar));
-
-    this.almacenService.actualizarAlmacen(this.almacenId, datosFiltrados).subscribe(
-      (response) => {
+    this.almacenService.actualizarAlmacen(this.almacenId, datosAEnviar).subscribe({
+      next: (response) => {
         console.log("Almacén actualizado:", response);
-
-        // Mostrar mensaje de confirmación
         window.alert('Almacén actualizado exitosamente');
-
-        // Redirigir al usuario a la vista de almacen-view con el id correspondiente
         this.router.navigate([`/almacen-view/${this.almacenId}`]);
       },
-      (error) => {
-        console.error("Error al actualizar el almacén:", error);
-      }
-    );
+      error: (error) => console.error("Error al actualizar el almacén:", error)
+    });
+  }
+
+  private prepararDatosAEnviar(): any {
+    const { nombre, descripcion, direccion, email, esActivo, idProvincia } = this.formulario.value;
+    return { nombre, descripcion, direccion, email, esActivo, idProvincia };
   }
 }

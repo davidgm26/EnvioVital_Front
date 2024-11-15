@@ -2,15 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlmacenService } from '../../services/almacen.service';
 import { NgIf } from "@angular/common";
+import { ListaEventosComponent } from "../lista-eventos/lista-eventos.component";
+import { Evento } from '../lista-eventos/lista-eventos.component';
 
 @Component({
   selector: 'app-almacen-view',
   templateUrl: './almacen-view.component.html',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf, ListaEventosComponent],
   styleUrls: ['./almacen-view.component.css']
 })
 export class AlmacenViewComponent implements OnInit {
+  eventos: Evento[] = [];
   almacen: any;
   provinciaNombre: string = '';
   usuarioUsername: string = '';
@@ -23,59 +26,65 @@ export class AlmacenViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.almacenId = +id;
+    this.almacenId = Number(this.route.snapshot.paramMap.get('id'));
+    if (this.almacenId) {
       this.cargarDatosAlmacen();
+      this.obtenerListaEventos(); // Llamamos a obtenerListaEventos al inicializar
     } else {
-      console.error('No almacenId provided');
-      this.router.navigate(['/']); // Redirect to a valid route
+      this.redirigirAInicio();
     }
   }
 
-  cargarDatosAlmacen(): void {
-    this.almacenService.obtenerAlmacenPorId(this.almacenId).subscribe(
-      (almacen) => {
+  private cargarDatosAlmacen(): void {
+    this.almacenService.obtenerAlmacenPorId(this.almacenId).subscribe({
+      next: (almacen) => {
         this.almacen = almacen;
-        this.cargarProvincia(almacen.idProvincia);
+        this.cargarProvincia(almacen.idProvincia); // Se llama a cargarProvincia aquí
         this.cargarUsuario(almacen.idUsuario);
       },
-      (error) => {
-        console.error('Error al cargar los datos del almacén:', error);
-      }
-    );
+      error: (error) => console.error('Error al cargar los datos del almacén:', error)
+    });
   }
 
-  cargarProvincia(idProvincia: number): void {
-    this.almacenService.obtenerProvincias().subscribe(
-      (provincias) => {
+  private cargarProvincia(idProvincia: number): void {
+    this.almacenService.obtenerProvincias().subscribe({
+      next: (provincias) => {
         const provincia = provincias.find((p) => p.id === idProvincia);
         this.provinciaNombre = provincia ? provincia.nombre : 'Provincia desconocida';
       },
-      (error) => {
-        console.error('Error al cargar las provincias:', error);
-      }
-    );
+      error: (error) => console.error('Error al cargar las provincias:', error)
+    });
   }
 
-  cargarUsuario(idUsuario: number): void {
-    this.almacenService.obtenerUsuarioPorId(idUsuario).subscribe(
-      (usuario) => {
+  private cargarUsuario(idUsuario: number): void {
+    this.almacenService.obtenerUsuarioPorId(idUsuario).subscribe({
+      next: (usuario) => {
         this.usuarioUsername = usuario ? usuario.username : 'Usuario desconocido';
       },
-      (error) => {
-        console.error('Error al cargar el usuario:', error);
-      }
-    );
+      error: (error) => console.error('Error al cargar el usuario:', error)
+    });
+  }
+
+  private redirigirAInicio(): void {
+    console.error('No almacenId provided');
+    this.router.navigate(['/']);
   }
 
   editarAlmacen(): void {
     this.router.navigate([`/almacen/${this.almacenId}`])
-      .then(success => {
-        console.log('Navigation successful:', success);
-      })
-      .catch(error => {
-        console.error('Navigation error:', error);
-      });
+      .then(success => console.log('Navigation successful:', success))
+      .catch(error => console.error('Navigation error:', error));
+  }
+
+  obtenerListaEventos(): void {
+    this.almacenService.obtenerListaEventos(this.almacenId).subscribe({
+      next: (eventos) => {
+        this.eventos = eventos;
+      },
+      error: (error) => {
+        console.error('Error al obtener la lista de eventos:', error);
+        console.log('Detalles del error:', error);
+      },
+    });
   }
 }
