@@ -6,6 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginRequest } from '../../interfaces/login-request';
 import { AuthService } from '../../services/auth.service';
+import { Observable } from 'rxjs';
+import { LoginResponse } from '../../interfaces/login-response';
 
 
 
@@ -33,7 +35,7 @@ export class LoginComponent {
   ) { }
 
 
-    onSubmit() {
+    onSubmit(){
       this.loginRequest = this.loginForm.value;
       console.log(this.loginRequest);
       this.authService.login(this.loginRequest).subscribe(
