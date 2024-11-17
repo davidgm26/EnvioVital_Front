@@ -8,6 +8,7 @@ import { LoginRequest } from '../../interfaces/login-request';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
 import { LoginResponse } from '../../interfaces/login-response';
+import { Router } from '@angular/router';
 
 
 
@@ -32,6 +33,7 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
+    private router: Router,
   ) { }
 
 
@@ -41,6 +43,8 @@ export class LoginComponent {
       this.authService.login(this.loginRequest).subscribe(
         (resp) => {
         localStorage.setItem('token',resp.token);
+        console.log(resp);
+        this.router.navigate(['/home']);
         },
         (error)=> {
           console.error(error);
