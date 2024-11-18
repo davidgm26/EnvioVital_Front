@@ -7,13 +7,15 @@ export interface EventoRequestDto {
   nombre?: string;
   descripcion?: string;
   idProvincia?: number;
+  nombreProvincia?: string;
+
 
 }
 @Injectable({
   providedIn: 'root'
 })
 export class EventoService {
-  private apiUrl = 'http://localhost:8081/evento/evento-inicio/2';
+  private apiUrl = 'http://localhost:8081/evento/evento-inicio/3';
 
   constructor(private http: HttpClient) {}
 
