@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConductorService } from '../../services/conductor.service';
 import { DatePipe, NgIf } from '@angular/common';
-import {AlmacenRegistrado} from "../../app/models/almacen-registrado.model";
+import {AlmacenRegistrado} from "../../app/interfaces/almacen-registrado.model";
 import {ListaAlmacenesRegistradosComponent} from "../lista-almacenes-registrados/lista-almacenes-registrados.component";
 
 @Component({
