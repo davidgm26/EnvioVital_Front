@@ -1,0 +1,11 @@
+table {
+  @apply w-full border border-gray-200 rounded-lg shadow-sm;
+}
+
+th {
+  @apply font-medium bg-gray-100 border-b border-gray-200 text-sm uppercase;
+}
+
+td {
+  @apply border-b border-gray-200 text-sm;
+}
