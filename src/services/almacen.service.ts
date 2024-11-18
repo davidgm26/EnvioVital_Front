@@ -9,8 +9,11 @@ export class AlmacenService {
   private apiUrl = 'http://localhost:8081/almacenes';
   private provinciasUrl = 'http://localhost:8081/provincias/lista';
   private usuarioUrl = 'http://localhost:8081/usuarios';
+  private almacenPorEventoUrl = 'http://localhost:8081/almacenes/listaregistrados';
+
 
   constructor(private http: HttpClient) {}
+
 
   // Obtener un almacén por su ID
   obtenerAlmacenPorId(id: number): Observable<any> {
@@ -31,4 +34,17 @@ export class AlmacenService {
   obtenerUsuarioPorId(id: number): Observable<any> {
     return this.http.get(`${this.usuarioUrl}/${id}`);
   }
+
+
+  // Obtener el almacén asociado a un evento
+  obtenerAlmacenPorEventoId(eventoId: number): Observable<any> {
+    return this.http.get(`${this.almacenPorEventoUrl}/${eventoId}`);
+  }
+
+
+
+
+}
+
+export class EventoAlmacenDtoResponse {
 }
