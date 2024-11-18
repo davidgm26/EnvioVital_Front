@@ -19,4 +19,12 @@ export class AuthService {
   login(loginRequest: LoginRequest): Observable<LoginResponse> {  
     return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`,loginRequest);
   }
+
+  getTokens(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  removeToken():void {
+    localStorage.removeItem('token');
+  }
 }

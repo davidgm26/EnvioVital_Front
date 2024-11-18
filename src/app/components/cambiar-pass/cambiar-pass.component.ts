@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import { AlmacenService } from '../../services/almacen.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Pass } from '../../app/models/almacen.model'
 import {NgIf} from "@angular/common";
+import { AlmacenService } from '../../services/almacen.service';
 
 @Component({
   selector: 'app-cambiar-pass',
@@ -40,6 +39,7 @@ export class CambiarPassComponent {
     return group.get('nuevaPass')?.value === group.get('repitePass')?.value ? null : { mismatch: true };
   }
 
+ /*
   onSubmit(): void {
     if (this.cambiarPassForm.invalid) {
       return;
@@ -56,4 +56,5 @@ export class CambiarPassComponent {
       }
     );
   }
+ */
 }

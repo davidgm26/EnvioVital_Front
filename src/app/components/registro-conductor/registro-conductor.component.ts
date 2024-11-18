@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {CommonModule, NgOptimizedImage} from "@angular/common";
-import {HttpClientModule} from "@angular/common/http";
-import {ConductorRegistroService} from "../../services/conductor-registro.service";
+import { ConductorRegistroService } from '../../services/conductor-registro.service';
 
 @Component({
   selector: 'app-registro-conductor',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, HttpClientModule, NgOptimizedImage],
+  imports: [ReactiveFormsModule],
   templateUrl: './registro-conductor.component.html',
   styleUrls: ['./registro-conductor.component.css'],
-  providers: [ConductorRegistroService],
+  providers: [],
 })
 
 export class RegistroConductorComponent implements OnInit{

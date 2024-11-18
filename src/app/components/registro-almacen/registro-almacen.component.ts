@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {HttpClientModule} from "@angular/common/http";
-import {AlmacenRegistroService} from "../../services/almacen-registro.service";
+import { AlmacenRegistroService } from '../../services/almacen-registro.service';
 
 @Component({
   selector: 'app-registro-almacen',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, HttpClientModule, NgOptimizedImage],
+  imports: [ReactiveFormsModule, HttpClientModule],
   templateUrl: './registro-almacen.component.html',
   styleUrls: ['./registro-almacen.component.css'],
   providers: [AlmacenRegistroService],

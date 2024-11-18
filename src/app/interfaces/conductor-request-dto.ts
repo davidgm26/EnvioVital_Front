@@ -4,10 +4,9 @@ export interface ConductorRequestDTO {
   dni: string;
   direccion: string;
   telefono: string;
-  fechaNacimiento: string; // Date as string in ISO format
+  fechaNacimiento: string; 
   email: string;
   usuario: { username: string;
     password: string;
-    // Otros campos de usuario, si es necesario
   };
 }

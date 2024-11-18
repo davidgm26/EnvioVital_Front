@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
-import { AlmacenFormComponent } from '../componentes/almacen-form/almacen-form.component';
-import { AlmacenViewComponent } from '../componentes/almacen-view/almacen-view.component';
-import { ConductorFormComponent } from '../componentes/conductor-form/conductor-form.component';
-import { ConductorViewComponent } from '../componentes/conductor-view/conductor-view.component';
+import { AlmacenFormComponent } from './components/almacen-form/almacen-form.component';
+import { AlmacenViewComponent } from './components/almacen-view/almacen-view.component';
+import { ConductorFormComponent } from './components/conductor-form/conductor-form.component';
+import { ConductorViewComponent } from './components/conductor-view/conductor-view.component';
 
 export const routes: Routes = [
     {path: "", redirectTo: "login", pathMatch: "full"},

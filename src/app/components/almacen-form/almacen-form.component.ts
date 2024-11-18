@@ -3,15 +3,14 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlmacenService } from '../../services/almacen.service';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-almacen-form',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './almacen-form.component.html',
   styleUrls: ['./almacen-form.component.css'],
-  providers: [AlmacenService]
+  providers: []
 })
 export class AlmacenFormComponent implements OnInit {
   formulario: FormGroup;

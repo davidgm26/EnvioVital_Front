@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConductorService } from '../../services/conductor.service';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-conductor-form',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './conductor-form.component.html',
   styleUrls: ['./conductor-form.component.css'],
-  providers: [ConductorService]
+  providers: []
 })
 export class ConductorFormComponent implements OnInit {
   formulario: FormGroup;

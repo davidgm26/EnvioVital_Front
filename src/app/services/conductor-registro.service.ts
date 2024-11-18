@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {ConductorRequestDTO} from "../dto/conductor-request-dto";
+import {ConductorRequestDTO} from "../app/interfaces/conductor-request-dto";
 
 @Injectable({
   providedIn: 'root',
