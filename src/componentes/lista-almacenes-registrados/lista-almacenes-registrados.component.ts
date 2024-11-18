@@ -9,7 +9,7 @@ import {MatIconButton} from "@angular/material/button";
 @Component({
   selector: 'app-lista-almacenes-registrados',
   standalone: true,
-  imports: [MatTableModule, HttpClientModule, NgClass, MatIcon, MatIconButton],  // Asegúrate de incluir HttpClientModule aquí
+  imports: [MatTableModule, HttpClientModule, NgClass, MatIcon, MatIconButton],
   templateUrl: './lista-almacenes-registrados.component.html',
   styleUrls: ['./lista-almacenes-registrados.component.css'],
 })

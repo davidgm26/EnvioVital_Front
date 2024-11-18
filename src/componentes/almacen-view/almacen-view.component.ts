@@ -14,7 +14,7 @@ import { Evento } from '../lista-eventos/lista-eventos.component';
 })
 export class AlmacenViewComponent implements OnInit {
   eventos: Evento[] = [];
-  almacen: any;
+  almacen: any = {};
   provinciaNombre: string = '';
   usuarioUsername: string = '';
   almacenId!: number;

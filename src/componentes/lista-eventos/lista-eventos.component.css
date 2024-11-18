@@ -3,9 +3,9 @@ table {
 }
 
 th {
-  @apply font-medium text-gray-700 bg-gray-100 border-b border-gray-200 text-sm uppercase;
+  @apply font-medium bg-gray-100 border-b border-gray-200 text-sm uppercase;
 }
 
 td {
-  @apply border-b border-gray-200 text-sm text-gray-700;
+  @apply border-b border-gray-200 text-sm;
 }
