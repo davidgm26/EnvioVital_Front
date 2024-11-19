@@ -6,9 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginRequest } from '../../interfaces/login-request';
 import { AuthService } from '../../services/auth.service';
-import { Observable } from 'rxjs';
-import { LoginResponse } from '../../interfaces/login-response';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 
 
@@ -16,7 +14,7 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, MatIconModule, 
-    MatButtonModule, FormsModule, ReactiveFormsModule],
+    MatButtonModule, FormsModule, ReactiveFormsModule,RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
 import { AlmacenRegistroService } from '../../services/almacen-registro.service';
 import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-registro-almacen',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule,NgFor],
+  imports: [ReactiveFormsModule,NgFor],
   templateUrl: './registro-almacen.component.html',
   styleUrls: ['./registro-almacen.component.css'],
   providers: [AlmacenRegistroService],
@@ -34,7 +33,7 @@ export class RegistroAlmacenComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarProvincias(); // Llama a cargar las provincias al iniciar
+    this.cargarProvincias();
   }
 
   private cargarProvincias(): void {

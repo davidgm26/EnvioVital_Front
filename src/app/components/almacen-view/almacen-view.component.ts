@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgIf } from "@angular/common";
 import { ListaEventosComponent } from "../lista-eventos/lista-eventos.component";
 import { Evento } from '../lista-eventos/lista-eventos.component';
 import { AlmacenService } from '../../services/almacen.service';
