@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConductorService } from '../../services/conductor.service';
-import { DatePipe, NgIf } from '@angular/common';
-import {AlmacenRegistrado} from "../../app/models/almacen-registrado.model";
+import { DatePipe } from '@angular/common';
+import {AlmacenRegistrado} from "../../interfaces/almacen-registrado.model";
 import {ListaAlmacenesRegistradosComponent} from "../lista-almacenes-registrados/lista-almacenes-registrados.component";
+import { ConductorService } from '../../services/conductor.service';
 
 @Component({
   selector: 'app-conductor-view',
   templateUrl: './conductor-view.component.html',
   standalone: true,
-  imports: [NgIf, DatePipe, ListaAlmacenesRegistradosComponent],
+  imports: [DatePipe, ListaAlmacenesRegistradosComponent],
   styleUrls: ['./conductor-view.component.css']
 })
 export class ConductorViewComponent implements OnInit {
