@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {AlmacenRequestDTO} from "../app/interfaces/almacen-request-dto";
+import { AlmacenRequestDTO } from '../interfaces/almacen-request-dto';
 
 @Injectable({
   providedIn: 'root',
