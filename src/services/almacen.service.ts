@@ -56,8 +56,8 @@ export class AlmacenService {
 
 
   // Obtener el almacén asociado a un evento
-  obtenerAlmacenPorEventoId(eventoId: number): Observable<any> {
-    return this.http.get(`${this.almacenPorEventoUrl}/${eventoId}`);
+  obtenerAlmacenPorEventoId(eventoId: number): Observable<AlmacenResponseDTO[]> {
+    return this.http.get<AlmacenResponseDTO []>(`${this.almacenPorEventoUrl}/${eventoId}`);
   }
 
 

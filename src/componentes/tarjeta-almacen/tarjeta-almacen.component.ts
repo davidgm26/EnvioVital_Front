@@ -11,11 +11,11 @@ import { AlmacenService, EventoAlmacenDtoResponse } from '../../services/almacen
 })
 export class TarjetaAlmacenComponent implements OnInit {
 
-  @Input() nombreAlmacen!: string;
-  @Input() nombreProvincia!: string;
-  @Input() imagenUrl!: string;
+ // @Input() nombreAlmacen!: string;
+  //@Input() nombreProvincia!: string;
+  //@Input() imagenUrl!: string;
 
-  // @Input() almacen?: EventoAlmacenDtoResponse;
+  @Input() almacen!: EventoAlmacenDtoResponse;
 
 
   constructor(private almacenService: AlmacenService) {}
