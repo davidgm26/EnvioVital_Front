@@ -4,15 +4,9 @@ import { MatTableModule } from '@angular/material/table';
 import { NgClass } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { Evento } from '../../interfaces/evento';
 
-export interface Evento {
-  id: number;
-  idEvento: number;
-  nombreEvento: string;
-  descripcionEvento: string;
-  nombreProvincia: string;
-  estado: boolean;
-}
+
 
 @Component({
   selector: 'app-lista-eventos-almacen',
@@ -21,7 +15,7 @@ export interface Evento {
   templateUrl: './lista-eventos.component.html',
   styleUrls: ['./lista-eventos.component.css'],
 })
-export class ListaEventosComponent implements OnInit {
+export class ListaEventosAlmacenComponent implements OnInit {
   @Input() eventos: Evento[] = [];
 
   displayedColumns: string[] = ['idEvento', 'nombreEvento', 'descripcionEvento', 'nombreProvincia', 'estado', 'eliminar'];

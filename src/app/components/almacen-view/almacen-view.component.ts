@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ListaEventosComponent } from "../lista-eventos-almacen/lista-eventos.component";
-import { Evento } from '../lista-eventos-almacen/lista-eventos.component';
 import { AlmacenService } from '../../services/almacen.service';
+import { Evento } from '../../interfaces/evento';
+import { ListaEventosAlmacenComponent } from '../lista-eventos-almacen/lista-eventos.component';
 
 @Component({
   selector: 'app-almacen-view',
   templateUrl: './almacen-view.component.html',
   standalone: true,
-  imports: [ListaEventosComponent],
+  imports: [ListaEventosAlmacenComponent],
   styleUrls: ['./almacen-view.component.css']
 })
 export class AlmacenViewComponent implements OnInit {

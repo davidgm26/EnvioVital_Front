@@ -27,8 +27,8 @@ export class ListaEventosComponent implements OnInit{
         this.eventos = data;
       },
       (error) => {
-        this.errorMessage = '¡Error al cargar los eventos! ' + error.message;
-        console.error('Error al cargar los eventos:', error);
+        this.errorMessage = '¡Error al cargar los eventos! '  ;
+        console.error('Error al cargar los eventos:',error);
       }
     );
   }
