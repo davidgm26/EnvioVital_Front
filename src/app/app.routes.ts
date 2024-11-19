@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import {TarjetaEventoComponent} from "../componentes/tarjeta-evento/tarjeta-evento.component";
 import {AlmacenFormComponent} from "../componentes/almacen-form/almacen-form.component";
 import {ListaEventosComponent} from "../componentes/lista-eventos/lista-eventos.component";
+import {ListaAlmacenesComponent} from "../componentes/lista-almacenes/lista-almacenes.component";
 
 export const routes: Routes = [
 
