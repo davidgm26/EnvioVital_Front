@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {map, Observable} from 'rxjs';
 
-export interface EventoRequestDto {
+export interface EventoResponseDto{
   profilePicture: string;
   nombre: string;
   descripcion: string;
@@ -11,7 +11,7 @@ export interface EventoRequestDto {
   almacenes: any[];
 }
 
-export interface EventoResponseDto {
+export interface EventoRequestDto {
   profilePicture?: string;
   nombre?: string;
   descripcion?: string;
@@ -33,8 +33,17 @@ export class EventoService {
     return this.http.get(`${this.apiUrlEventoPorId}/${id}`);
   }
 
+  // Obtener todos los eventos
   getAllEventos(): Observable<EventoResponseDto[]> {
-    return this.http.get<EventoResponseDto[]>(`${this.apiUrl}/`);  }
+   return this.http.get<EventoResponseDto[]>(`${this.apiUrl}/`);  }
+
+  //Obtener solo eventos activos en la pagina Inicio.
+
+  getActiveEventos(): Observable<EventoResponseDto[]> {
+    return this.getAllEventos().pipe(
+      map(eventos => eventos.filter(evento => evento.activo))
+    );
+  }
 
 }
 

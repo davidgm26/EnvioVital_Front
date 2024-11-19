@@ -22,7 +22,7 @@ export class ListaEventosComponent implements OnInit{
   constructor(private eventoService: EventoService) {}
 
   ngOnInit(): void {
-    this.eventoService.getAllEventos().subscribe(
+    this.eventoService.getActiveEventos().subscribe(
       (data: EventoResponseDto[]) => {
         this.eventos = data;
       },
