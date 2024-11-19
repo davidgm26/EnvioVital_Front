@@ -17,7 +17,7 @@ export interface EventoResponseDto {
   descripcion?: string;
   idProvincia?: number;
   nombreProvincia?: string;
-  
+
 }
 
 @Injectable({
