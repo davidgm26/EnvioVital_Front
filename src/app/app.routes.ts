@@ -6,6 +6,9 @@ import { ConductorFormComponent } from './components/conductor-form/conductor-fo
 import { ConductorViewComponent } from './components/conductor-view/conductor-view.component';
 import { RegistroAlmacenComponent } from './components/registro-almacen/registro-almacen.component';
 import { RegistroConductorComponent } from './components/registro-conductor/registro-conductor.component';
+import {TarjetaEventoComponent} from "../componentes/tarjeta-evento/tarjeta-evento.component";
+import {ListaEventosComponent} from "../componentes/lista-eventos/lista-eventos.component";
+import {ListaAlmacenesComponent} from "../componentes/lista-almacenes/lista-almacenes.component";
 
 export const routes: Routes = [
     {path: "", redirectTo: "login", pathMatch: "full"},
@@ -15,6 +18,11 @@ export const routes: Routes = [
     { path: "conductor/:id", component: ConductorFormComponent },
     { path: "conductor-view/:id", component: ConductorViewComponent },
     { path: "registro/almacen", component: RegistroAlmacenComponent },
-    { path: "registro/conductor", component: RegistroConductorComponent }
+    { path: "registro/conductor", component: RegistroConductorComponent },
+    { path: 'evento/:id', component:TarjetaEventoComponent,},
+    { path: 'almacen', component:AlmacenFormComponent},
+    { path: 'eventos', component:ListaEventosComponent},
+    { path: 'lista-almacenes/:eventoId', component: ListaAlmacenesComponent },
+
   ];
 
