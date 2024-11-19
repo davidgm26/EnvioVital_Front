@@ -18,10 +18,10 @@ export interface Evento {
   selector: 'app-lista-eventos-almacen',
   standalone: true,
   imports: [MatTableModule, NgClass, MatIconButton, MatIconModule],
-  templateUrl: './lista-eventos.component.html',
-  styleUrls: ['./lista-eventos.component.css'],
+  templateUrl: './lista-eventos-almacen.component.html',
+  styleUrls: ['./lista-eventos-almacen.component.css'],
 })
-export class ListaEventosComponent implements OnInit {
+export class ListaEventosAlmacenComponent implements OnInit {
   @Input() eventos: Evento[] = [];
 
   displayedColumns: string[] = ['idEvento', 'nombreEvento', 'descripcionEvento', 'nombreProvincia', 'estado', 'eliminar'];
