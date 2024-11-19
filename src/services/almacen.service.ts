@@ -2,6 +2,25 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface AlmacenResponseDTO {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  direccion: string;
+  email: string;
+  esActivo: boolean;
+  provincia: string;
+  idUsuario: number;
+}
+
+export interface EventoAlmacenDtoResponse {
+  idEvento: number;
+  idAlmacen: number;
+  nombreAlmacen: string;
+  nombreEvento: string;
+  almacen: AlmacenResponseDTO;
+}
+
 @Injectable({
   providedIn: 'root'
 })

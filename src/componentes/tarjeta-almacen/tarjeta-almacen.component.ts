@@ -13,6 +13,7 @@ export class TarjetaAlmacenComponent implements OnInit {
 
   @Input() nombreAlmacen!: string;
   @Input() nombreProvincia!: string;
+  @Input() imagenUrl!: string;
 
   // @Input() almacen?: EventoAlmacenDtoResponse;
 
