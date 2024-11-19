@@ -5,7 +5,7 @@ import {NgForOf, NgIf} from "@angular/common";
 // import {EventoRequestDto} from "../../services/evento.service";
 
 @Component({
-  selector: 'app-lista-eventos',
+  selector: 'app-lista-eventos-almacen',
   standalone: true,
   imports: [
     TarjetaEventoComponent,

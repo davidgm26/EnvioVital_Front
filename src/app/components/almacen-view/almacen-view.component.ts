@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ListaEventosComponent } from "../lista-eventos/lista-eventos.component";
-import { Evento } from '../lista-eventos/lista-eventos.component';
+import { ListaEventosComponent } from "../lista-eventos-almacen/lista-eventos.component";
+import { Evento } from '../lista-eventos-almacen/lista-eventos.component';
 import { AlmacenService } from '../../services/almacen.service';
 
 @Component({

@@ -15,7 +15,7 @@ export interface Evento {
 }
 
 @Component({
-  selector: 'app-lista-eventos',
+  selector: 'app-lista-eventos-almacen',
   standalone: true,
   imports: [MatTableModule, NgClass, MatIconButton, MatIconModule],
   templateUrl: './lista-eventos.component.html',
