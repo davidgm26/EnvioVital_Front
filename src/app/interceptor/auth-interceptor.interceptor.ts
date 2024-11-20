@@ -1,22 +1,46 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { HttpInterceptorFn } from "@angular/common/http";
 import { AuthService } from "../services/auth.service";
-import { Observable } from "rxjs";
-import { Injectable } from "@angular/core";
+import { inject } from "@angular/core";
+import { environment } from "../../env/environment";
 
-@Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+export const AuthInterceptor: HttpInterceptorFn = (request, next) => {
+debugger;
+  const authService = inject(AuthService);
 
-  constructor(private authService: AuthService) { }
+  const PUBLIC_URLS = [
+    { url: '/auth/', methods: ['POST', 'GET', 'PUT', 'DELETE'] },
+    { url: '/almacenes/', methods: ['POST', 'GET'] },
+    { url: '/provincia/', methods: ['GET'] },
+    { url: '/evento/', methods: ['GET'] },
+  ];
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const token = this.authService.getTokens();
+
+
+  const requestUrl = new URL(request.url, environment.apiUrl).pathname;
+
+  const isPublic = PUBLIC_URLS.some((route) => 
+    requestUrl.startsWith(route.url) && route.methods.includes(request.method)
+  );
+  if (!isPublic) {
+    let clonedRequest = request.clone({
+      setHeaders: {
+        'Access-Control-Allow-Origin': 'http://localhost:4200',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+        'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type, Authorization',
+      }
+    });
+
+    const token = authService.getTokens();
     if (token) {
-      request = request.clone({
+      clonedRequest = clonedRequest.clone({
         setHeaders: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
     }
-    return next.handle(request);
+
+    return next(clonedRequest);
   }
-}
+
+  return next(request);
+};
