@@ -7,9 +7,9 @@ import { ConductorViewComponent } from './components/conductor-view/conductor-vi
 import { RegistroAlmacenComponent } from './components/registro-almacen/registro-almacen.component';
 import { RegistroConductorComponent } from './components/registro-conductor/registro-conductor.component';
 import { TarjetaEventoComponent } from './components/tarjeta-evento/tarjeta-evento.component';
-import { ListaEventosAlmacenComponent } from './components/lista-eventos-almacen/lista-eventos.component';
 import { ListaAlmacenesComponent } from './components/lista-almacenes/lista-almacenes.component';
 import { ListaEventosComponent } from './components/lista-eventos/lista-eventos.component';
+import { ListaEventosAlmacenComponent } from './components/lista-eventos-almacen/lista-eventos-almacen.component';
 
 export const routes: Routes = [
     {path: "", redirectTo: "main", pathMatch: "full"},

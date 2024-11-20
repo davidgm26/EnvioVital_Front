@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlmacenService } from '../../services/almacen.service';
+import { ListaEventosAlmacenComponent } from '../lista-eventos-almacen/lista-eventos-almacen.component';
 import { Evento } from '../../interfaces/evento';
-import { ListaEventosAlmacenComponent } from '../lista-eventos-almacen/lista-eventos.component';
+import { AlmacenService } from '../../services/almacen.service';
+
 
 @Component({
   selector: 'app-almacen-view',
