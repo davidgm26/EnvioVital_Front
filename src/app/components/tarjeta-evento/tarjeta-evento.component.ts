@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { ActivatedRoute}  from "@angular/router";
 import {EventoService, EventoRequestDto, EventoResponseDto} from "../../services/evento.service";
 import {CommonModule} from "@angular/common";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tarjeta-evento',

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {map, Observable} from 'rxjs';
+import { environment } from '../../env/environment';
 
 export interface EventoResponseDto{
   profilePicture: string;
@@ -24,18 +25,17 @@ export interface EventoRequestDto {
   providedIn: 'root'
 })
 export class EventoService {
-  private apiUrlEventoPorId = 'http://localhost:8081/evento/evento-inicio';
-  private apiUrl = 'http://localhost:8081/evento';
+  API_URL = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
   // Obtener el evento por idEvento
   getEventoById(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrlEventoPorId}/${id}`);
+    return this.http.get(`${this.API_URL}/${id}`);
   }
 
   // Obtener todos los eventos
   getAllEventos(): Observable<EventoResponseDto[]> {
-   return this.http.get<EventoResponseDto[]>(`${this.apiUrl}/`);  }
+   return this.http.get<EventoResponseDto[]>(`${this.API_URL}/evento/`);  }
 
   //Obtener solo eventos activos en la pagina Inicio.
 

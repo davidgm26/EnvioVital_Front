@@ -4,15 +4,9 @@ import { MatTableModule } from '@angular/material/table';
 import { NgClass } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { Evento } from '../../interfaces/evento';
 
-export interface Evento {
-  id: number;
-  idEvento: number;
-  nombreEvento: string;
-  descripcionEvento: string;
-  nombreProvincia: string;
-  estado: boolean;
-}
+
 
 @Component({
   selector: 'app-lista-eventos-almacen',
