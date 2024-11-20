@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlmacenService } from '../../services/almacen.service';
+import {AlmacenViewComponent} from "../almacen-view/almacen-view.component";
 
 @Component({
   selector: 'app-almacen-form',
@@ -13,6 +14,7 @@ import { AlmacenService } from '../../services/almacen.service';
   providers: []
 })
 export class AlmacenFormComponent implements OnInit {
+  @Output() onSave: EventEmitter<void> = new EventEmitter<void>();
   formulario: FormGroup;
   provincias: any[] = [];
   nombreProvincia: string | null = null;
@@ -111,10 +113,9 @@ export class AlmacenFormComponent implements OnInit {
     const datosAEnviar = this.prepararDatosAEnviar();
 
     this.almacenService.actualizarAlmacen(this.almacenId, datosAEnviar).subscribe({
-      next: (response) => {
-        console.log("Almacén actualizado:", response);
-        window.alert('Almacén actualizado exitosamente');
-        this.router.navigate([`/almacen-perfil/${this.almacenId}`]);
+      next: () => {
+        alert("Almacén actualizado exitosamente");
+        this.onSave.emit(); // Emitir evento cuando se complete la operación
       },
       error: (error) => console.error("Error al actualizar el almacén:", error)
     });

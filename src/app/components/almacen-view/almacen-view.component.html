@@ -1,64 +1,73 @@
 <div class="max-w-5xl mx-auto mt-10 space-y-8">
-  <!-- Título -->
-  <h2 class="text-3xl font-bold text-gray-800 text-center">Detalles del Almacén</h2>
-
-  <div class="flex flex-col md:flex-row items-center md:space-x-8">
-    <!-- Detalles del Almacén -->
-    <div class="flex flex-col items-center bg-gray-100 p-6 rounded-lg shadow-md w-full md:w-1/3">
-      <div class="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center mb-4">
-        <!-- Icono de almacén -->
-        <span class="material-icons text-gray-500 text-6xl">store</span>
+  <!-- Contenedor Principal con Icono a la Izquierda y NavTabs a la Derecha -->
+  <div class="flex flex-col md:flex-row items-start md:items-center bg-white p-6 rounded-lg shadow-xl">
+    <!-- Parte del Icono y Nombre (Izquierda) -->
+    <div class="flex flex-col items-center w-full md:w-1/4 mb-4 md:mb-0 md:mr-8">
+      <div class="w-32 h-32 bg-blue-500 text-white rounded-full flex items-center justify-center mb-4">
+        <span class="material-icons text-4xl">store</span>
       </div>
-      <p class="text-lg font-semibold">{{ usuarioUsername }}</p>
+      <p class="text-xl font-semibold text-gray-800">{{ usuarioUsername }}</p>
     </div>
 
-    <!-- Información del Almacén -->
-    <div class="bg-teal-500 text-white p-6 rounded-lg shadow-md w-full md:w-2/3">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <p><strong>Nombre:</strong></p>
-          <p>{{ almacen.nombre }}</p>
-        </div>
-        <div>
-          <p><strong>Descripción:</strong></p>
-          <p>{{ almacen.descripcion }}</p>
-        </div>
-        <div>
-          <p><strong>Dirección:</strong></p>
-          <p>{{ almacen.direccion }}</p>
-        </div>
-        <div>
-          <p><strong>Email:</strong></p>
-          <p>{{ almacen.email }}</p>
-        </div>
-        <div>
-          <p><strong>Provincia:</strong></p>
-          <p>{{ provinciaNombre }}</p>
-        </div>
-        <div>
-          <p><strong>Estado Activo:</strong></p>
-          <p>{{ almacen.esActivo ? 'Sí' : 'No' }}</p>
+    <!-- Parte del NavTab y Contenido (Derecha) -->
+    <div class="w-full md:w-3/4">
+      <!-- Nav Tabs -->
+      <ul class="flex flex-wrap border-b-2 pb-2 mb-6">
+        <li class="mr-6 mb-2 md:mb-0">
+          <button (click)="activeTab = 'details'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'details'}" class="text-blue-600 hover:text-blue-800 font-semibold">Detalles</button>
+        </li>
+        <li class="mr-6 mb-2 md:mb-0">
+          <button (click)="activeTab = 'edit'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'edit'}" class="text-blue-600 hover:text-blue-800 font-semibold">Editar</button>
+        </li>
+        <li class="mr-6 mb-2 md:mb-0">
+          <button (click)="activeTab = 'changePass'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'changePass'}" class="text-blue-600 hover:text-blue-800 font-semibold">Cambiar Contraseña</button>
+        </li>
+        <li class="mb-2 md:mb-0">
+          <button (click)="activeTab = 'events'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'events'}" class="text-blue-600 hover:text-blue-800 font-semibold">Eventos</button>
+        </li>
+      </ul>
+
+      <!-- Tab Content -->
+      <div *ngIf="activeTab === 'details'" class="p-6 bg-gradient-to-r from-teal-400 to-teal-600 text-white rounded-lg shadow-xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <p><strong>Nombre</strong></p>
+            <p>{{ almacen.nombre }}</p>
+          </div>
+          <div>
+            <p><strong>Descripción</strong></p>
+            <p>{{ almacen.descripcion }}</p>
+          </div>
+          <div>
+            <p><strong>Dirección</strong></p>
+            <p>{{ almacen.direccion }}</p>
+          </div>
+          <div>
+            <p><strong>Email</strong></p>
+            <p>{{ almacen.email }}</p>
+          </div>
+          <div>
+            <p><strong>Provincia</strong></p>
+            <p>{{ provinciaNombre }}</p>
+          </div>
+          <div>
+            <p><strong>Estado Activo</strong></p>
+            <p>{{ almacen.esActivo ? 'Sí' : 'No' }}</p>
+          </div>
         </div>
       </div>
 
-      <!-- Botones -->
-      <div class="mt-6 flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 justify-center">
-        <button
-          class="bg-yellow-400 text-gray-800 font-semibold py-2 px-6 rounded-md hover:bg-yellow-500 transition duration-200"
-          (click)="editarAlmacen()"
-        >
-          Editar Almacén
-        </button>
+      <div *ngIf="activeTab === 'edit'">
+        <app-almacen-form (onSave)="handleSave()"></app-almacen-form>
+      </div>
 
-        <button
-          class="bg-yellow-400 text-gray-800 font-semibold py-2 px-6 rounded-md hover:bg-yellow-500 transition duration-200"
-          (click)="cambiarPass()"
-        >
-          Cambiar Contraseña
-        </button>
+      <div *ngIf="activeTab === 'changePass'">
+        <app-cambiar-pass [usuarioId]="userId"></app-cambiar-pass>
+      </div>
+
+      <div *ngIf="activeTab === 'events'">
+        <app-lista-eventos-almacen [eventos]="eventos"></app-lista-eventos-almacen>
       </div>
     </div>
   </div>
-
-  <app-lista-eventos-almacen [eventos]="eventos"></app-lista-eventos-almacen>
 </div>

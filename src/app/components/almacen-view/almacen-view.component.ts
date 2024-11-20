@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListaEventosAlmacenComponent } from "../lista-eventos-almacen/lista-eventos-almacen.component";
 import { Evento } from '../lista-eventos-almacen/lista-eventos-almacen.component';
 import { AlmacenService } from '../../services/almacen.service';
 import { UsuarioService } from "../../services/usuario.service";
+import {AlmacenFormComponent} from "../almacen-form/almacen-form.component";
+import {CambiarPassComponent} from "../cambiar-pass/cambiar-pass.component";
+import {NgClass, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-almacen-view',
   templateUrl: './almacen-view.component.html',
   standalone: true,
-  imports: [ListaEventosAlmacenComponent],
+  imports: [ListaEventosAlmacenComponent, AlmacenFormComponent, CambiarPassComponent, NgIf, NgClass],
   styleUrls: ['./almacen-view.component.css']
 })
 export class AlmacenViewComponent implements OnInit {
@@ -18,7 +21,9 @@ export class AlmacenViewComponent implements OnInit {
   provinciaNombre: string = '';
   usuarioUsername: string = '';
   almacenId!: number;
-  userId!: number;  // Añadimos la propiedad userId
+  userId!: number;
+  activeTab: string = 'details';
+  @Output() reloadDataEvent = new EventEmitter<void>();
 
   constructor(
     private route: ActivatedRoute,
@@ -27,13 +32,13 @@ export class AlmacenViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Obtener el ID del almacén desde la URL
+    this.reloadDataEvent.subscribe(() => this.reloadData());
     this.almacenId = Number(this.route.snapshot.paramMap.get('id'));
     if (this.almacenId) {
       this.cargarDatosAlmacen();
       this.obtenerListaEventos(); // Llamamos a obtenerListaEventos al inicializar
     } else {
-      this.redirigirAInicio(); // Redirige si no hay ID
+      this.redirigirAInicio();
     }
   }
 
@@ -79,9 +84,7 @@ export class AlmacenViewComponent implements OnInit {
 
   // Método para editar el almacén
   editarAlmacen(): void {
-    this.router.navigate([`/almacen-perfil/editar/${this.almacenId}`])
-      .then(success => console.log('Navigation successful:', success))
-      .catch(error => console.error('Navigation error:', error));
+    this.activeTab = 'edit';
   }
 
   // Método para obtener la lista de eventos asociados al almacén
@@ -99,13 +102,16 @@ export class AlmacenViewComponent implements OnInit {
 
   // Método para redirigir a la página de cambio de contraseña
   cambiarPass(): void {
-    if (this.userId) {
-      // Redirige al usuario a la página de cambio de contraseña
-      this.router.navigate([`/cambiar-pass/${this.userId}`])
-        .then(success => console.log('Navigation successful:', success))
-        .catch(error => console.error('Navigation error:', error));
-    } else {
-      console.error('User ID is missing');  // Asegúrate de que el userId esté disponible
-    }
+    this.activeTab = 'changePass';
   }
+  reloadData(): void {
+    this.cargarDatosAlmacen();
+    this.obtenerListaEventos();
+  }
+
+  handleSave(): void {
+    this.activeTab = 'details';
+    this.reloadData();
+  }
+
 }
