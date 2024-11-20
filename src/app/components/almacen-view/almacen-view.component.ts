@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  ListaEventosAlmacenComponent,
-} from "../lista-eventos-almacen/lista-eventos-almacen.component";
+import { ListaEventosAlmacenComponent } from "../lista-eventos-almacen/lista-eventos-almacen.component";
 import { Evento } from '../lista-eventos-almacen/lista-eventos-almacen.component';
 import { AlmacenService } from '../../services/almacen.service';
+import { UsuarioService } from "../../services/usuario.service";
 
 @Component({
   selector: 'app-almacen-view',
@@ -19,6 +18,7 @@ export class AlmacenViewComponent implements OnInit {
   provinciaNombre: string = '';
   usuarioUsername: string = '';
   almacenId!: number;
+  userId!: number;  // Añadimos la propiedad userId
 
   constructor(
     private route: ActivatedRoute,
@@ -27,26 +27,29 @@ export class AlmacenViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Obtener el ID del almacén desde la URL
     this.almacenId = Number(this.route.snapshot.paramMap.get('id'));
     if (this.almacenId) {
       this.cargarDatosAlmacen();
       this.obtenerListaEventos(); // Llamamos a obtenerListaEventos al inicializar
     } else {
-      this.redirigirAInicio();
+      this.redirigirAInicio(); // Redirige si no hay ID
     }
   }
 
+  // Método para cargar los datos del almacén
   private cargarDatosAlmacen(): void {
     this.almacenService.obtenerAlmacenPorId(this.almacenId).subscribe({
       next: (almacen) => {
-        this.almacen = almacen;
-        this.cargarProvincia(almacen.idProvincia); // Se llama a cargarProvincia aquí
-        this.cargarUsuario(almacen.idUsuario);
+        this.almacen = almacen; // Asignamos los datos del almacén a la propiedad almacen
+        this.cargarProvincia(almacen.idProvincia); // Llamamos a cargarProvincia con el ID de la provincia
+        this.cargarUsuario(almacen.idUsuario); // Llamamos a cargarUsuario con el ID del usuario
       },
       error: (error) => console.error('Error al cargar los datos del almacén:', error)
     });
   }
 
+  // Método para cargar la provincia relacionada con el almacén
   private cargarProvincia(idProvincia: number): void {
     this.almacenService.obtenerProvincias().subscribe({
       next: (provincias) => {
@@ -57,35 +60,52 @@ export class AlmacenViewComponent implements OnInit {
     });
   }
 
+  // Método para cargar los datos del usuario asociado al almacén
   private cargarUsuario(idUsuario: number): void {
     this.almacenService.obtenerUsuarioPorId(idUsuario).subscribe({
       next: (usuario) => {
         this.usuarioUsername = usuario ? usuario.username : 'Usuario desconocido';
+        this.userId = usuario ? usuario.id : 0;  // Asignamos el userId aquí
       },
       error: (error) => console.error('Error al cargar el usuario:', error)
     });
   }
 
+  // Redirige al inicio si no se ha encontrado un ID de almacén válido
   private redirigirAInicio(): void {
     console.error('No almacenId provided');
     this.router.navigate(['/']);
   }
 
+  // Método para editar el almacén
   editarAlmacen(): void {
-    this.router.navigate([`/almacen/${this.almacenId}`])
+    this.router.navigate([`/almacen-perfil/editar/${this.almacenId}`])
       .then(success => console.log('Navigation successful:', success))
       .catch(error => console.error('Navigation error:', error));
   }
 
+  // Método para obtener la lista de eventos asociados al almacén
   obtenerListaEventos(): void {
     this.almacenService.obtenerListaEventos(this.almacenId).subscribe({
       next: (eventos) => {
-        this.eventos = eventos;
+        this.eventos = eventos; // Asignamos los eventos a la propiedad eventos
       },
       error: (error) => {
         console.error('Error al obtener la lista de eventos:', error);
         console.log('Detalles del error:', error);
       },
     });
+  }
+
+  // Método para redirigir a la página de cambio de contraseña
+  cambiarPass(): void {
+    if (this.userId) {
+      // Redirige al usuario a la página de cambio de contraseña
+      this.router.navigate([`/cambiar-pass/${this.userId}`])
+        .then(success => console.log('Navigation successful:', success))
+        .catch(error => console.error('Navigation error:', error));
+    } else {
+      console.error('User ID is missing');  // Asegúrate de que el userId esté disponible
+    }
   }
 }

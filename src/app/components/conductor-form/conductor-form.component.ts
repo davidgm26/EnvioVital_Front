@@ -77,7 +77,7 @@ export class ConductorFormComponent implements OnInit {
       next: (response) => {
         console.log("Conductor actualizado:", response);
         window.alert('Conductor actualizado exitosamente');
-        this.router.navigate([`/conductor-view/${this.conductorId}`]);
+        this.router.navigate([`/conductor-perfil/${this.conductorId}`]);
       },
       error: (error) => console.error("Error al actualizar el conductor:", error)
     });

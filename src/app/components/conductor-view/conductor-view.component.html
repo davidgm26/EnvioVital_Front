@@ -9,7 +9,7 @@
         <!-- Icono de perfil -->
         <span class="material-icons text-gray-500 text-6xl">person</span>
       </div>
-      <p class="text-lg font-semibold">{{conductor.nombre}}</p>
+      <p class="text-lg font-semibold">{{ usuarioUsername }}</p>
     </div>
 
     <!-- Formulario de Información del Conductor -->
@@ -20,7 +20,7 @@
           <p>{{ conductor.nombre }}</p>
         </div>
         <div>
-          <p><strong>Primer apellido</strong></p>
+          <p><strong>Apellidos</strong></p>
           <p>{{ conductor.apellidos }}</p>
         </div>
         <div>
@@ -41,17 +41,24 @@
         </div>
       </div>
 
-      <!-- Botón Aceptar -->
-      <div class="mt-6 flex justify-center">
+      <!-- Botones -->
+      <div class="mt-6 flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 justify-center">
         <button
           class="bg-yellow-400 text-gray-800 font-semibold py-2 px-6 rounded-md hover:bg-yellow-500 transition duration-200"
           (click)="editarConductor()"
         >
           Editar Perfil
         </button>
+
+        <button
+          class="bg-yellow-400 text-gray-800 font-semibold py-2 px-6 rounded-md hover:bg-yellow-500 transition duration-200"
+          (click)="cambiarPass()"
+        >
+          Cambiar Contraseña
+        </button>
       </div>
     </div>
   </div>
 
-    <app-lista-almacenes-registrados [almacenes]="almacenesRegistrados"></app-lista-almacenes-registrados>
+  <app-lista-almacenes-registrados [almacenes]="almacenesRegistrados"></app-lista-almacenes-registrados>
 </div>

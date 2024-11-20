@@ -114,7 +114,7 @@ export class AlmacenFormComponent implements OnInit {
       next: (response) => {
         console.log("Almacén actualizado:", response);
         window.alert('Almacén actualizado exitosamente');
-        this.router.navigate([`/almacen-view/${this.almacenId}`]);
+        this.router.navigate([`/almacen-perfil/${this.almacenId}`]);
       },
       error: (error) => console.error("Error al actualizar el almacén:", error)
     });

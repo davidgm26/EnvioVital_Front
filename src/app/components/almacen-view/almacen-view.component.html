@@ -9,16 +9,12 @@
         <!-- Icono de almacén -->
         <span class="material-icons text-gray-500 text-6xl">store</span>
       </div>
-      <p class="text-lg font-semibold">{{almacen.nombre}}</p>
+      <p class="text-lg font-semibold">{{ usuarioUsername }}</p>
     </div>
 
     <!-- Información del Almacén -->
     <div class="bg-teal-500 text-white p-6 rounded-lg shadow-md w-full md:w-2/3">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <p><strong>Usuario:</strong></p>
-          <p>{{ usuarioUsername }}</p>
-        </div>
         <div>
           <p><strong>Nombre:</strong></p>
           <p>{{ almacen.nombre }}</p>
@@ -45,16 +41,24 @@
         </div>
       </div>
 
-      <!-- Botón Editar -->
-      <div class="mt-6 flex justify-center">
+      <!-- Botones -->
+      <div class="mt-6 flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 justify-center">
         <button
           class="bg-yellow-400 text-gray-800 font-semibold py-2 px-6 rounded-md hover:bg-yellow-500 transition duration-200"
           (click)="editarAlmacen()"
         >
           Editar Almacén
         </button>
+
+        <button
+          class="bg-yellow-400 text-gray-800 font-semibold py-2 px-6 rounded-md hover:bg-yellow-500 transition duration-200"
+          (click)="cambiarPass()"
+        >
+          Cambiar Contraseña
+        </button>
       </div>
     </div>
   </div>
-      <app-lista-eventos-almacen [eventos]="eventos"></app-lista-eventos-almacen>
+
+  <app-lista-eventos-almacen [eventos]="eventos"></app-lista-eventos-almacen>
 </div>

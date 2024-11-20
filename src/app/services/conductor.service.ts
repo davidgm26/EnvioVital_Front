@@ -13,7 +13,6 @@ export class ConductorService {
 
   constructor(private http: HttpClient) { }
 
-  // Obtener un conductor por su ID
   obtenerConductorPorId(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/${id}`);
   }

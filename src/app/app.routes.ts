@@ -9,21 +9,24 @@ import { RegistroConductorComponent } from './components/registro-conductor/regi
 import {TarjetaEventoComponent} from "./components/tarjeta-evento/tarjeta-evento.component";
 import {ListaEventosComponent} from "./components/lista-eventos/lista-eventos.component";
 import {ListaAlmacenesComponent} from "./components/lista-almacenes/lista-almacenes.component";
+import {CambiarPassComponent} from "./components/cambiar-pass/cambiar-pass.component";
 
 export const routes: Routes = [
     {path: "", redirectTo: "main", pathMatch: "full"},
+    {path: "main", component: ListaEventosComponent},
     {path: "login", component: LoginComponent},
-    { path: "almacen/:id", component: AlmacenFormComponent },
-    { path: "almacen-view/:id", component: AlmacenViewComponent },
-    { path: "conductor/:id", component: ConductorFormComponent },
-    { path: "conductor-view/:id", component: ConductorViewComponent },
+    { path: "almacen-perfil/editar/:id", component: AlmacenFormComponent },
+    { path: "almacen-perfil/:id", component: AlmacenViewComponent },
+    { path: "conductor-perfil/editar/:id", component: ConductorFormComponent },
+    { path: "conductor-perfil/:id", component: ConductorViewComponent },
     { path: "registro/almacen", component: RegistroAlmacenComponent },
     { path: "registro/conductor", component: RegistroConductorComponent },
     { path: 'evento/:id', component:TarjetaEventoComponent,},
     { path: 'almacen', component:AlmacenFormComponent},
     { path: 'eventos', component:ListaEventosComponent},
     { path: 'lista-almacenes/:eventoId', component: ListaAlmacenesComponent },
-    {path: "main", component: ListaEventosComponent}
+    { path: 'cambiar-pass/:usuarioId', component: CambiarPassComponent}
+
 
   ];
 

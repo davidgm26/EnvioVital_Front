@@ -1,33 +1,66 @@
-<div class="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 mt-10">
-  <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Cambiar Contraseña</h2>
+<div class="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6">
+  <h2 class="text-xl font-bold text-center mb-4">Cambiar Contraseña</h2>
 
   <form [formGroup]="cambiarPassForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="actualPass">Contraseña Actual</label>
-      <input type="password" id="actualPass" formControlName="actualPass" class="form-control" />
-      <div *ngIf="cambiarPassForm.get('actualPass')?.invalid && cambiarPassForm.get('actualPass')?.touched" class="error">
-        Contraseña actual es requerida
+    <!-- Campo de contraseña antigua -->
+    <div class="mb-4">
+      <label class="block text-gray-700 font-medium mb-2" for="oldPassword">Contraseña Actual</label>
+      <input
+        type="password"
+        id="oldPassword"
+        formControlName="oldPassword"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+        placeholder="Introduce tu contraseña actual"
+      />
+      <div *ngIf="cambiarPassForm.get('oldPassword')?.invalid && cambiarPassForm.get('oldPassword')?.touched" class="text-red-500 text-sm">
+        Este campo es obligatorio.
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="nuevaPass">Nueva Contraseña</label>
-      <input type="password" id="nuevaPass" formControlName="nuevaPass" class="form-control" />
-      <div *ngIf="cambiarPassForm.get('nuevaPass')?.invalid && cambiarPassForm.get('nuevaPass')?.touched" class="error">
-        La nueva contraseña debe tener al menos 6 caracteres
+    <!-- Campo de nueva contraseña -->
+    <div class="mb-4">
+      <label class="block text-gray-700 font-medium mb-2" for="newPassword">Nueva Contraseña</label>
+      <input
+        type="password"
+        id="newPassword"
+        formControlName="newPassword"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+        placeholder="Introduce tu nueva contraseña"
+      />
+      <div *ngIf="cambiarPassForm.get('newPassword')?.invalid && cambiarPassForm.get('newPassword')?.touched" class="text-red-500 text-sm">
+        La contraseña debe tener al menos 8 caracteres.
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="repitePass">Repetir Nueva Contraseña</label>
-      <input type="password" id="repitePass" formControlName="repitePass" class="form-control" />
-      <div *ngIf="cambiarPassForm.errors?.['mismatch'] && cambiarPassForm.get('repitePass')?.touched">
-        <p class="error-text">Las contraseñas no coinciden.</p>
+    <!-- Confirmar nueva contraseña -->
+    <div class="mb-4">
+      <label class="block text-gray-700 font-medium mb-2" for="confirmPassword">Confirmar Contraseña</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        formControlName="confirmPassword"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+        placeholder="Repite tu nueva contraseña"
+      />
+      <div *ngIf="cambiarPassForm.hasError('passwordsDontMatch') && cambiarPassForm.get('confirmPassword')?.touched" class="text-red-500 text-sm">
+        Las contraseñas no coinciden.
       </div>
     </div>
 
-    <button type="submit" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded mt-4">
+    <!-- Botón de envío -->
+    <button
+      type="submit"
+      class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+    >
       Cambiar Contraseña
     </button>
   </form>
+
+  <!-- Mensajes de éxito y error -->
+  <div *ngIf="successMessage" class="mt-4 text-green-500 font-medium">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="mt-4 text-red-500 font-medium">
+    {{ errorMessage }}
+  </div>
 </div>
