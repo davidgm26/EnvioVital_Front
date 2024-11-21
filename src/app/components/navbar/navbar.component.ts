@@ -6,8 +6,13 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-
+  openMenu(): void {
+    const menu = document.getElementById('menu');
+    if (menu) {
+      menu.classList.toggle('hidden');
+    }
+  }
 }
