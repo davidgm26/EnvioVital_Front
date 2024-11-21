@@ -1,24 +1,28 @@
 <nav class="bg-white-800 py-6 relative justify-around">
-  <div class="bg-blue-50 container mx-auto flex px-8 xl:px-0 rounded-3xl shadow-xl shadow-gray-300">
+  <div class="bg-white container mx-auto flex px-8 xl:px-0 rounded-3xl shadow-xl shadow-gray-300 ">
     <div class="flex flex-grow ml-4">
-      <img src="assets/logo_envioVital.png" alt="logo" class="h-20 w-auto">
+      <img src="assets/logo_envioVital.png" alt="logo" class="w-36 h-24" style="max-width: 148px; max-height: 97px;">
     </div>
 
     <div class="flex lg:hidden items-center mr-3">
       <img src="assets/icono-menu.png" class="h-8 w-8" (click)="openMenu()">
-
     </div>
 
-    <div id="menu" class="lg:flex hidden flex-grow justify-between items-center absolute lg:relative lg:top-0 top-28  left-16 lg:left-0 w-full">
+    <div id="menu" class="lg:flex hidden flex-grow justify-between absolute lg:relative lg:top-0 top-28 left-0 bg-gradient-to-b from white to transparent w-full lg:w-auto
+    items-center lg:left-0   lg:ml-48 py-6 px-8">
 
-      <div class="flex flex-col lg:flex-row">
-        <input type="text" placeholder="Buscar..." class="flex-grow p-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        <button class="bg-blue-500 text-white p-2 rounded-r-lg hover:bg-blue-700">Buscar</button>
+      <div class="flex flex-row lg:flex-row items-center mb-4 lg:mb-0">
+
+        <input type="text" placeholder="Buscar por provincia:" class="flex-grow p-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button class="bg-white  p-2 rounded-r-lg hover:bg-gray-300 border border-gray-300">
+          <img src="assets/icono-lupa.png" alt="Buscar" class="h-6 w-6">
+        </button>
       </div>
+      <div></div>
 
-      <div class=" flex flex-col lg:flex-row mr-4">
+      <div class=" flex flex-col lg:flex-row  text-center">
 
-        <a href="a" class="text-white bg-black border border-black py-2.5 px-5 rounded-md hover:bg-slate-700 hover:border-slate-700 transition duration-500 ease-in-out lg:mr-2"> Iniciar sesión</a>
+        <a href="a" class="text-white bg-black border border-black py-2.5 px-5 rounded-md hover:bg-slate-700 hover:border-slate-700 transition duration-500 ease-in-out lg:mr-2 mb-2 lg:mb-0"> Iniciar sesión</a>
         <a href="a" class="text-white bg-cyan-600 border py-2.5 px-5 rounded-md hover:bg-cyan-500 hover: border-cyan-500 transition duration-500 ease-in-out"> Registrarse</a>
 
       </div>

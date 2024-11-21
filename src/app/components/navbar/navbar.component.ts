@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -8,11 +8,16 @@ import { RouterLink } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements AfterViewInit {
   openMenu(): void {
     const menu = document.getElementById('menu');
     if (menu) {
       menu.classList.toggle('hidden');
     }
   }
+
+  ngAfterViewInit(): void {
+  }
+
+
 }
