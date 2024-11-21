@@ -44,8 +44,7 @@ asignarCabecera(){
 
   // Obtener todos los eventos
   getAllEventos(): Observable<EventoResponseDto[]> {
-    const options = this.asignarCabecera();
-   return this.http.get<any>(`${this.API_URL}/evento/`,options);
+   return this.http.get<any>(`${this.API_URL}/evento/`);
     }
 
   //Obtener solo eventos activos en la pagina Inicio.
