@@ -10,6 +10,7 @@ import { TarjetaEventoComponent } from './components/tarjeta-evento/tarjeta-even
 import { ListaAlmacenesComponent } from './components/lista-almacenes/lista-almacenes.component';
 import { ListaEventosComponent } from './components/lista-eventos/lista-eventos.component';
 import { ListaEventosAlmacenComponent } from './components/lista-eventos-almacen/lista-eventos-almacen.component';
+import { SelectorRolComponent } from './components/selector-rol/selector-rol.component';
 
 export const routes: Routes = [
     {path: "", redirectTo: "main", pathMatch: "full"},
@@ -24,7 +25,7 @@ export const routes: Routes = [
     { path: 'almacen', component:AlmacenFormComponent},
     { path: 'eventos', component:ListaEventosAlmacenComponent},
     { path: 'lista-almacenes/:eventoId', component: ListaAlmacenesComponent},
-    { path: 'main', component: ListaEventosComponent }
-
+    { path: 'main', component: ListaEventosComponent },
+    {path: 'selector', component: SelectorRolComponent},
   ];
 
