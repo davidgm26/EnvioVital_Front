@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConductorService } from '../../services/conductor.service';
 
 @Component({
   selector: 'app-conductor-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './conductor-form.component.html',
   styleUrls: ['./conductor-form.component.css'],
   providers: []
 })
 export class ConductorFormComponent implements OnInit {
+  @Output() onSave: EventEmitter<void> = new EventEmitter<void>();
   formulario: FormGroup;
   conductorId!: number;
 
@@ -74,10 +76,9 @@ export class ConductorFormComponent implements OnInit {
     const datosAEnviar = this.prepararDatosAEnviar();
 
     this.conductorService.actualizarConductor(this.conductorId, datosAEnviar).subscribe({
-      next: (response) => {
-        console.log("Conductor actualizado:", response);
-        window.alert('Conductor actualizado exitosamente');
-        this.router.navigate([`/conductor-perfil/${this.conductorId}`]);
+      next: () => {
+        alert("Conductor actualizado exitosamente");
+        this.onSave.emit();
       },
       error: (error) => console.error("Error al actualizar el conductor:", error)
     });

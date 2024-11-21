@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListaEventosAlmacenComponent } from '../lista-eventos-almacen/lista-eventos-almacen.component';
 import { Evento } from '../../interfaces/evento';
@@ -13,7 +13,7 @@ import {NgClass, NgIf} from "@angular/common";
   selector: 'app-almacen-view',
   templateUrl: './almacen-view.component.html',
   standalone: true,
-  imports: [ListaEventosAlmacenComponent],
+  imports: [ListaEventosAlmacenComponent, AlmacenFormComponent, CambiarPassComponent, NgClass, NgIf],
   styleUrls: ['./almacen-view.component.css']
 })
 export class AlmacenViewComponent implements OnInit {

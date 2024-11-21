@@ -1,15 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';  // Importa HttpClient y HttpClientModule
+import { HttpClient } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
-import { AlmacenRegistrado } from '../../interfaces/almacen-registrado.model';
 import { NgClass } from '@angular/common';
-import {MatIcon} from "@angular/material/icon";
-import {MatIconButton} from "@angular/material/button";
+import { MatIconButton } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { AlmacenRegistrado } from '../../interfaces/almacen-registrado.model';
 
 @Component({
   selector: 'app-lista-almacenes-registrados',
   standalone: true,
-  imports: [MatTableModule, HttpClientModule, NgClass, MatIcon, MatIconButton],
+  imports: [MatTableModule, NgClass, MatIconButton, MatIconModule],
   templateUrl: './lista-almacenes-registrados.component.html',
   styleUrls: ['./lista-almacenes-registrados.component.css'],
 })
@@ -18,27 +18,26 @@ export class ListaAlmacenesRegistradosComponent implements OnInit {
 
   displayedColumns: string[] = ['nombreAlmacen', 'direccionAlmacen', 'nombreEvento', 'descripcionEvento', 'nombreProvincia', 'estado', 'eliminar'];
 
-  constructor(private http: HttpClient) {} // Inyecta HttpClient
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {}
 
   eliminarRegistro(id: number): void {
-    // Mostrar un cuadro de confirmación antes de eliminar
     const confirmDelete = window.confirm('¿Seguro que quieres eliminar este registro?');
 
     if (confirmDelete) {
       const url = `http://localhost:8081/conductores/eliminarRegistro/${id}`;
 
       this.http.delete(url).subscribe(
-        (response) => {
+        (response: any) => {
           console.log('Registro eliminado:', response);
-          // Elimina el registro de la lista local
+
           this.almacenes = this.almacenes.filter(almacen => almacen.id !== id);
-          alert('Registro eliminado con éxito'); // Muestra una alerta si el registro se elimina correctamente
+          alert('Registro eliminado con éxito');
         },
-        (error) => {
+        (error: any) => {
           console.error('Error al eliminar el registro:', error);
-          alert('Hubo un error al eliminar el registro'); // Muestra una alerta si hay un error
+          alert('Hubo un error al eliminar el registro');
         }
       );
     } else {
