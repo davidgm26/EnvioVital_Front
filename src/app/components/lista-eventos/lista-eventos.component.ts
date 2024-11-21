@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {TarjetaEventoComponent} from "../tarjeta-evento/tarjeta-evento.component";
 import {EventoResponseDto, EventoService} from "../../services/evento.service";
 import {NgForOf, NgIf} from "@angular/common";
-// import {EventoRequestDto} from "../../services/evento.service";
 
 @Component({
   selector: 'app-lista-eventos-almacen',

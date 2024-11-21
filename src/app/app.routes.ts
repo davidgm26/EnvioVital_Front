@@ -10,9 +10,28 @@ import { TarjetaEventoComponent } from './components/tarjeta-evento/tarjeta-even
 import { ListaAlmacenesComponent } from './components/lista-almacenes/lista-almacenes.component';
 import { ListaEventosComponent } from './components/lista-eventos/lista-eventos.component';
 import { ListaEventosAlmacenComponent } from './components/lista-eventos-almacen/lista-eventos-almacen.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 export const routes: Routes = [
-    {path: "", redirectTo: "main", pathMatch: "full"},
+    // {path: "", redirectTo: "main", pathMatch: "full"},
+    // {path: "login", component: LoginComponent},
+    // { path: "almacen/:id", component: AlmacenFormComponent },
+    // { path: "almacen-view/:id", component: AlmacenViewComponent },
+    // { path: "conductor/:id", component: ConductorFormComponent },
+    // { path: "conductor-view/:id", component: ConductorViewComponent },
+    // { path: "registro/almacen", component: RegistroAlmacenComponent },
+    // { path: "registro/conductor", component: RegistroConductorComponent },
+    // { path: 'evento/:id', component:TarjetaEventoComponent,},
+    // { path: 'almacen', component:AlmacenFormComponent},
+    // { path: 'eventos', component:ListaEventosAlmacenComponent},
+    // { path: 'lista-almacenes/:eventoId', component: ListaAlmacenesComponent},
+    // { path: 'main', component: ListaEventosComponent }
+
+  {path: '', component: NavbarComponent, children: [
+    { path: 'almacen', component:AlmacenFormComponent},
+    { path: 'main', component: ListaEventosComponent }
+  ]
+  },
     {path: "login", component: LoginComponent},
     { path: "almacen/:id", component: AlmacenFormComponent },
     { path: "almacen-view/:id", component: AlmacenViewComponent },
@@ -21,10 +40,8 @@ export const routes: Routes = [
     { path: "registro/almacen", component: RegistroAlmacenComponent },
     { path: "registro/conductor", component: RegistroConductorComponent },
     { path: 'evento/:id', component:TarjetaEventoComponent,},
-    { path: 'almacen', component:AlmacenFormComponent},
-    { path: 'eventos', component:ListaEventosAlmacenComponent},
     { path: 'lista-almacenes/:eventoId', component: ListaAlmacenesComponent},
-    { path: 'main', component: ListaEventosComponent }
+];
 
-  ];
+
 
