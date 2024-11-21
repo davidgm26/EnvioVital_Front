@@ -1,26 +1,53 @@
-<div class="w-2/6 h-4/5 mx-auto border border-[#696773] m-10 caja rounded-md">
-  <div class="w-1/3 h-14 mx-auto border border-blue-500 m-10"> 
-      <img src="" alt="">
+<div class="w-11/12 md:w-3/4 lg:w-1/2 xl:w-1/3 max-w-md mx-auto my-8 border border-gray-600 p-6 rounded-lg shadow-lg">
+  <div class="w-full mx-auto mb-6 hidden md:block">
+    <img src="logo_ev_1-removebg-preview.png" alt="Logo" class="w-2/3 max-w-xs mx-auto">
   </div>
-  <div>
-    <form [formGroup]="loginForm" class="flex flex-col" (ngSubmit)="onSubmit()">
-      <fieldset class="flex flex-col m-5">
-        <label for="username">Nombre de usuario</label>
-        <input type="text" id="username" formControlName="username" class="border border-[#D9D9D9] rounded-md p-2">
-      </fieldset>
-      <fieldset class="flex flex-col relative m-5">
-        <label for="password">Contraseña</label>
-          <div class="flex items-center border border-[#D9D9D9] rounded-md p-2">
-          <input [type]="hidePassword ? 'password' : 'text'" id="password" formControlName="password" class="flex-grow outline-none">
-           <mat-icon matSuffix (click)="togglePasswordVisibility()" class="cursor-pointer">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
-          </div>
-        </fieldset>
-        <a href="" class="m-5"> Olvidé mi contraseña</a>
-      
-      <div class="flex w-full p-2 items-center">
-        <button class="w-1/2 h-10 bg-[#6481FE] text-white m-2 rounded-md border border-black" type="submit">Entrar</button>
-        <a routerLink="/registro/almacen" class="w-1/2 h-10 bg-[#696773] text-white m-2 rounded-md border border-black flex items-center justify-center">Registrarse</a>
+
+  <form [formGroup]="loginForm" class="flex flex-col space-y-4" (ngSubmit)="onSubmit()">
+    <fieldset class="flex flex-col">
+      <label for="username" class="text-sm font-medium mb-2">Nombre de usuario</label>
+      <input 
+        type="text" 
+        id="username" 
+        formControlName="username" 
+        class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      >
+    </fieldset>
+
+    <fieldset class="flex flex-col">
+      <label for="password" class="text-sm font-medium mb-2">Contraseña</label>
+      <div class="flex items-center border border-gray-300 rounded-md">
+        <input 
+          [type]="hidePassword ? 'password' : 'text'" 
+          id="password" 
+          formControlName="password" 
+          class="flex-grow px-3 py-2 outline-none focus:ring-2 focus:ring-blue-400"
+        >
+        <mat-icon 
+          matSuffix 
+          (click)="togglePasswordVisibility()" 
+          class="cursor-pointer mr-3"
+        >
+          {{hidePassword ? 'visibility' : 'visibility_off'}}
+        </mat-icon>
       </div>
-    </form>
-  </div>
+    </fieldset>
+
+    <a href="#" class="text-sm text-blue-500 hover:underline self-end">Olvidé mi contraseña</a>
+
+    <div class="flex flex-col sm:flex-row gap-4">
+      <button 
+        class="flex-1 h-10 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors" 
+        type="submit"
+      >
+        Entrar
+      </button>
+      <a 
+        routerLink="/registro/almacen" 
+        class="flex-1 h-10 bg-gray-700 hover:bg-gray-800 text-white rounded-md flex items-center justify-center transition-colors"
+      >
+        Registrarse
+      </a>
+    </div>
+  </form>
 </div>
