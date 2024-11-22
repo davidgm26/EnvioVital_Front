@@ -25,6 +25,7 @@
     "@angular/ssr": "^18.2.1",
     "@ngx-translate/core": "^15.0.0",
     "autoprefixer": "^10.4.20",
+    "ngx-toastr": "^19.0.0",
     "jquery": "^3.7.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

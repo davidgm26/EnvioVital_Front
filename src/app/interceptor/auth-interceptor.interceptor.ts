@@ -18,7 +18,7 @@ debugger;
 
   const requestUrl = new URL(request.url, environment.apiUrl).pathname;
 
-  const isPublic = PUBLIC_URLS.some((route) => 
+  const isPublic = PUBLIC_URLS.some((route) =>
     requestUrl.startsWith(route.url) && route.methods.includes(request.method)
   );
   if (!isPublic) {
