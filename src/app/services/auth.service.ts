@@ -14,7 +14,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    @Inject(PLATFORM_ID) private platformId: Object  // Inyectar el identificador de la plataforma
+    @Inject(PLATFORM_ID) private platformId: Object 
 
   ) { }
 
