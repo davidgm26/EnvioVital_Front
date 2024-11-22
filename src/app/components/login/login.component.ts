@@ -10,6 +10,7 @@ import { Router, RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { ToastrService, ToastNoAnimation } from 'ngx-toastr';
 import { log } from 'console';
+import {logging} from "@angular-devkit/core";
 
 
 
@@ -63,7 +64,8 @@ export class LoginComponent {
           localStorage.setItem('token', resp.token);
           localStorage.setItem('logged',this.logged.toString());
           console.log(resp);
-          this.router.navigate(['/main']);
+          window.location.href = '/main'; // Con esto no hace flata refrescar la pagina
+
         },
         (error) => {
           console.log(error.error.mensaje);

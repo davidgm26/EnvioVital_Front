@@ -3,6 +3,7 @@ import {Router, RouterLink} from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoRegistroComponent } from '../dialogo-registro/dialogo-registro.component';
 import {NgIf} from "@angular/common";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-navbar',
@@ -16,9 +17,10 @@ export class NavbarComponent implements AfterViewInit , OnInit{
   logged!: boolean;
 
   constructor(
-    private dialog: MatDialog,
-    private router: Router
+    private router: Router,
   ) { }
+
+
 
   ngOnInit(): void {
     debugger;
@@ -28,9 +30,6 @@ export class NavbarComponent implements AfterViewInit , OnInit{
 
   }
 
-  openRegisterDialog(): void {
-    this.dialog.open(DialogoRegistroComponent);
-  }
 
   openMenu(): void {
     const menu = document.getElementById('menu');
