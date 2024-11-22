@@ -33,6 +33,8 @@ export class LoginComponent {
 
   errorPassword: string = '';
 
+  logged: boolean = true;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -59,12 +61,13 @@ export class LoginComponent {
       this.authService.login(this.loginRequest).subscribe(
         (resp) => {
           localStorage.setItem('token', resp.token);
+          localStorage.setItem('logged',this.logged.toString());
           console.log(resp);
           this.router.navigate(['/main']);
         },
         (error) => {
           console.log(error.error.mensaje);
-          this.toast.error(error.error.mensaje , 'Error');  
+          this.toast.error(error.error.mensaje , 'Error');
 
 
         })
