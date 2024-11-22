@@ -1,0 +1,9 @@
+.white-button {
+  background-color: white !important;
+  color: black !important; /* Cambia el color del texto si es necesario */
+}
+
+.white-button:hover,
+.white-button:focus {
+  background-color: white !important;
+}

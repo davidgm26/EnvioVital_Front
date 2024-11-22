@@ -12,6 +12,9 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class AuthService {
 
+
+
+
   constructor(
     private http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object 
@@ -19,12 +22,12 @@ export class AuthService {
   ) { }
 
 
-  login(loginRequest: LoginRequest): Observable<LoginResponse> {  
+  login(loginRequest: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`,loginRequest);
   }
 
   getTokens(): string | null {
-    if(isPlatformBrowser(this.platformId)){      
+    if(isPlatformBrowser(this.platformId)){
       return localStorage.getItem('token');
     }
     return null;
