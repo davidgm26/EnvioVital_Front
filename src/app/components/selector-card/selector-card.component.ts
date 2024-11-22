@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [NgClass],
   templateUrl: './selector-card.component.html',
-  styleUrl: './selector-card.component.css'
+  styleUrls: ['./selector-card.component.css']
 })
 export class SelectorCardComponent {
 

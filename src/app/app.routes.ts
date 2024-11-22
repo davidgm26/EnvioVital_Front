@@ -13,35 +13,20 @@ import { SelectorRolComponent } from './components/selector-rol/selector-rol.com
 import { NavbarComponent } from './components/navbar/navbar.component';
 
 export const routes: Routes = [
-    // {path: "", redirectTo: "main", pathMatch: "full"},
-    // {path: "login", component: LoginComponent},
-    // { path: "almacen/:id", component: AlmacenFormComponent },
-    // { path: "almacen-view/:id", component: AlmacenViewComponent },
-    // { path: "conductor/:id", component: ConductorFormComponent },
-    // { path: "conductor-view/:id", component: ConductorViewComponent },
-    // { path: "registro/almacen", component: RegistroAlmacenComponent },
-    // { path: "registro/conductor", component: RegistroConductorComponent },
-    // { path: 'evento/:id', component:TarjetaEventoComponent,},
-    // { path: 'almacen', component:AlmacenFormComponent},
-    // { path: 'eventos', component:ListaEventosAlmacenComponent},
-    // { path: 'lista-almacenes/:eventoId', component: ListaAlmacenesComponent},
-    // { path: 'main', component: ListaEventosComponent }
-
-  {path: '', component: NavbarComponent, children: [
-    { path: 'almacen', component:AlmacenFormComponent},
-    { path: 'main', component: ListaEventosComponent }
-  ]
+  {
+    path: '', 
+    component: NavbarComponent,
+    children: [
+      { path: '', redirectTo: 'main', pathMatch: 'full' },
+      { path: 'main', component: ListaEventosComponent },
+      { path: 'almacen', component: AlmacenFormComponent },
+      { path: 'almacen-view', component: AlmacenViewComponent },
+      { path: 'login', component: LoginComponent },
+    ]
   },
-    {path: "login", component: LoginComponent},
-    { path: "almacen/:id", component: AlmacenFormComponent },
-    { path: "almacen-view/:id", component: AlmacenViewComponent },
-    { path: "conductor/:id", component: ConductorFormComponent },
-    { path: "conductor-view/:id", component: ConductorViewComponent },
-    { path: "registro/almacen", component: RegistroAlmacenComponent },
-    { path: "registro/conductor", component: RegistroConductorComponent },
-    { path: 'evento/:id', component:TarjetaEventoComponent,},
-    { path: 'lista-almacenes/:eventoId', component: ListaAlmacenesComponent},
-    { path: 'main', component: ListaEventosComponent },
-    {path: 'selector', component: SelectorRolComponent},
-  ];
+  {path:'register', component: SelectorRolComponent},
+  { path: 'registro/conductor', component: RegistroConductorComponent },
+  { path: 'registro/almacen', component: RegistroAlmacenComponent },
+  { path: '**', redirectTo: 'main' }, 
+];
 

@@ -1,9 +1,6 @@
 import {Component, AfterViewInit, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterOutlet} from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogoRegistroComponent } from '../dialogo-registro/dialogo-registro.component';
 import {NgIf} from "@angular/common";
-import {AuthService} from "../../services/auth.service";
 
 
 @Component({
@@ -13,7 +10,7 @@ import {AuthService} from "../../services/auth.service";
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements AfterViewInit , OnInit{
+export class NavbarComponent implements OnInit{
 
   logged!: boolean;
 
@@ -24,7 +21,6 @@ export class NavbarComponent implements AfterViewInit , OnInit{
 
 
   ngOnInit(): void {
-    debugger;
       if (localStorage.getItem('logged') === 'true') {
         this.logged = true;
       }
@@ -47,6 +43,11 @@ export class NavbarComponent implements AfterViewInit , OnInit{
     }
   }
 
-  ngAfterViewInit(): void {
+  navegarPerfil() {
+    if (localStorage.getItem('rol') === 'conductor') {
+      this.router.navigate(['/registro/conductor']);
+    } else {
+      this.router.navigate(['/almacen']);
+    }
   }
 }
