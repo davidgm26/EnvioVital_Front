@@ -1,5 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogoRegistroComponent } from '../dialogo-registro/dialogo-registro.component';
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +11,13 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements AfterViewInit {
+
+  constructor(public dialog: MatDialog) { }
+
+  openRegisterDialog(): void {
+    this.dialog.open(DialogoRegistroComponent);
+  }
+
   openMenu(): void {
     const menu = document.getElementById('menu');
     if (menu) {
@@ -18,6 +27,4 @@ export class NavbarComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
   }
-
-
 }
