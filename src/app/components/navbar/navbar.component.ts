@@ -1,14 +1,15 @@
 import {Component, AfterViewInit, OnInit} from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
+import {Router, RouterLink, RouterOutlet} from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoRegistroComponent } from '../dialogo-registro/dialogo-registro.component';
 import {NgIf} from "@angular/common";
 import {AuthService} from "../../services/auth.service";
 
+
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink,NgIf],
+  imports: [RouterLink,NgIf,RouterOutlet],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
