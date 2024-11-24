@@ -11,8 +11,7 @@ export class EventoService {
 
   constructor(
     private http: HttpClient
-  ) 
-  {}
+  ) { }
 
 
   getActiveEventos(): Observable<Evento[]> {
