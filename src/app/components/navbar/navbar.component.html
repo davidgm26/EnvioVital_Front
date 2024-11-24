@@ -1,55 +1,44 @@
-<nav class="bg-white-800">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 bg-white rounded-2xl">
+<nav class="bg-white-800 py-6 relative justify-around">
+  <div class="bg-white container mx-auto flex px-8 xl:px-0 rounded-3xl shadow-xl shadow-gray-300 ">
+    <div class="flex flex-grow ml-4">
+      <img src="/logo_ev_1-removebg-preview.png" alt="logo" class="w-36 h-24" style="max-width: 148px; max-height: 97px;">
+    </div>
 
-    <div class="relative flex h-16 items-center justify-between bg-white rounded-lg shadow-lg ">
-      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+    <div class="flex lg:hidden items-center mr-3">
+      <img src="/icono-menu.png" class="h-8 w-8" (click)="openMenu()">
+    </div>
 
-        <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
-          <span class="absolute -inset-0.5"></span>
-          <span class="sr-only">Open main menu</span>
+    <div id="menu" class="lg:flex hidden flex-grow justify-between absolute rounded-2xl lg:relative lg:top-0 top-36 left-0 bg-white w-full lg:w-auto
+    items-center lg:left-0   lg:ml-48 py-6 px-8">
 
-          <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-          </svg>
+      <div class="flex flex-row lg:flex-row items-center mb-4 lg:mb-0">
 
-          <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-          </svg>
+        <input type="text" placeholder="Buscar por provincia:" class="flex-grow p-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button class="bg-white  p-2 rounded-r-lg hover:bg-gray-300 border border-gray-300">
+          <img src="/icono-lupa.png" alt="Buscar" class="h-6 w-6">
         </button>
       </div>
-      <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-        <div class="flex shrink-0 items-center">
-          <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
-        </div>
-        <div class="hidden sm:ml-6 sm:block">
-          <div class="flex space-x-4">
-            <form class="flex w-full max-w-sm space-x-3">
-              <input type="text" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" placeholder="Buscar...">
-              <button type="submit" class="rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">Buscar</button>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 ml-auto space-x-2">
-        <a routerLink="/login" type="button" class="relative rounded-full bg-blue-600 px-3 py-1 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
-          Entrar
-        </a>
-        <a type="button" class="relative rounded-full bg-green-600 px-3 py-1 text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-600">
-          Registro
-        </a>
-      </div>
-    </div>
-  </div>
 
-  <!-- Mobile menu, show/hide based on menu state. -->
-  <div class="sm:hidden" id="mobile-menu">
-    <div class="space-y-1 px-2 pb-3 pt-2">
-      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-      <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Dashboard</a>
-      <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
-      <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Projects</a>
-      <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Calendar</a>
+      <div class=" flex flex-col lg:flex-row  text-center space-x-2">
+        <a *ngIf="logged" (click)="navegarPerfil()" class="text-white bg-cyan-600 border py-2.5 px-5 rounded-md hover:bg-cyan-500 hover:border-cyan-500 transition duration-500 ease-in-out">Perfil</a>
+        <a *ngIf="!logged" routerLink="login" class="text-white bg-black border border-black py-2.5 px-5 rounded-md hover:bg-slate-700 hover:border-slate-700 transition duration-500 ease-in-out lg:mr-2 mb-2 lg:mb-0">Iniciar sesión</a>
+        <a *ngIf="!logged" routerLink="register" class="text-white bg-cyan-600 border py-2.5 px-5 rounded-md hover:bg-cyan-500 hover:border-cyan-500 transition duration-500 ease-in-out">Registrarse</a>
+        <a *ngIf="logged" href="a" (click)="logOut()" class="text-white bg-black border border-black py-2.5 px-5 rounded-md hover:bg-slate-700 hover:border-slate-700 transition duration-500 ease-in-out lg:mr-2 mb-2 lg:mb-0">Cerrar sesión</a>
+      </div>
+
+<!--        <div class="flex flex-col lg:flex-row text-center">-->
+<!--          <ng-container *ngIf="authService.isLoggedIn(); else notLoggedIn">-->
+<!--            <button (click)="goToProfile()" class="text-white bg-black border border-black py-2.5 px-5 rounded-md hover:bg-slate-700 hover:border-slate-700 transition duration-500 ease-in-out lg:mr-2 mb-2 lg:mb-0">Perfil</button>-->
+<!--            <button (click)="logout()" class="text-white bg-red-600 border py-2.5 px-5 rounded-md hover:bg-red-500 hover:border-red-500 transition duration-500 ease-in-out">Cerrar sesión</button>-->
+<!--          </ng-container>-->
+<!--            <a routerLink="login" class="text-white bg-black border border-black py-2.5 px-5 rounded-md hover:bg-slate-700 hover:border-slate-700 transition duration-500 ease-in-out lg:mr-2 mb-2 lg:mb-0">Iniciar sesión</a>-->
+<!--            <a routerLink="register" class="text-white bg-cyan-600 border py-2.5 px-5 rounded-md hover:bg-cyan-500 hover:border-cyan-500 transition duration-500 ease-in-out">Registrarse</a>-->
+<!--        </div>-->
+
+
+
     </div>
+
   </div>
 </nav>
-
+<router-outlet></router-outlet>

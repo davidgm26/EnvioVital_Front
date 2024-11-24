@@ -1,0 +1,12 @@
+<div [ngClass]="[
+      'w-full mb-6 p-5 text-white rounded caja ',
+      id % 2 === 0 ? 'bg-[#009FB7]' : 'bg-[#6481FE]'
+    ]">
+      <h4>{{rol.nombre}}</h4>
+      <p>
+          {{rol.descripcion}}
+      </p>
+      <button class="w-full bg-[#E0BE57] rounded text-white" (click)="registro(rol.nombre)">
+        Aceptar
+    </button>
+    </div>
