@@ -21,11 +21,11 @@ export class NavbarComponent implements OnInit{
 
 
   ngOnInit(): void {
-      if (localStorage.getItem('logged') === 'true') {
-        this.logged = true;
-      }
-
+    if (typeof window !== 'undefined' && localStorage.getItem('logged') === 'true') {
+      this.logged = true;
+    }
   }
+  
 
 
   openMenu(): void {

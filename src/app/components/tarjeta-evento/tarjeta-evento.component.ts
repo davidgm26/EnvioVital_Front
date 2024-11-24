@@ -24,7 +24,6 @@ export class TarjetaEventoComponent implements OnInit {
   ngOnInit(): void {
     const eventoId = Number(this.route.snapshot.paramMap.get('id'));
     if (eventoId == 0) {
-      console.info('El id = 0 no es válido o no existe');
       return;
     }
     this.eventoService.getEventoById(eventoId).subscribe({
