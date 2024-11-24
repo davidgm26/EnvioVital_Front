@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AlmacenService } from '../../services/almacen.service';
 import { TarjetaAlmacenComponent } from '../tarjeta-almacen/tarjeta-almacen.component';
+import { AlmacenRegistrado } from '../../interfaces/almacen-registrado';
+import { log } from 'node:console';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-lista-almacenes',
@@ -15,28 +18,30 @@ import { TarjetaAlmacenComponent } from '../tarjeta-almacen/tarjeta-almacen.comp
   styleUrls: ['./lista-almacenes.component.css']
 })
 export class ListaAlmacenesComponent implements OnInit {
-  eventoId!: number //=1;  //Asignar el idEvento que quiera mostar, en vez de en la ruta
-  almacenes: any[] = [];
-  errorMessage: string = '';
+  eventoId!: number;
+  almacenes: AlmacenRegistrado[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private almacenService: AlmacenService
+    private almacenService: AlmacenService,
+    private toastService: ToastrService,
   ) {}
 
   ngOnInit(): void {
-    this.eventoId = +this.route.snapshot.paramMap.get('eventoId')!;
+    this.eventoId = +this.route.snapshot.paramMap.get('id')!;
     this.cargarAlmacenes();
   }
 
   cargarAlmacenes(): void {
-    this.almacenService.obtenerAlmacenPorEventoId(this.eventoId).subscribe(
+    this.almacenService.obtenerAlmacenesPorEventoId(this.eventoId).subscribe(
       (almacenes) => {
-        this.almacenes = almacenes;
+        almacenes.forEach((almacen => {
+          this.almacenes.push(almacen.almacen);
+          console.log(this.almacenes);
+        }));
       },
       (error) => {
-        this.errorMessage = '¡Error al cargar los almacenes! ' + error.message;
-        console.error('Error al cargar los almacenes:', error);
+        this.toastService.error(error.error.mensaje, 'Error');
       }
     );
   }

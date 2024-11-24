@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';  // Importa HttpClient y HttpClientModule
 import { MatTableModule } from '@angular/material/table';
-import { AlmacenRegistrado } from '../../interfaces/almacen-registrado.model';
+import { AlmacenRegistrado } from '../../interfaces/almacen-registrado';
 import { NgClass } from '@angular/common';
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";

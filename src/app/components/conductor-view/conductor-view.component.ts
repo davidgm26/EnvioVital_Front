@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import {AlmacenRegistrado} from "../../interfaces/almacen-registrado.model";
+import {AlmacenRegistrado} from "../../interfaces/almacen-registrado";
 import {ListaAlmacenesRegistradosComponent} from "../lista-almacenes-registrados/lista-almacenes-registrados.component";
 import { ConductorService } from '../../services/conductor.service';
 

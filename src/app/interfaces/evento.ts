@@ -1,8 +1,11 @@
+import { EventoAlmacenResponse } from "./evento-almacen-response";
+
 export interface Evento {
-    id: number;
-    idEvento: number;
-    nombreEvento: string;
-    descripcionEvento: string;
-    nombreProvincia: string;
-    estado: boolean;
-  }
+    id:          number;
+    nombre:      string;
+    descripcion: string;
+    activo:      boolean;
+    provincia:   string;
+    almacenes:   EventoAlmacenResponse[];
+}
+  

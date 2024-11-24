@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import { AlmacenRegistroService } from '../../services/almacen-registro.service';
+import { AlmacenRegistroService } from '../../../services/almacen-registro.service';
 import { NgFor } from '@angular/common';
 
 @Component({

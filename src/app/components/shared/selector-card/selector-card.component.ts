@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Rol } from '../../interfaces/rol';
+import { Rol } from '../../../interfaces/rol';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 
