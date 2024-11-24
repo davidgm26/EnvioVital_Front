@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import { AlmacenRegistroService } from '../../../services/almacen-registro.service';
 import { NgFor } from '@angular/common';
+import { AlmacenService } from '../../../services/almacen.service';
 
 @Component({
   selector: 'app-registro-almacen',
@@ -9,7 +9,7 @@ import { NgFor } from '@angular/common';
   imports: [ReactiveFormsModule,NgFor],
   templateUrl: './registro-almacen.component.html',
   styleUrls: ['./registro-almacen.component.css'],
-  providers: [AlmacenRegistroService],
+  providers: [],
 })
 export class RegistroAlmacenComponent implements OnInit {
   registroForm: FormGroup;
@@ -17,7 +17,7 @@ export class RegistroAlmacenComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private almacenRegistroService: AlmacenRegistroService
+    private almacenRegistroService: AlmacenService
   ) {
     this.registroForm = this.fb.group({
       nombre: [''],
