@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import { ConductorRegistroService } from '../../services/conductor-registro.service';
+import { ConductorRegistroService } from '../../../services/conductor-registro.service';
 
 @Component({
   selector: 'app-registro-conductor',

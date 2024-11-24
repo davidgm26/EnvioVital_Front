@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AlmacenService, EventoAlmacenDtoResponse } from '../../services/almacen.service';
+import { AlmacenService,  } from '../../services/almacen.service';
+import { AlmacenRegistrado } from '../../interfaces/almacen-registrado';
 
 @Component({
   selector: 'app-tarjeta-almacen',
@@ -11,14 +12,13 @@ import { AlmacenService, EventoAlmacenDtoResponse } from '../../services/almacen
 })
 export class TarjetaAlmacenComponent implements OnInit {
 
- // @Input() nombreAlmacen!: string;
-  //@Input() nombreProvincia!: string;
-  //@Input() imagenUrl!: string;
 
-  @Input() almacen!: EventoAlmacenDtoResponse;
+  @Input() almacen!: AlmacenRegistrado;
 
 
   constructor(private almacenService: AlmacenService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.almacen)
+  }
 }

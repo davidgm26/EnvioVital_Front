@@ -1,26 +1,29 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {EventoService, EventoRequestDto, EventoResponseDto} from "../../services/evento.service";
 import {CommonModule} from "@angular/common";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { EventoService } from '../../services/evento.service';
+import { Evento } from '../../interfaces/evento';
 
 @Component({
   selector: 'app-tarjeta-evento',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './tarjeta-evento.component.html',
   styleUrl: './tarjeta-evento.component.css'
 })
 export class TarjetaEventoComponent implements OnInit {
-  //evento?: EventoRequestDto ;
 
-  //@Input() evento!: EventoResponseDto;
-  @Input() evento?: EventoResponseDto;
+  @Input() evento?: Evento
 
   constructor(
     private route: ActivatedRoute,
     private eventoService: EventoService
   ) {}
 
+  ngOnInit(): void {
+      
+  }
+/*
   ngOnInit(): void {
     const eventoId = Number(this.route.snapshot.paramMap.get('id'));
     if (eventoId == 0) {
@@ -37,6 +40,7 @@ export class TarjetaEventoComponent implements OnInit {
     });
 
   }
+*/
 
 
 }
