@@ -1,86 +1,80 @@
-<div class="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 mt-10">
-  <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Editar Conductor</h2>
+<div class="max-w-5xl mx-auto mt-10 space-y-8">
+  <div class="p-6 bg-gradient-to-r from-teal-400 to-teal-600 text-white rounded-lg shadow-xl">
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()" class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block font-semibold mb-2">Nombre</label>
+          <input
+            type="text"
+            formControlName="nombre"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+          />
+        </div>
 
-  <form [formGroup]="formulario" (ngSubmit)="onSubmit()" class="space-y-4">
-    <!-- Nombre -->
-    <div>
-      <label class="block text-gray-700 font-semibold mb-2">Nombre</label>
-      <input
-        type="text"
-        formControlName="nombre"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+        <div>
+          <label class="block font-semibold mb-2">Apellidos</label>
+          <input
+            type="text"
+            formControlName="apellidos"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+          />
+        </div>
 
-    <!-- Apellidos -->
-    <div>
-      <label class="block text-gray-700 font-semibold mb-2">Apellidos</label>
-      <input
-        type="text"
-        formControlName="apellidos"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+        <div>
+          <label class="block font-semibold mb-2">DNI</label>
+          <input
+            type="text"
+            formControlName="dni"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-200 text-gray-900"
+            readonly
+          />
+        </div>
 
-    <!-- DNI -->
-    <div>
-      <label class="block text-gray-700 font-semibold mb-2">DNI</label>
-      <input
-        type="text"
-        formControlName="dni"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100"
-        readonly
-      />
-    </div>
+        <div>
+          <label class="block font-semibold mb-2">Dirección</label>
+          <input
+            type="text"
+            formControlName="direccion"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+          />
+        </div>
 
-    <!-- Dirección -->
-    <div>
-      <label class="block text-gray-700 font-semibold mb-2">Dirección</label>
-      <input
-        type="text"
-        formControlName="direccion"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+        <div>
+          <label class="block font-semibold mb-2">Teléfono</label>
+          <input
+            type="text"
+            formControlName="telefono"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+          />
+        </div>
 
-    <!-- Teléfono -->
-    <div>
-      <label class="block text-gray-700 font-semibold mb-2">Teléfono</label>
-      <input
-        type="text"
-        formControlName="telefono"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+        <div>
+          <label class="block font-semibold mb-2">Fecha de Nacimiento</label>
+          <input
+            type="date"
+            formControlName="fechaNacimiento"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+          />
+        </div>
 
-    <!-- Fecha de Nacimiento -->
-    <div>
-      <label class="block text-gray-700 font-semibold mb-2">Fecha de Nacimiento</label>
-      <input
-        type="date"
-        formControlName="fechaNacimiento"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+        <div>
+          <label class="block font-semibold mb-2">Email</label>
+          <input
+            type="email"
+            formControlName="email"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-200 text-gray-900"
+            readonly
+          />
+        </div>
+      </div>
 
-    <!-- Email -->
-    <div>
-      <label class="block text-gray-700 font-semibold mb-2">Email</label>
-      <input
-        type="email"
-        formControlName="email"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-200"
-        readonly
-      />
-    </div>
-
-    <!-- Submit Button -->
-    <button
-      type="submit"
-      class="w-full bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600 transition duration-200"
-      [disabled]="formulario.invalid"
-    >
-      Guardar Cambios
-    </button>
-  </form>
+      <button
+        type="submit"
+        class="w-full bg-yellow-400 text-gray-800 font-semibold py-2 px-6 rounded-md hover:bg-yellow-500 transition duration-200"
+        [disabled]="formulario.invalid"
+      >
+        Guardar Cambios
+      </button>
+    </form>
+  </div>
 </div>

@@ -18,7 +18,7 @@ import { Evento } from '../../interfaces/evento';
 export class ListaEventosAlmacenComponent implements OnInit {
   @Input() eventos: Evento[] = [];
 
-  displayedColumns: string[] = ['idEvento', 'nombreEvento', 'descripcionEvento', 'nombreProvincia', 'estado', 'eliminar'];
+  displayedColumns: string[] = ['nombreEvento', 'descripcionEvento', 'nombreProvincia', 'estado', 'eliminar'];
 
   constructor(private http: HttpClient) {}
 

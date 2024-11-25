@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './components/shared/login/login.component';
 import { AlmacenFormComponent } from './components/almacen-form/almacen-form.component';
 import { AlmacenViewComponent } from './components/almacen-view/almacen-view.component';
-
 import { RegistroAlmacenComponent } from './components/shared/registro-almacen/registro-almacen.component';
 import { RegistroConductorComponent } from './components/shared/registro-conductor/registro-conductor.component';
 import { ListaAlmacenesComponent } from './components/lista-almacenes/lista-almacenes.component';
