@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import { ConductorRegistroService } from '../../../services/conductor-registro.service';
+import { ConductorService } from '../../../services/conductor.service';
 
 @Component({
   selector: 'app-registro-conductor',
@@ -16,7 +16,7 @@ export class RegistroConductorComponent implements OnInit{
 
   constructor(
     private fb: FormBuilder,
-    private conductorRegistroService: ConductorRegistroService
+    private conductorRegistroService: ConductorService
   ) {
     this.registroForm = this.fb.group({
       nombre: [''],

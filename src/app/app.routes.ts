@@ -10,6 +10,10 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { SelectorRolComponent } from './components/selector-rol/selector-rol.component';
 import { authGuard } from './guards/auth.guard';
 import { ConductorViewComponent } from './components/conductor-view/conductor-view.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { GestionAlmacenesComponent } from './components/gestion-almacenes/gestion-almacenes.component';
+import { GestionEventosComponent } from './components/gestion-eventos/gestion-eventos.component';
+import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-usuarios.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +36,11 @@ export const routes: Routes = [
   {path:'register', component: SelectorRolComponent},
   { path: 'registro/conductor', component: RegistroConductorComponent },
   { path: 'registro/almacen', component: RegistroAlmacenComponent },
+  {path: 'admin', component: AdminPanelComponent,children: [
+    {path: 'gestion-almacenes', component:GestionAlmacenesComponent },
+    {path: 'gestion-eventos', component: GestionEventosComponent},
+    {path: 'gestion-usuarios', component:GestionUsuariosComponent },
+  ]},
   { path: '**', redirectTo: 'main' }, 
 ];
 

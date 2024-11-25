@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogoRegistroComponent } from './dialogo-registro.component';
+import { GestionEventosComponent } from './gestion-eventos.component';
 
-describe('DialogoRegistroComponent', () => {
-  let component: DialogoRegistroComponent;
-  let fixture: ComponentFixture<DialogoRegistroComponent>;
+describe('GestionEventosComponent', () => {
+  let component: GestionEventosComponent;
+  let fixture: ComponentFixture<GestionEventosComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DialogoRegistroComponent]
+      imports: [GestionEventosComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DialogoRegistroComponent);
+    fixture = TestBed.createComponent(GestionEventosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

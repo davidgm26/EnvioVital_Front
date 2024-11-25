@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AlmacenRegistrado } from '../interfaces/almacen-registrado';
+import { ConductorRequestDTO } from '../interfaces/conductor-request-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,17 @@ export class ConductorService {
     return this.http.get<any[]>(`${this.apiUrl}/vehiculosRegistrados/${conductorId}`);
   }
 
+  guardarConductor(data: ConductorRequestDTO): Observable<any> {
+    return this.http.post<ConductorRequestDTO>(`${this.apiUrl}/guardar`, data);
+    console.log(data)
+  }
 
+  autorizarPeticion() {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      // 'Authorization': 'Bearer ' + localStorage.getItem('token'),
+    });
+
+    return {headers: headers}
+  }
 }
