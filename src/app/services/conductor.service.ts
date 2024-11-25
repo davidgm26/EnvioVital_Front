@@ -33,6 +33,9 @@ export class ConductorService {
   obtenerAlmacenesRegistrados(conductorId: number): Observable<AlmacenRegistrado[]> {
     return this.http.get<AlmacenRegistrado[]>(`${this.apiUrl}/almacenesRegistrados/${conductorId}`);
   }
+  obtenerListaVehiculos(conductorId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/vehiculosRegistrados/${conductorId}`);
+  }
 
 
 }

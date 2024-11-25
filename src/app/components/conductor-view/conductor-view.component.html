@@ -18,8 +18,11 @@
         <li class="mr-6 mb-2 md:mb-0">
           <button (click)="activeTab = 'changePass'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'changePass'}" class="text-blue-600 hover:text-blue-800 font-semibold">Cambiar Contraseña</button>
         </li>
-        <li class="mb-2 md:mb-0">
+        <li class="mr-6 mb-2 md:mb-0">
           <button (click)="activeTab = 'almacenes'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'almacenes'}" class="text-blue-600 hover:text-blue-800 font-semibold">Almacenes</button>
+        </li>
+        <li class="mb-2 md:mb-0">
+          <button (click)="activeTab = 'addVehicle'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'addVehicle'}" class="text-blue-600 hover:text-blue-800 font-semibold">Añadir Vehículo</button>
         </li>
       </ul>
 
@@ -63,6 +66,10 @@
 
         <div *ngIf="activeTab === 'almacenes'">
           <app-lista-almacenes-registrados [almacenes]="almacenes"></app-lista-almacenes-registrados>
+        </div>
+
+        <div *ngIf="activeTab === 'addVehicle'">
+          <app-vehiculo-form [conductorId]="conductorId"></app-vehiculo-form>
         </div>
       </div>
     </div>

@@ -1,18 +1,18 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListaAlmacenesRegistradosComponent } from '../lista-almacenes-registrados/lista-almacenes-registrados.component';
 import { ConductorService } from '../../services/conductor.service';
-import { UsuarioService } from "../../services/usuario.service";
-import {ConductorFormComponent} from "../conductor-form/conductor-form.component";
-import {CambiarPassComponent} from "../cambiar-pass/cambiar-pass.component";
-import {DatePipe, NgClass, NgIf} from "@angular/common";
+import { ConductorFormComponent } from "../conductor-form/conductor-form.component";
+import { CambiarPassComponent } from "../cambiar-pass/cambiar-pass.component";
+import { DatePipe, NgClass, NgIf } from "@angular/common";
 import { AlmacenRegistrado } from '../../interfaces/almacen-registrado.model';
+import {VehiculoFormComponent} from "../vehiculo-form/vehiculo-form.component";
 
 @Component({
   selector: 'app-conductor-view',
   templateUrl: './conductor-view.component.html',
   standalone: true,
-  imports: [ListaAlmacenesRegistradosComponent, ConductorFormComponent, CambiarPassComponent, NgClass, NgIf, DatePipe],
+  imports: [ListaAlmacenesRegistradosComponent, ConductorFormComponent, CambiarPassComponent, NgClass, NgIf, DatePipe, VehiculoFormComponent],
   styleUrls: ['./conductor-view.component.css']
 })
 export class ConductorViewComponent implements OnInit {
