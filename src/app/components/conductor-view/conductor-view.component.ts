@@ -1,23 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
-import {AlmacenRegistrado} from "../../interfaces/almacen-registrado.model";
-import {ListaAlmacenesRegistradosComponent} from "../lista-almacenes-registrados/lista-almacenes-registrados.component";
+import { ListaAlmacenesRegistradosComponent } from '../lista-almacenes-registrados/lista-almacenes-registrados.component';
 import { ConductorService } from '../../services/conductor.service';
+import { ConductorFormComponent } from "../conductor-form/conductor-form.component";
+import { CambiarPassComponent } from "../cambiar-pass/cambiar-pass.component";
+import { DatePipe, NgClass, NgIf } from "@angular/common";
+import { AlmacenRegistrado } from '../../interfaces/almacen-registrado.model';
+import {VehiculoFormComponent} from "../vehiculo-form/vehiculo-form.component";
 
 @Component({
   selector: 'app-conductor-view',
   templateUrl: './conductor-view.component.html',
   standalone: true,
-  imports: [DatePipe, ListaAlmacenesRegistradosComponent],
+  imports: [ListaAlmacenesRegistradosComponent, ConductorFormComponent, CambiarPassComponent, NgClass, NgIf, DatePipe, VehiculoFormComponent],
   styleUrls: ['./conductor-view.component.css']
 })
 export class ConductorViewComponent implements OnInit {
   conductor: any = {};
+  usuarioUsername: string = '';
   conductorId!: number;
-  almacenesRegistrados: AlmacenRegistrado[] = [];
-
-  displayedColumns: string[] = ['idAlmacen', 'nombreAlmacen', 'direccionAlmacen', 'nombreEvento', 'descripcionEvento', 'nombreProvincia'];
+  userId!: number;
+  activeTab: string = 'details';
+  almacenes: AlmacenRegistrado[] = [];
+  @Output() reloadDataEvent = new EventEmitter<void>();
 
   constructor(
     private route: ActivatedRoute,
@@ -26,10 +31,11 @@ export class ConductorViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.reloadDataEvent.subscribe(() => this.reloadData());
     this.conductorId = Number(this.route.snapshot.paramMap.get('id'));
     if (this.conductorId) {
       this.cargarDatosConductor();
-      this.cargarAlmacenesRegistrados(); // Carga la lista de almacenes registrados
+      this.obtenerListaAlmacenes();
     } else {
       this.redirigirAInicio();
     }
@@ -37,15 +43,30 @@ export class ConductorViewComponent implements OnInit {
 
   private cargarDatosConductor(): void {
     this.conductorService.obtenerConductorPorId(this.conductorId).subscribe({
-      next: (conductor) => this.conductor = conductor,
+      next: (conductor) => {
+        this.conductor = conductor;
+        this.cargarUsuario(conductor.idUsuario);
+      },
       error: (error) => console.error('Error al cargar los datos del conductor:', error)
     });
   }
 
-  private cargarAlmacenesRegistrados(): void {
+  private cargarUsuario(idUsuario: number): void {
+    this.conductorService.obtenerUsuarioPorId(idUsuario).subscribe({
+      next: (usuario) => {
+        this.usuarioUsername = usuario ? usuario.username : 'Usuario desconocido';
+        this.userId = usuario ? usuario.id : 0;
+      },
+      error: (error) => console.error('Error al cargar el usuario:', error)
+    });
+  }
+
+  private obtenerListaAlmacenes(): void {
     this.conductorService.obtenerAlmacenesRegistrados(this.conductorId).subscribe({
-      next: (almacenes) => this.almacenesRegistrados = almacenes,
-      error: (error) => console.error('Error al cargar los almacenes registrados:', error)
+      next: (almacenes) => {
+        this.almacenes = almacenes;
+      },
+      error: (error) => console.error('Error al obtener la lista de almacenes:', error)
     });
   }
 
@@ -55,8 +76,20 @@ export class ConductorViewComponent implements OnInit {
   }
 
   editarConductor(): void {
-    this.router.navigate([`/conductor/${this.conductorId}`])
-      .then(success => console.log('Navigation successful:', success))
-      .catch(error => console.error('Navigation error:', error));
+    this.activeTab = 'edit';
+  }
+
+  cambiarPass(): void {
+    this.activeTab = 'changePass';
+  }
+
+  reloadData(): void {
+    this.cargarDatosConductor();
+    this.obtenerListaAlmacenes();
+  }
+
+  handleSave(): void {
+    this.activeTab = 'details';
+    this.reloadData();
   }
 }

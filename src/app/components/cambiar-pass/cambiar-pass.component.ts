@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import {NgIf} from "@angular/common";
-import { AlmacenService } from '../../services/almacen.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UsuarioService } from '../../services/usuario.service';
+import { Router } from '@angular/router';
+import { NgIf } from "@angular/common";
 
 @Component({
   selector: 'app-cambiar-pass',
@@ -14,47 +14,57 @@ import { AlmacenService } from '../../services/almacen.service';
   ],
   styleUrls: ['./cambiar-pass.component.css']
 })
-export class CambiarPassComponent {
+export class CambiarPassComponent implements OnInit {
+  @Input() usuarioId!: number; // Accept usuarioId as input
   cambiarPassForm: FormGroup;
-  almacenId!: number;
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
 
   constructor(
     private fb: FormBuilder,
-    private almacenService: AlmacenService,
-    private route: ActivatedRoute,
+    private usuarioService: UsuarioService,
     private router: Router
   ) {
     this.cambiarPassForm = this.fb.group({
-      actualPass: ['', Validators.required],
-      nuevaPass: ['', [Validators.required, Validators.minLength(6)]],
-      repitePass: ['', Validators.required]
-    }, { validator: this.matchPasswords });
+      oldPassword: ['', [Validators.required]],
+      newPassword: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required]],
+    }, { validator: this.passwordsMatch });
   }
 
   ngOnInit(): void {
-    this.almacenId = +this.route.snapshot.paramMap.get('id')!;
+    if (!this.usuarioId) {
+      console.error("usuarioId no proporcionado");
+      this.router.navigate(['/']);
+    }
   }
 
-  matchPasswords(group: FormGroup) {
-    return group.get('nuevaPass')?.value === group.get('repitePass')?.value ? null : { mismatch: true };
+  private passwordsMatch(group: FormGroup): { [key: string]: boolean } | null {
+    const newPassword = group.get('newPassword')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+    return newPassword === confirmPassword ? null : { passwordsDontMatch: true };
   }
 
- /*
   onSubmit(): void {
     if (this.cambiarPassForm.invalid) {
+      this.errorMessage = 'Por favor, asegúrese de que todos los campos sean válidos.';
       return;
     }
 
-    const { actualPass, nuevaPass } = this.cambiarPassForm.value;
-    this.almacenService.cambiarPassword(this.almacenId, actualPass, nuevaPass).subscribe(
-      (response: any) => {
-        console.log('Contraseña actualizada exitosamente:', response);
-        this.router.navigate([`/almacen-view/${this.almacenId}`]);
+    const { oldPassword, newPassword } = this.cambiarPassForm.value;
+
+    this.usuarioService.changePassword(this.usuarioId, oldPassword, newPassword).subscribe({
+      next: (response) => {
+        this.successMessage = response.message;
+        this.errorMessage = null;
+        window.alert('¡Contraseña cambiada exitosamente!');
+        this.router.navigate(['/']);
+        this.cambiarPassForm.reset();
       },
-      (error: any) => {
-        console.error('Error al actualizar la contraseña:', error);
+      error: (error) => {
+        this.errorMessage = error.error.message || 'Error cambiando la contraseña';
+        this.successMessage = null;
       }
-    );
+    });
   }
- */
 }

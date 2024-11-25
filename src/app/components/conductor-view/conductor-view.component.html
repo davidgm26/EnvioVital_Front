@@ -1,57 +1,77 @@
 <div class="max-w-5xl mx-auto mt-10 space-y-8">
-  <!-- Título -->
-  <h2 class="text-3xl font-bold text-gray-800 text-center">Tu perfil</h2>
-
-  <div class="flex flex-col md:flex-row items-center md:space-x-8">
-    <!-- Foto y Nombre de Usuario -->
-    <div class="flex flex-col items-center bg-gray-100 p-6 rounded-lg shadow-md w-full md:w-1/3">
-      <div class="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center mb-4">
-        <!-- Icono de perfil -->
-        <span class="material-icons text-gray-500 text-6xl">person</span>
+  <div class="flex flex-col md:flex-row items-start md:items-center bg-white p-6 rounded-lg shadow-xl">
+    <div class="flex flex-col items-center w-full md:w-1/4 mb-4 md:mb-0 md:mr-8">
+      <div class="w-32 h-32 bg-blue-500 text-white rounded-full flex items-center justify-center mb-4">
+        <span class="material-icons text-4xl">person</span>
       </div>
-      <p class="text-lg font-semibold">{{conductor.nombre}}</p>
+      <p class="text-xl font-semibold text-gray-800">{{ usuarioUsername }}</p>
     </div>
 
-    <!-- Formulario de Información del Conductor -->
-    <div class="bg-teal-500 text-white p-6 rounded-lg shadow-md w-full md:w-2/3">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <p><strong>Nombre</strong></p>
-          <p>{{ conductor.nombre }}</p>
-        </div>
-        <div>
-          <p><strong>Primer apellido</strong></p>
-          <p>{{ conductor.apellidos }}</p>
-        </div>
-        <div>
-          <p><strong>Fecha de nacimiento</strong></p>
-          <p>{{ conductor.fechaNacimiento | date:'dd-MM-yyyy' }}</p>
-        </div>
-        <div>
-          <p><strong>DNI</strong></p>
-          <p>{{ conductor.dni }}</p>
-        </div>
-        <div>
-          <p><strong>Teléfono</strong></p>
-          <p>{{ conductor.telefono }}</p>
-        </div>
-        <div>
-          <p><strong>E-mail</strong></p>
-          <p>{{ conductor.email }}</p>
-        </div>
-      </div>
+    <div class="w-full md:w-3/4">
+      <ul class="flex flex-wrap border-b-2 pb-2 mb-6">
+        <li class="mr-6 mb-2 md:mb-0">
+          <button (click)="activeTab = 'details'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'details'}" class="text-blue-600 hover:text-blue-800 font-semibold">Detalles</button>
+        </li>
+        <li class="mr-6 mb-2 md:mb-0">
+          <button (click)="activeTab = 'edit'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'edit'}" class="text-blue-600 hover:text-blue-800 font-semibold">Editar</button>
+        </li>
+        <li class="mr-6 mb-2 md:mb-0">
+          <button (click)="activeTab = 'changePass'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'changePass'}" class="text-blue-600 hover:text-blue-800 font-semibold">Cambiar Contraseña</button>
+        </li>
+        <li class="mr-6 mb-2 md:mb-0">
+          <button (click)="activeTab = 'almacenes'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'almacenes'}" class="text-blue-600 hover:text-blue-800 font-semibold">Almacenes</button>
+        </li>
+        <li class="mb-2 md:mb-0">
+          <button (click)="activeTab = 'addVehicle'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'addVehicle'}" class="text-blue-600 hover:text-blue-800 font-semibold">Añadir Vehículo</button>
+        </li>
+      </ul>
 
-      <!-- Botón Aceptar -->
-      <div class="mt-6 flex justify-center">
-        <button
-          class="bg-yellow-400 text-gray-800 font-semibold py-2 px-6 rounded-md hover:bg-yellow-500 transition duration-200"
-          (click)="editarConductor()"
-        >
-          Editar Perfil
-        </button>
+      <div class="min-h-[40vh]">
+        <div *ngIf="activeTab === 'details'" class="p-6 bg-gradient-to-r from-teal-400 to-teal-600 text-white rounded-lg shadow-xl">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <p><strong>Nombre</strong></p>
+              <p>{{ conductor.nombre }}</p>
+            </div>
+            <div>
+              <p><strong>Apellidos</strong></p>
+              <p>{{ conductor.apellidos }}</p>
+            </div>
+            <div>
+              <p><strong>Fecha de nacimiento</strong></p>
+              <p>{{ conductor.fechaNacimiento | date:'dd-MM-yyyy' }}</p>
+            </div>
+            <div>
+              <p><strong>DNI</strong></p>
+              <p>{{ conductor.dni }}</p>
+            </div>
+            <div>
+              <p><strong>Teléfono</strong></p>
+              <p>{{ conductor.telefono }}</p>
+            </div>
+            <div>
+              <p><strong>E-mail</strong></p>
+              <p>{{ conductor.email }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="activeTab === 'edit'">
+          <app-conductor-form (onSave)="handleSave()"></app-conductor-form>
+        </div>
+
+        <div *ngIf="activeTab === 'changePass'">
+          <app-cambiar-pass [usuarioId]="userId"></app-cambiar-pass>
+        </div>
+
+        <div *ngIf="activeTab === 'almacenes'">
+          <app-lista-almacenes-registrados [almacenes]="almacenes"></app-lista-almacenes-registrados>
+        </div>
+
+        <div *ngIf="activeTab === 'addVehicle'">
+          <app-vehiculo-form [conductorId]="conductorId"></app-vehiculo-form>
+        </div>
       </div>
     </div>
   </div>
-
-    <app-lista-almacenes-registrados [almacenes]="almacenesRegistrados"></app-lista-almacenes-registrados>
 </div>

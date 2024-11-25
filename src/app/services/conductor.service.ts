@@ -13,7 +13,6 @@ export class ConductorService {
 
   constructor(private http: HttpClient) { }
 
-  // Obtener un conductor por su ID
   obtenerConductorPorId(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
@@ -33,6 +32,9 @@ export class ConductorService {
 
   obtenerAlmacenesRegistrados(conductorId: number): Observable<AlmacenRegistrado[]> {
     return this.http.get<AlmacenRegistrado[]>(`${this.apiUrl}/almacenesRegistrados/${conductorId}`);
+  }
+  obtenerListaVehiculos(conductorId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/vehiculosRegistrados/${conductorId}`);
   }
 
 
