@@ -1,10 +1,25 @@
-<nav class="flex">
-    <img src="/logo_ev_1-removebg-preview.png" alt="">
-    <h1>Panel del Administrador</h1>
+<nav class="flex flex-col md:flex-row items-center justify-between w-full border border-red-700 p-2">
+    <div class="flex items-center justify-between w-full">
+        <img src="/logo_ev_1-removebg-preview.png" alt="Logo" class="h-10 w-auto">
+        <h1 class="text-center md:w-1/3 text-sm font-bold">Panel del Administrador</h1>
+        <button (click)="logOut()" class="md:w-1/3 bg-red-500 text-white px-4 py-2 rounded">Cerrar Sesión</button>
+    </div>
 </nav>
-<ul class="flex space-x-2">
-    <li><a routerLink="gestion-usuarios"><mat-icon aria-hidden="false" aria-label="Example person icon" >person</mat-icon></a></li>
-    <li><a routerLink="gestion-almacenes"><mat-icon aria-hidden="false" aria-label="Example warehouse icon">warehouse</mat-icon></a></li>
-    <li><a routerLink="gestion-eventos"><mat-icon aria-hidden="false" aria-label="Example calendar_today icon">calendar_today</mat-icon></a></li>
+<ul class="flex justify-center space-x-4 md:space-x-6 my-2">
+    <li class="hover:bg-gray-100 rounded-full p-2">
+        <a routerLink="gestion-usuarios" class="flex items-center">
+            <mat-icon aria-hidden="false" aria-label="Gestión de Usuarios">person</mat-icon>
+        </a>
+    </li>
+    <li class="hover:bg-gray-100 rounded-full p-2">
+        <a routerLink="gestion-almacenes" class="flex items-center">
+            <mat-icon aria-hidden="false" aria-label="Gestión de Almacenes">warehouse</mat-icon>
+        </a>
+    </li>
+    <li class="hover:bg-gray-100 rounded-full p-2">
+        <a routerLink="gestion-eventos" class="flex items-center">
+            <mat-icon aria-hidden="false" aria-label="Gestión de Eventos">calendar_today</mat-icon>
+        </a>
+    </li>
 </ul>
-<router-outlet> </router-outlet>
+<router-outlet></router-outlet>
