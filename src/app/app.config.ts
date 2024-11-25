@@ -6,9 +6,11 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideToastr } from 'ngx-toastr';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimations(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes), provideClientHydration()
     , provideAnimationsAsync(), provideAnimationsAsync(),
@@ -20,5 +22,5 @@ export const appConfig: ApplicationConfig = {
         positionClass: 'toast-top-right',
         preventDuplicates: true,
       }
-    )]
+    ),BrowserAnimationsModule]
   }
