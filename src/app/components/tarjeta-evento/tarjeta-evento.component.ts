@@ -21,26 +21,13 @@ export class TarjetaEventoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-      
+    this.setDefaultFotoUrl();
   }
-/*
-  ngOnInit(): void {
-    const eventoId = Number(this.route.snapshot.paramMap.get('id'));
-    if (eventoId == 0) {
-      return;
-    }
-    this.eventoService.getEventoById(eventoId).subscribe({
-      next: (respuesta)=> {
-        this.evento = respuesta;
-        console.info(respuesta);
-      } ,
-      error:(error) => console.log(error),
-      complete:()=> console.info('petición enviada')
 
-    });
+ setDefaultFotoUrl(): void {
+  if (this.evento && (!this.evento.fotoUrl || this.evento.fotoUrl.trim().length === 0)) {
+  this.evento.fotoUrl = "https://acortar.link/hS3Sr8"; // URL de la foto por defecto
+}
 
-  }
-*/
-
-
+}
 }
