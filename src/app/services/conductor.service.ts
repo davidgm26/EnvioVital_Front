@@ -14,7 +14,7 @@ export class ConductorService {
   constructor(private http: HttpClient) { }
 
   obtenerConductorPorId(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`);
+    return this.http.get(`/api/conductores/${id}`);
   }
 
   // Actualizar un conductor

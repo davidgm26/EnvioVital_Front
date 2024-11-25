@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit{
       this.logged = true;
     }
   }
-  
+
 
 
   openMenu(): void {
@@ -44,8 +44,9 @@ export class NavbarComponent implements OnInit{
   }
 
   navegarPerfil() {
-    if (localStorage.getItem('rol') === 'conductor') {
-      this.router.navigate(['/registro/conductor']);
+    const id = localStorage.getItem('id');
+    if (localStorage.getItem('rol') === 'CONDUCTOR' && id) {
+      this.router.navigate([`/perfil/conductor/${id}`]);
     } else {
       this.router.navigate(['/almacen']);
     }
@@ -53,6 +54,6 @@ export class NavbarComponent implements OnInit{
   navegarAInicio() {
     this.router.navigate(['/main']);
   }
-  
+
 
 }

@@ -1,12 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import {AlmacenRegistrado} from "../../interfaces/almacen-registrado";
-import {ListaAlmacenesRegistradosComponent} from "../lista-almacenes-registrados/lista-almacenes-registrados.component";
+import { Router } from '@angular/router';
+import { AlmacenRegistrado } from "../../interfaces/almacen-registrado";
+import { ListaAlmacenesRegistradosComponent } from "../lista-almacenes-registrados/lista-almacenes-registrados.component";
 import { ConductorService } from '../../services/conductor.service';
 import { ConductorFormComponent } from "../conductor-form/conductor-form.component";
 import { CambiarPassComponent } from "../cambiar-pass/cambiar-pass.component";
 import { DatePipe, NgClass, NgIf } from "@angular/common";
-import {VehiculoFormComponent} from "../vehiculo-form/vehiculo-form.component";
+import { VehiculoFormComponent } from "../vehiculo-form/vehiculo-form.component";
 
 @Component({
   selector: 'app-conductor-view',
@@ -25,15 +25,15 @@ export class ConductorViewComponent implements OnInit {
   @Output() reloadDataEvent = new EventEmitter<void>();
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private conductorService: ConductorService
   ) {}
 
   ngOnInit(): void {
     this.reloadDataEvent.subscribe(() => this.reloadData());
-    this.conductorId = Number(this.route.snapshot.paramMap.get('id'));
-    if (this.conductorId) {
+    const storedConductorId = localStorage.getItem('id');
+    if (storedConductorId) {
+      this.conductorId = Number(storedConductorId);
       this.cargarDatosConductor();
       this.obtenerListaAlmacenes();
     } else {

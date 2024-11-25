@@ -61,6 +61,7 @@ export class LoginComponent {
         (resp) => {
           localStorage.setItem('token', resp.token);
           localStorage.setItem('logged', this.logged.toString());
+          localStorage.setItem('id', resp.id.toString());
           localStorage.setItem('rol', resp.rol);
           console.log(resp);
           window.location.href = '/main';
