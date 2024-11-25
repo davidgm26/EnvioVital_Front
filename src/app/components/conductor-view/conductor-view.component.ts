@@ -1,11 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ListaAlmacenesRegistradosComponent } from '../lista-almacenes-registrados/lista-almacenes-registrados.component';
+import {AlmacenRegistrado} from "../../interfaces/almacen-registrado";
+import {ListaAlmacenesRegistradosComponent} from "../lista-almacenes-registrados/lista-almacenes-registrados.component";
 import { ConductorService } from '../../services/conductor.service';
 import { ConductorFormComponent } from "../conductor-form/conductor-form.component";
 import { CambiarPassComponent } from "../cambiar-pass/cambiar-pass.component";
 import { DatePipe, NgClass, NgIf } from "@angular/common";
-import { AlmacenRegistrado } from '../../interfaces/almacen-registrado.model';
 import {VehiculoFormComponent} from "../vehiculo-form/vehiculo-form.component";
 
 @Component({
