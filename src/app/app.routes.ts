@@ -7,7 +7,9 @@ import { RegistroConductorComponent } from './components/shared/registro-conduct
 import { ListaAlmacenesComponent } from './components/lista-almacenes/lista-almacenes.component';
 import { ListaEventosComponent } from './components/lista-eventos/lista-eventos.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
-import { SelectorCardComponent } from './components/shared/selector-card/selector-card.component';
+import { SelectorRolComponent } from './components/selector-rol/selector-rol.component';
+import { authGuard } from './guards/auth.guard';
+import { ConductorViewComponent } from './components/conductor-view/conductor-view.component';
 
 export const routes: Routes = [
   {
@@ -20,9 +22,14 @@ export const routes: Routes = [
       { path: 'almacen-view', component: AlmacenViewComponent },
       { path: 'login', component: LoginComponent },
       { path: 'evento/:id/almacenes', component: ListaAlmacenesComponent  },
+      { path: 'perfil', canActivate: [authGuard], children: [
+        { path: 'conductor', component: ConductorViewComponent },
+        { path: 'almacen', component: AlmacenViewComponent },
+      ] 
+    },
     ]
   },
-  {path:'register', component: SelectorCardComponent},
+  {path:'register', component: SelectorRolComponent},
   { path: 'registro/conductor', component: RegistroConductorComponent },
   { path: 'registro/almacen', component: RegistroAlmacenComponent },
   { path: '**', redirectTo: 'main' }, 

@@ -22,6 +22,13 @@ export class AuthService {
     return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`,loginRequest);
   }
 
+  isUserLogged(): boolean {
+    if (typeof window !== 'undefined' && localStorage.getItem('logged') === 'true') {
+      return true;
+    }
+    return false;
+  }
+
   getTokens(): string | null {
     if(isPlatformBrowser(this.platformId)){
       return localStorage.getItem('token');

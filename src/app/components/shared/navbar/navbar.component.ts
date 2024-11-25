@@ -50,4 +50,9 @@ export class NavbarComponent implements OnInit{
       this.router.navigate(['/almacen']);
     }
   }
+  navegarAInicio() {
+    this.router.navigate(['/main']);
+  }
+  
+
 }
