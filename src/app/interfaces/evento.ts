@@ -7,5 +7,4 @@ export interface Evento {
     activo:      boolean;
     provincia:   string;
     almacenes:   EventoAlmacenResponse[];
-    fotoUrl:     string;
 }

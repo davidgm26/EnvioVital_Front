@@ -7,6 +7,5 @@ export interface AlmacenResponse {
     esActivo:    boolean;
     provincia:   string;
     idUsuario:   number;
-    fotoUrl:     string;
 
 }

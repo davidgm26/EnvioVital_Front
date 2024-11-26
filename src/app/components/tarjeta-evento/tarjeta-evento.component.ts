@@ -21,13 +21,10 @@ export class TarjetaEventoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.setDefaultFotoUrl();
+
   }
 
- setDefaultFotoUrl(): void {
-  if (this.evento && (!this.evento.fotoUrl || this.evento.fotoUrl.trim().length === 0)) {
-  this.evento.fotoUrl = "https://acortar.link/hS3Sr8"; // URL de la foto por defecto
-}
 
-}
+
+
 }

@@ -6,5 +6,4 @@ export interface EventoAlmacenResponse {
     nombreAlmacen: string;
     nombreEvento: string;
     almacen: AlmacenRegistrado;
-    fotoUrl: string;
 }
