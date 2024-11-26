@@ -47,4 +47,5 @@ export class ConductorService {
   obtenerListaVehiculos(conductorId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/vehiculosRegistrados/${conductorId}`, { headers: this.getAuthHeaders() });
   }
+
 }
