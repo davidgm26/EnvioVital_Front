@@ -9,4 +9,5 @@ export interface AlmacenRequestDTO {
      username: string;
      password: string;
   };
+  fotoUrl: string;
 }

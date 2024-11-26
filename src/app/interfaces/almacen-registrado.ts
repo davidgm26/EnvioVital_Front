@@ -7,4 +7,5 @@ export interface AlmacenRegistrado {
   esActivo:    boolean;
   provincia:   string;
   idUsuario:   number;
+  fotoUrl:     string;
 }

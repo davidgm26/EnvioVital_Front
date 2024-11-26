@@ -19,6 +19,15 @@ export class TarjetaAlmacenComponent implements OnInit {
   constructor(private almacenService: AlmacenService) {}
 
   ngOnInit(): void {
+    this.setDefaultFotoUrl();
     console.log(this.almacen)
   }
+
+  setDefaultFotoUrl(): void {
+    if (this.almacen && (!this.almacen.fotoUrl || this.almacen.fotoUrl.trim().length === 0)) {
+      this.almacen.fotoUrl = "https://acortar.link/gRkyyF"; // URL de la foto por defecto
+    }
+  }
+
+
 }
