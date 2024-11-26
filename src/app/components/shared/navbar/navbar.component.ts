@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NgIf } from "@angular/common";
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +16,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +34,7 @@ export class NavbarComponent implements OnInit {
 
   logOut(): void {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-      localStorage.removeItem('logged');
+      this.authService.clearLocalStorage();
       this.logged = false;
       this.router.navigate(['/main']);
     }

@@ -13,30 +13,44 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    @Inject(PLATFORM_ID) private platformId: Object 
-
+    @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
-
   login(loginRequest: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`,loginRequest);
+    return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`, loginRequest);
   }
 
   isUserLogged(): boolean {
-    if (typeof window !== 'undefined' && localStorage.getItem('logged') === 'true') {
+    if (isPlatformBrowser(this.platformId) && localStorage.getItem('logged') === 'true') {
       return true;
     }
     return false;
   }
 
   getTokens(): string | null {
-    if(isPlatformBrowser(this.platformId)){
+    if (isPlatformBrowser(this.platformId)) {
       return localStorage.getItem('token');
     }
     return null;
   }
 
-  removeToken():void {
-    localStorage.removeItem('token');
+  removeToken(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('logged');
+    }
+  }
+
+  setToken(token: string): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('token', token);
+      localStorage.setItem('logged', 'true');
+    }
+  }
+
+  clearLocalStorage(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.clear();
+    }
   }
 }
