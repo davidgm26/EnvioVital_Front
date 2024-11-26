@@ -32,7 +32,7 @@ export class AlmacenService {
   }
 
   guardarAlmacen(data: AlmacenResponse): Observable<any> {
-    return this.http.post<AlmacenResponse>(`${environment.apiUrl}/guardar`, data, { headers: this.getAuthHeaders() });
+    return this.http.post<AlmacenResponse>(`${environment.apiUrl}/almacenes/guardar`, data,);
   }
 
   obtenerProvincias(): Observable<any[]> {
