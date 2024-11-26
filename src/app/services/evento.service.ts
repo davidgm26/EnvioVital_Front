@@ -17,4 +17,8 @@ export class EventoService {
   getActiveEventos(): Observable<Evento[]> {
     return this.http.get<Evento[]>(`${environment.apiUrl}/evento/activos`);
   }
+
+  getAllEventos(): Observable<Evento[]> {
+    return this.http.get<Evento[]>(`${environment.apiUrl}/evento/`);
+  }
 }

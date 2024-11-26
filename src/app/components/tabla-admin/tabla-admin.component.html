@@ -1,0 +1,19 @@
+<table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+        <tr *ngFor="let header of headers">
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{headers}}</th>
+        </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+        <tr>
+            <td class="px-6 py-4 whitespace-nowrap"></td>
+            <td class="px-6 py-4 whitespace-nowrap"></td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800" *ngIf="">Activo</span>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800" *ngIf="">Inactivo</span>         
+            </td>
+            <td><a ><mat-icon aria-hidden="false" aria-label="edit">edit</mat-icon>            </a></td>
+            <td><a ><mat-icon aria-hidden="false" aria-label="delete">delete</mat-icon>            </a></td>
+        </tr>
+    </tbody>
+</table>
