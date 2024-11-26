@@ -5,6 +5,7 @@ import { NgClass } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Evento } from '../../interfaces/evento';
+import { environment } from '../../../env/environment';
 
 
 
@@ -28,7 +29,7 @@ export class ListaEventosAlmacenComponent implements OnInit {
     const confirmDelete = window.confirm('¿Seguro que quieres eliminar este registro?');
 
     if (confirmDelete) {
-      const url = `http://localhost:8081/almacenes/eliminarRegistro/${id}`;
+      const url = `${environment.apiUrl}/almacenes/eliminarRegistro/${id}`;
 
       this.http.delete(url).subscribe(
         (response: any) => {

@@ -8,47 +8,48 @@ import { ConductorRequestDTO } from '../interfaces/conductor-request-dto';
   providedIn: 'root'
 })
 export class ConductorService {
-  private apiUrl = 'http://localhost:8081/conductores';
-  private provinciasUrl = 'http://localhost:8081/provincias/lista';
-  private usuarioUrl = 'http://localhost:8081/usuarios';
+  private apiUrl = '/api/conductores';
+  private provinciasUrl = '/api/provincias/lista';
+  private usuarioUrl = '/api/usuarios';
 
   constructor(private http: HttpClient) { }
 
-  obtenerConductorPorId(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`);
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
   }
 
-  // Actualizar un conductor
+  obtenerConductorPorId(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
+  }
+
+  obtenerConductorPorUsuario(idUsuario: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/usuario/${idUsuario}`, { headers: this.getAuthHeaders() });
+  }
+
   actualizarConductor(id: number, datos: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/editar/${id}`, datos);
+    return this.http.put(`${this.apiUrl}/editar/${id}`, datos, { headers: this.getAuthHeaders() });
   }
-  // Obtener lista de provincias
+
   obtenerProvincias(): Observable<any[]> {
-    return this.http.get<any[]>(this.provinciasUrl);
+    return this.http.get<any[]>(this.provinciasUrl, { headers: this.getAuthHeaders() });
   }
-  // Obtener un usuario por su ID
+
   obtenerUsuarioPorId(id: number): Observable<any> {
-    return this.http.get(`${this.usuarioUrl}/${id}`);
+    return this.http.get(`${this.usuarioUrl}/${id}`, { headers: this.getAuthHeaders() });
   }
 
   obtenerAlmacenesRegistrados(conductorId: number): Observable<AlmacenRegistrado[]> {
-    return this.http.get<AlmacenRegistrado[]>(`${this.apiUrl}/almacenesRegistrados/${conductorId}`);
+    return this.http.get<AlmacenRegistrado[]>(`${this.apiUrl}/almacenesRegistrados/${conductorId}`, { headers: this.getAuthHeaders() });
   }
+
   obtenerListaVehiculos(conductorId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/vehiculosRegistrados/${conductorId}`);
+    return this.http.get<any[]>(`${this.apiUrl}/vehiculosRegistrados/${conductorId}`, { headers: this.getAuthHeaders() });
   }
 
   guardarConductor(data: ConductorRequestDTO): Observable<any> {
     return this.http.post<ConductorRequestDTO>(`${this.apiUrl}/guardar`, data);
-    console.log(data)
-  }
-
-  autorizarPeticion() {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      // 'Authorization': 'Bearer ' + localStorage.getItem('token'),
-    });
-
-    return {headers: headers}
   }
 }

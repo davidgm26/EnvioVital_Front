@@ -1,32 +1,29 @@
-import {Component, AfterViewInit, OnInit} from '@angular/core';
-import {Router, RouterLink, RouterOutlet} from '@angular/router';
-import {NgIf} from "@angular/common";
-
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { NgIf } from "@angular/common";
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink,NgIf,RouterOutlet],
+  imports: [RouterLink, NgIf, RouterOutlet],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit {
 
   logged!: boolean;
 
   constructor(
     private router: Router,
+    private authService: AuthService
   ) { }
-
-
 
   ngOnInit(): void {
     if (typeof window !== 'undefined' && localStorage.getItem('logged') === 'true') {
       this.logged = true;
     }
   }
-  
-
 
   openMenu(): void {
     const menu = document.getElementById('menu');
@@ -37,22 +34,24 @@ export class NavbarComponent implements OnInit{
 
   logOut(): void {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-      localStorage.removeItem('logged');
+      this.authService.clearLocalStorage();
       this.logged = false;
-      this.router.navigate(['/main'])
+      this.router.navigate(['/main']);
     }
   }
 
-  navegarPerfil() {
-    if (localStorage.getItem('rol') === 'conductor') {
-      this.router.navigate(['/registro/conductor']);
+  navegarPerfil(): void {
+    const rol = localStorage.getItem('rol');
+    if (rol === 'CONDUCTOR') {
+      this.router.navigate(['/perfil/conductor']);
+    } else if (rol === 'ALMACEN') {
+      this.router.navigate(['/perfil/almacen']);
     } else {
       this.router.navigate(['/almacen']);
     }
   }
-  navegarAInicio() {
+
+  navegarAInicio(): void {
     this.router.navigate(['/main']);
   }
-  
-
 }

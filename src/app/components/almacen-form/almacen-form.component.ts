@@ -1,14 +1,13 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AlmacenService } from '../../services/almacen.service';
-import {AlmacenViewComponent} from "../almacen-view/almacen-view.component";
 
 @Component({
   selector: 'app-almacen-form',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './almacen-form.component.html',
   styleUrls: ['./almacen-form.component.css'],
   providers: []
@@ -23,7 +22,6 @@ export class AlmacenFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private almacenService: AlmacenService
   ) {
@@ -31,8 +29,13 @@ export class AlmacenFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.almacenId = Number(this.route.snapshot.paramMap.get('id'));
-    this.almacenId ? this.cargarProvincias() : this.redirigirAInicio();
+    const storedUserId = localStorage.getItem('id');
+    if (storedUserId) {
+      this.userId = Number(storedUserId);
+      this.obtenerAlmacenId();
+    } else {
+      this.redirigirAInicio();
+    }
   }
 
   private crearFormulario(): FormGroup {
@@ -47,8 +50,26 @@ export class AlmacenFormComponent implements OnInit {
   }
 
   private redirigirAInicio(): void {
-    console.error('No almacenId provided');
+    console.error('No userId provided');
     this.router.navigate(['/']);
+  }
+
+  private obtenerAlmacenId(): void {
+    this.almacenService.obtenerAlmacenPorUsuario(this.userId).subscribe({
+      next: (almacen) => {
+        if (almacen) {
+          this.almacenId = almacen.id;
+          this.cargarProvincias();
+        } else {
+          console.error('No almacen found for the given userId');
+          this.redirigirAInicio();
+        }
+      },
+      error: (error) => {
+        console.error('Error al obtener el almacen por usuario:', error);
+        this.redirigirAInicio();
+      }
+    });
   }
 
   private cargarProvincias(): void {
