@@ -31,6 +31,7 @@ export class ConductorViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.setDefaultFotoUrl()
     this.reloadDataEvent.subscribe(() => this.reloadData());
     this.conductorId = Number(this.route.snapshot.paramMap.get('id'));
     if (this.conductorId) {
@@ -91,5 +92,11 @@ export class ConductorViewComponent implements OnInit {
   handleSave(): void {
     this.activeTab = 'details';
     this.reloadData();
+  }
+
+  setDefaultFotoUrl(): void {
+    if (this.conductor && (!this.conductor.fotoUrl || this.conductor.fotoUrl.trim().length === 0)) {
+      this.conductor.fotoUrl = "https://static.vecteezy.com/system/resources/previews/024/983/914/non_2x/simple-user-default-icon-free-png.png";
+    }
   }
 }
