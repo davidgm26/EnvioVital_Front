@@ -1,13 +1,11 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListaEventosAlmacenComponent } from '../lista-eventos-almacen/lista-eventos-almacen.component';
 import { Evento } from '../../interfaces/evento';
 import { AlmacenService } from '../../services/almacen.service';
-import { UsuarioService } from "../../services/usuario.service";
-import {AlmacenFormComponent} from "../almacen-form/almacen-form.component";
-import {CambiarPassComponent} from "../cambiar-pass/cambiar-pass.component";
-import {NgClass, NgIf} from "@angular/common";
-
+import { AlmacenFormComponent } from "../almacen-form/almacen-form.component";
+import { CambiarPassComponent } from "../cambiar-pass/cambiar-pass.component";
+import { NgClass, NgIf } from "@angular/common";
 
 @Component({
   selector: 'app-almacen-view',
@@ -17,13 +15,13 @@ import {NgClass, NgIf} from "@angular/common";
   styleUrls: ['./almacen-view.component.css']
 })
 export class AlmacenViewComponent implements OnInit {
-  eventos: Evento[] = [];
   almacen: any = {};
-  provinciaNombre: string = '';
   usuarioUsername: string = '';
   almacenId!: number;
   userId!: number;
   activeTab: string = 'details';
+  eventos: Evento[] = [];
+  provinciaNombre: string = '';
   @Output() reloadDataEvent = new EventEmitter<void>();
 
   constructor(
@@ -34,77 +32,63 @@ export class AlmacenViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.reloadDataEvent.subscribe(() => this.reloadData());
-    this.almacenId = Number(this.route.snapshot.paramMap.get('id'));
-    if (this.almacenId) {
+    const storedUserId = localStorage.getItem('id');
+    if (storedUserId) {
+      this.userId = Number(storedUserId);
       this.cargarDatosAlmacen();
-      this.obtenerListaEventos(); // Llamamos a obtenerListaEventos al inicializar
     } else {
       this.redirigirAInicio();
     }
   }
 
-  // Método para cargar los datos del almacén
   private cargarDatosAlmacen(): void {
-    this.almacenService.obtenerAlmacenPorId(this.almacenId).subscribe({
+    this.almacenService.obtenerAlmacenPorUsuario(this.userId).subscribe({
       next: (almacen) => {
-        this.almacen = almacen; // Asignamos los datos del almacén a la propiedad almacen
-        this.cargarProvincia(almacen.idProvincia); // Llamamos a cargarProvincia con el ID de la provincia
-        this.cargarUsuario(almacen.idUsuario); // Llamamos a cargarUsuario con el ID del usuario
+        console.log('Datos del almacén recibidos:', almacen);
+        this.almacen = almacen;
+        this.almacenId = almacen.id;
+        this.usuarioUsername = almacen.nombre;
+        this.obtenerProvinciaNombre(almacen.idProvincia);
+        this.obtenerListaEventos();
       },
-      error: (error) => console.error('Error al cargar los datos del almacén:', error)
+      error: (error) => {
+        console.error('Error al cargar los datos del almacén:', error);
+      }
     });
   }
 
-  // Método para cargar la provincia relacionada con el almacén
-  private cargarProvincia(idProvincia: number): void {
+  private obtenerProvinciaNombre(idProvincia: number): void {
     this.almacenService.obtenerProvincias().subscribe({
       next: (provincias) => {
-        const provincia = provincias.find((p) => p.id === idProvincia);
-        this.provinciaNombre = provincia ? provincia.nombre : 'Provincia desconocida';
+        const provincia = provincias.find(p => p.id === idProvincia);
+        this.provinciaNombre = provincia ? provincia.nombre : 'Desconocida';
       },
-      error: (error) => console.error('Error al cargar las provincias:', error)
+      error: (error) => console.error('Error al obtener el nombre de la provincia:', error)
     });
   }
 
-  // Método para cargar los datos del usuario asociado al almacén
-  private cargarUsuario(idUsuario: number): void {
-    this.almacenService.obtenerUsuarioPorId(idUsuario).subscribe({
-      next: (usuario) => {
-        this.usuarioUsername = usuario ? usuario.username : 'Usuario desconocido';
-        this.userId = usuario ? usuario.id : 0;  // Asignamos el userId aquí
+  private obtenerListaEventos(): void {
+    this.almacenService.obtenerListaEventos(this.almacenId).subscribe({
+      next: (eventos) => {
+        this.eventos = eventos;
       },
-      error: (error) => console.error('Error al cargar el usuario:', error)
+      error: (error) => console.error('Error al obtener la lista de eventos:', error)
     });
   }
 
-  // Redirige al inicio si no se ha encontrado un ID de almacén válido
   private redirigirAInicio(): void {
-    console.error('No almacenId provided');
+    console.error('No userId provided');
     this.router.navigate(['/']);
   }
 
-  // Método para editar el almacén
   editarAlmacen(): void {
     this.activeTab = 'edit';
   }
 
-  // Método para obtener la lista de eventos asociados al almacén
-  obtenerListaEventos(): void {
-    this.almacenService.obtenerListaEventos(this.almacenId).subscribe({
-      next: (eventos) => {
-        this.eventos = eventos; // Asignamos los eventos a la propiedad eventos
-      },
-      error: (error) => {
-        console.error('Error al obtener la lista de eventos:', error);
-        console.log('Detalles del error:', error);
-      },
-    });
-  }
-
-  // Método para redirigir a la página de cambio de contraseña
   cambiarPass(): void {
     this.activeTab = 'changePass';
   }
+
   reloadData(): void {
     this.cargarDatosAlmacen();
     this.obtenerListaEventos();
@@ -114,5 +98,4 @@ export class AlmacenViewComponent implements OnInit {
     this.activeTab = 'details';
     this.reloadData();
   }
-
 }

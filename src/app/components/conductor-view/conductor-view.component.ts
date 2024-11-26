@@ -31,33 +31,27 @@ export class ConductorViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.reloadDataEvent.subscribe(() => this.reloadData());
-    const storedConductorId = localStorage.getItem('id');
-    if (storedConductorId) {
-      this.conductorId = Number(storedConductorId);
+    const storedUserId = localStorage.getItem('id');
+    if (storedUserId) {
+      this.userId = Number(storedUserId);
       this.cargarDatosConductor();
-      this.obtenerListaAlmacenes();
     } else {
       this.redirigirAInicio();
     }
   }
 
   private cargarDatosConductor(): void {
-    this.conductorService.obtenerConductorPorId(this.conductorId).subscribe({
+    this.conductorService.obtenerConductorPorUsuario(this.userId).subscribe({
       next: (conductor) => {
+        console.log('Datos del conductor recibidos:', conductor);
         this.conductor = conductor;
-        this.cargarUsuario(conductor.idUsuario);
+        this.conductorId = conductor.id;
+        this.usuarioUsername = conductor.nombre;
+        this.obtenerListaAlmacenes();
       },
-      error: (error) => console.error('Error al cargar los datos del conductor:', error)
-    });
-  }
-
-  private cargarUsuario(idUsuario: number): void {
-    this.conductorService.obtenerUsuarioPorId(idUsuario).subscribe({
-      next: (usuario) => {
-        this.usuarioUsername = usuario ? usuario.username : 'Usuario desconocido';
-        this.userId = usuario ? usuario.id : 0;
-      },
-      error: (error) => console.error('Error al cargar el usuario:', error)
+      error: (error) => {
+        console.error('Error al cargar los datos del conductor:', error);
+      }
     });
   }
 
@@ -71,7 +65,7 @@ export class ConductorViewComponent implements OnInit {
   }
 
   private redirigirAInicio(): void {
-    console.error('No conductorId provided');
+    console.error('No userId provided');
     this.router.navigate(['/']);
   }
 

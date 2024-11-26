@@ -5,6 +5,7 @@ import { AlmacenRegistrado } from '../../interfaces/almacen-registrado';
 import { NgClass } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { environment } from '../../../env/environment';
 
 @Component({
   selector: 'app-lista-almacenes-registrados',
@@ -26,7 +27,7 @@ export class ListaAlmacenesRegistradosComponent implements OnInit {
     const confirmDelete = window.confirm('¿Seguro que quieres eliminar este registro?');
 
     if (confirmDelete) {
-      const url = `http://localhost:8081/conductores/eliminarRegistro/${id}`;
+      const url = `${environment.apiUrl}/almacenes/eliminarRegistro/${id}`;
 
       this.http.delete(url).subscribe(
         (response: any) => {
