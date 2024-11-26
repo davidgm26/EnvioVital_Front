@@ -1,12 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import {AlmacenRegistrado} from "../../interfaces/almacen-registrado";
-import {ListaAlmacenesRegistradosComponent} from "../lista-almacenes-registrados/lista-almacenes-registrados.component";
+import { Router } from '@angular/router';
+import { AlmacenRegistrado } from "../../interfaces/almacen-registrado";
+import { ListaAlmacenesRegistradosComponent } from "../lista-almacenes-registrados/lista-almacenes-registrados.component";
 import { ConductorService } from '../../services/conductor.service';
 import { ConductorFormComponent } from "../conductor-form/conductor-form.component";
 import { CambiarPassComponent } from "../cambiar-pass/cambiar-pass.component";
 import { DatePipe, NgClass, NgIf } from "@angular/common";
-import {VehiculoFormComponent} from "../vehiculo-form/vehiculo-form.component";
+import { VehiculoFormComponent } from "../vehiculo-form/vehiculo-form.component";
 
 @Component({
   selector: 'app-conductor-view',
@@ -25,7 +25,6 @@ export class ConductorViewComponent implements OnInit {
   @Output() reloadDataEvent = new EventEmitter<void>();
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private conductorService: ConductorService
   ) {}
@@ -33,32 +32,27 @@ export class ConductorViewComponent implements OnInit {
   ngOnInit(): void {
     this.setDefaultFotoUrl()
     this.reloadDataEvent.subscribe(() => this.reloadData());
-    this.conductorId = Number(this.route.snapshot.paramMap.get('id'));
-    if (this.conductorId) {
+    const storedUserId = localStorage.getItem('id');
+    if (storedUserId) {
+      this.userId = Number(storedUserId);
       this.cargarDatosConductor();
-      this.obtenerListaAlmacenes();
     } else {
       this.redirigirAInicio();
     }
   }
 
   private cargarDatosConductor(): void {
-    this.conductorService.obtenerConductorPorId(this.conductorId).subscribe({
+    this.conductorService.obtenerConductorPorUsuario(this.userId).subscribe({
       next: (conductor) => {
+        console.log('Datos del conductor recibidos:', conductor);
         this.conductor = conductor;
-        this.cargarUsuario(conductor.idUsuario);
+        this.conductorId = conductor.id;
+        this.usuarioUsername = conductor.nombre;
+        this.obtenerListaAlmacenes();
       },
-      error: (error) => console.error('Error al cargar los datos del conductor:', error)
-    });
-  }
-
-  private cargarUsuario(idUsuario: number): void {
-    this.conductorService.obtenerUsuarioPorId(idUsuario).subscribe({
-      next: (usuario) => {
-        this.usuarioUsername = usuario ? usuario.username : 'Usuario desconocido';
-        this.userId = usuario ? usuario.id : 0;
-      },
-      error: (error) => console.error('Error al cargar el usuario:', error)
+      error: (error) => {
+        console.error('Error al cargar los datos del conductor:', error);
+      }
     });
   }
 
@@ -72,7 +66,7 @@ export class ConductorViewComponent implements OnInit {
   }
 
   private redirigirAInicio(): void {
-    console.error('No conductorId provided');
+    console.error('No userId provided');
     this.router.navigate(['/']);
   }
 

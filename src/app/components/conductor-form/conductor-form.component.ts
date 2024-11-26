@@ -1,7 +1,7 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ConductorService } from '../../services/conductor.service';
 
 @Component({
@@ -16,10 +16,10 @@ export class ConductorFormComponent implements OnInit {
   @Output() onSave: EventEmitter<void> = new EventEmitter<void>();
   formulario: FormGroup;
   conductorId!: number;
+  userId!: number;
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private conductorService: ConductorService
   ) {
@@ -27,8 +27,13 @@ export class ConductorFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.conductorId = Number(this.route.snapshot.paramMap.get('id'));
-    this.conductorId ? this.cargarDatosConductor() : this.redirigirAInicio();
+    const storedUserId = localStorage.getItem('id');
+    if (storedUserId) {
+      this.userId = Number(storedUserId);
+      this.obtenerConductorId();
+    } else {
+      this.redirigirAInicio();
+    }
   }
 
   private crearFormulario(): FormGroup {
@@ -44,8 +49,26 @@ export class ConductorFormComponent implements OnInit {
   }
 
   private redirigirAInicio(): void {
-    console.error('No conductorId provided');
+    console.error('No userId provided');
     this.router.navigate(['/']);
+  }
+
+  private obtenerConductorId(): void {
+    this.conductorService.obtenerConductorPorUsuario(this.userId).subscribe({
+      next: (conductor) => {
+        if (conductor) {
+          this.conductorId = conductor.id;
+          this.cargarDatosConductor();
+        } else {
+          console.error('No conductor found for the given userId');
+          this.redirigirAInicio();
+        }
+      },
+      error: (error) => {
+        console.error('Error al obtener el conductor por usuario:', error);
+        this.redirigirAInicio();
+      }
+    });
   }
 
   private cargarDatosConductor(): void {
@@ -63,7 +86,7 @@ export class ConductorFormComponent implements OnInit {
           });
         }
       },
-      error: (error) => console.error("Error al cargar los datos del conductor:", error)
+      error: (error) => console.error('Error al cargar los datos del conductor:', error)
     });
   }
 
@@ -77,10 +100,10 @@ export class ConductorFormComponent implements OnInit {
 
     this.conductorService.actualizarConductor(this.conductorId, datosAEnviar).subscribe({
       next: () => {
-        alert("Conductor actualizado exitosamente");
+        alert('Conductor actualizado exitosamente');
         this.onSave.emit();
       },
-      error: (error) => console.error("Error al actualizar el conductor:", error)
+      error: (error) => console.error('Error al actualizar el conductor:', error)
     });
   }
 
