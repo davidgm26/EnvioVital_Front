@@ -9,12 +9,12 @@
         </tr>
     </thead>
     <tbody class="bg-white divide-y divide-gray-200">
-        <tr>
-            <td class="px-6 py-4 whitespace-nowrap">Evento manoli</td>
-            <td class="px-6 py-4 whitespace-nowrap">Sevilla</td>
+        <tr *ngFor="let evento of listaEventos">
+            <td class="px-6 py-4 whitespace-nowrap">{{evento.nombre}}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{evento.provincia}}</td>
             <td class="px-6 py-4 whitespace-nowrap">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Activo</span>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800" *ngIf="">Inactivo</span>         
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800" *ngIf="evento.activo" (click)="cambiarEstado(evento.id)">Activo</span>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800" *ngIf="!evento.activo" (click)="cambiarEstado(evento.id)">Inactivo</span>         
             </td>
             <td><a ><mat-icon aria-hidden="false" aria-label="edit">edit</mat-icon>            </a></td>
             <td><a ><mat-icon aria-hidden="false" aria-label="delete">delete</mat-icon>            </a></td>

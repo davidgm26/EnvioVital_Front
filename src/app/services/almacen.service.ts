@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../env/environment';
 import { AlmacenResponse } from '../interfaces/almacen-response';
 import { EventoAlmacenResponse } from '../interfaces/evento-almacen-response';
+import { AlmacenRegistrado } from '../interfaces/almacen-registrado';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,9 @@ export class AlmacenService {
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
+  }
+  obtenerTodosLosAlmacenes(): Observable<AlmacenRegistrado[]>{
+    return this.http.get<AlmacenRegistrado[]>(`${environment.apiUrl}/almacenes/lista`);
   }
 
   obtenerAlmacenPorId(id: number): Observable<any> {

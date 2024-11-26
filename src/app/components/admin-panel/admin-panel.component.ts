@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-admin-panel',
@@ -11,7 +11,11 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class AdminPanelComponent {
 
+  constructor(
+    private router: Router,
+  ) {}
+
   logOut(){
-    localStorage.removeItem('token');
-  }
+    localStorage.clear();
+    window.location.href= '/main';  }
 }

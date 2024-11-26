@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AlmacenRegistrado } from '../interfaces/almacen-registrado';
 import { ConductorRequestDTO } from '../interfaces/conductor-request-dto';
+import { ConductorResponse } from '../interfaces/conductor-response';
+import { environment } from '../../env/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -51,5 +53,9 @@ export class ConductorService {
 
   guardarConductor(data: ConductorRequestDTO): Observable<any> {
     return this.http.post<ConductorRequestDTO>(`${this.apiUrl}/guardar`, data);
+  }
+
+  obtenerConductores(): Observable<ConductorResponse[]> {
+    return this.http.get<ConductorResponse[]>(`${environment.apiUrl}/conductores/lista`);
   }
 }

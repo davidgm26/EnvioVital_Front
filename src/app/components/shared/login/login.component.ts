@@ -64,7 +64,11 @@ export class LoginComponent {
           localStorage.setItem('id', resp.id.toString());
           localStorage.setItem('rol', resp.rol);
           console.log(resp);
-          window.location.href = '/main';
+          if(resp.rol === 'ADMIN'){
+            this.router.navigate(['/admin']);
+          }else{
+            window.location.href = '/main';
+          }
 
         },
         (error) => {

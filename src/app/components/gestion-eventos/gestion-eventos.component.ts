@@ -1,13 +1,13 @@
-import { NgFor } from '@angular/common';
-import { Component,OnInit } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
+import { Component,Input,OnInit } from '@angular/core';
 import { EventoService } from '../../services/evento.service';
-import { TablaAdminComponent } from "../tabla-admin/tabla-admin.component";
 import { MatIcon } from '@angular/material/icon';
+import { Evento } from '../../interfaces/evento';
 
 @Component({
   selector: 'app-gestion-eventos',
   standalone: true,
-  imports: [TablaAdminComponent, NgFor, TablaAdminComponent,MatIcon],
+  imports: [NgFor,MatIcon,NgIf],
   templateUrl: './gestion-eventos.component.html',
   styleUrl: './gestion-eventos.component.css'
 })
@@ -15,8 +15,7 @@ export class GestionEventosComponent implements OnInit{
 
   
 
-  listaEventos: any[] = [];
-  headers: string[] = ['ID', 'Nombre', 'Fecha', 'Hora', 'Lugar', 'Cupo', 'Estado', 'Acciones'];
+  listaEventos!: Evento[];
 
   constructor(
     private eventoService: EventoService
@@ -24,7 +23,6 @@ export class GestionEventosComponent implements OnInit{
 
   ngOnInit(): void {
       this.cargarEventos();
-      console.log(this.listaEventos);
   }
 
   cargarEventos(){
@@ -38,4 +36,19 @@ export class GestionEventosComponent implements OnInit{
 
     );
   }
+
+  cambiarEstado(id: number){
+    this.eventoService.changeEventoState(id).subscribe({
+      next: (resp) => {
+        const index = this.listaEventos.findIndex(evento => evento.id === id);
+        if (index !== -1) {
+          this.listaEventos[index] = resp;
+        }
+      },
+      error: (error) => {
+        console.error('Error changing event state:', error);
+      }
+    });
+  }
+
 }
