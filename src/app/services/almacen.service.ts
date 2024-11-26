@@ -44,7 +44,7 @@ export class AlmacenService {
   }
 
   obtenerAlmacenesPorEventoId(eventoId: number): Observable<EventoAlmacenResponse[]> {
-    return this.http.get<EventoAlmacenResponse[]>(`${environment.apiUrl}/almacenes/listaregistrados/${eventoId}`, { headers: this.getAuthHeaders() });
+    return this.http.get<EventoAlmacenResponse []>(`${environment.apiUrl}/almacenes/listaregistrados/${eventoId}`);
   }
 
   obtenerListaEventos(id: number): Observable<any> {
