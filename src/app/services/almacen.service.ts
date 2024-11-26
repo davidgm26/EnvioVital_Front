@@ -36,7 +36,7 @@ export class AlmacenService {
   }
 
   obtenerProvincias(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/provincias/lista`, { headers: this.getAuthHeaders() });
+    return this.http.get<any[]>(`${environment.apiUrl}/provincias/lista`);
   }
 
   obtenerUsuarioPorId(id: number): Observable<any> {
