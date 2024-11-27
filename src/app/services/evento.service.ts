@@ -20,9 +20,9 @@ export class EventoService {
       'Authorization': 'Bearer ' + localStorage.getItem('token'),
     });
 
-    return {headers: headers}
+    return { headers: headers }
   }
-  
+
   getActiveEventos(): Observable<Evento[]> {
     return this.http.get<Evento[]>(`${environment.apiUrl}/evento/activos`);
   }
@@ -32,10 +32,14 @@ export class EventoService {
   }
 
   changeEventoState(id: number): Observable<Evento> {
-    return this.http.put<Evento>(`${environment.apiUrl}/evento/estado/${id}`, {}, this.autorizarPeticion() );
+    return this.http.put<Evento>(`${environment.apiUrl}/evento/estado/${id}`, {}, this.autorizarPeticion());
   }
-  
+
   deleteEvento(id: number): Observable<void> {
     return this.http.delete<void>(`${environment.apiUrl}/evento/${id}`, this.autorizarPeticion());
+  }
+
+  editEvento(id: number, evento: Evento): Observable<Evento> {
+    return this.http.put<Evento>(`${environment.apiUrl}/evento/${id}`, evento, this.autorizarPeticion());
   }
 }

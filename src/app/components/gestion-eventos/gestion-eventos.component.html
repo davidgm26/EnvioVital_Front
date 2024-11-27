@@ -1,23 +1,36 @@
-<table class="min-w-full divide-y divide-gray-200">
-    <thead class="bg-gray-50">
+<table class="min-w-full divide-y divide-gray-300 border border-gray-300 rounded-lg overflow-hidden shadow-sm">
+    <thead class="bg-gray-100">
         <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Provincia</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Nombre</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Provincia</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Estado</th>
             <th class="px-6 py-3"></th>
             <th class="px-6 py-3"></th>
         </tr>
     </thead>
     <tbody class="bg-white divide-y divide-gray-200">
-        <tr *ngFor="let evento of listaEventos">
-            <td class="px-6 py-4 whitespace-nowrap">{{evento.nombre}}</td>
-            <td class="px-6 py-4 whitespace-nowrap">{{evento.provincia}}</td>
+        <tr *ngFor="let evento of listaEventos" class="hover:bg-gray-100">
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{evento.nombre}}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{evento.provincia}}</td>
             <td class="px-6 py-4 whitespace-nowrap">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800" *ngIf="evento.activo" (click)="cambiarEstado(evento.id)">Activo</span>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800" *ngIf="!evento.activo" (click)="cambiarEstado(evento.id)">Inactivo</span>         
+                <span 
+                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold cursor-pointer" 
+                    [ngClass]="{'bg-green-100 text-green-800': evento.activo, 'bg-red-100 text-red-800': !evento.activo}" 
+                    (click)="cambiarEstado(evento.id)"
+                >
+                    {{ evento.activo ? 'Activo' : 'Inactivo' }}
+                </span>
             </td>
-            <td><a ><mat-icon aria-hidden="false" aria-label="edit">edit</mat-icon></a></td>
-            <td><a ><mat-icon aria-hidden="false" aria-label="delete" (click)="abrirConfirmacion(evento.id)">delete</mat-icon>            </a></td>
+            <td>
+                <button class="text-blue-600 hover:text-blue-800 focus:outline-none">
+                    <mat-icon aria-hidden="false" aria-label="edit" (click)="abrirEditar(evento.id)">edit</mat-icon>
+                </button>
+            </td>
+            <td>
+                <button class="text-red-600 hover:text-red-800 focus:outline-none" (click)="abrirBorrado(evento.id)">
+                    <mat-icon aria-hidden="false" aria-label="delete">delete</mat-icon>
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>

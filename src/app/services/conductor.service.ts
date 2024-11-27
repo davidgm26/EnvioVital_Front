@@ -35,10 +35,6 @@ export class ConductorService {
     return this.http.put(`${this.apiUrl}/editar/${id}`, datos, { headers: this.getAuthHeaders() });
   }
 
-  obtenerProvincias(): Observable<any[]> {
-    return this.http.get<any[]>(this.provinciasUrl, { headers: this.getAuthHeaders() });
-  }
-
   obtenerUsuarioPorId(id: number): Observable<any> {
     return this.http.get(`${this.usuarioUrl}/${id}`, { headers: this.getAuthHeaders() });
   }

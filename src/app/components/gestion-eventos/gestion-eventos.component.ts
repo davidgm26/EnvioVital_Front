@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component,Input,OnInit } from '@angular/core';
 import { EventoService } from '../../services/evento.service';
 import { MatIcon } from '@angular/material/icon';
@@ -9,7 +9,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 @Component({
   selector: 'app-gestion-eventos',
   standalone: true,
-  imports: [NgFor,MatIcon,NgIf],
+  imports: [NgFor,MatIcon,NgClass],
   templateUrl: './gestion-eventos.component.html',
   styleUrl: './gestion-eventos.component.css'
 })
@@ -54,7 +54,7 @@ export class GestionEventosComponent implements OnInit{
     });
   }
 
-  abrirConfirmacion(id: number){
+  abrirBorrado(id: number){
     this.dialog.open(ConfirmDialogComponent,{
       data: {
         title: 'Borrar evento',
@@ -79,6 +79,10 @@ export class GestionEventosComponent implements OnInit{
     this.cargarEventos();
   }
   
+
+  abrirEditar(id: number){
+    console.log('Editar evento:', id);
+  }
 
 
 }

@@ -39,10 +39,6 @@ export class AlmacenService {
     return this.http.post<AlmacenResponse>(`${environment.apiUrl}/guardar`, data, { headers: this.getAuthHeaders() });
   }
 
-  obtenerProvincias(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/provincias/lista`, { headers: this.getAuthHeaders() });
-  }
-
   obtenerUsuarioPorId(id: number): Observable<any> {
     return this.http.get(`${environment.apiUrl}/usuarios/${id}`, { headers: this.getAuthHeaders() });
   }
@@ -53,5 +49,9 @@ export class AlmacenService {
 
   obtenerListaEventos(id: number): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/almacenes/listaEventos/${id}`, { headers: this.getAuthHeaders() });
+  }
+
+  borrarAlmacen(id: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/almacenes/eliminar/${id}`, { headers: this.getAuthHeaders() });
   }
 }

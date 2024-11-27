@@ -3,6 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AlmacenRegistrado } from '../../interfaces/almacen-registrado';
 import { MatIcon } from '@angular/material/icon';
 import { AlmacenService } from '../../services/almacen.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-gestion-almacenes',
@@ -16,7 +18,9 @@ export class GestionAlmacenesComponent implements OnInit {
   listaAlmacen!: AlmacenRegistrado[];
 
   constructor(
-    private almacenService: AlmacenService
+    private almacenService: AlmacenService,
+    private dialog: MatDialog,
+
   ) {
 
   }
@@ -37,7 +41,33 @@ export class GestionAlmacenesComponent implements OnInit {
     );
   }
 
+  abrirConfirmacion(id: number) {
+    this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Borrar almacen',
+        message: '¿Estás seguro de que quieres borrar este almacen?'
+      }
+    }).afterClosed().subscribe(
+      confirmado => {
+        if (confirmado) {
+          this.borrarAlmacen(id);
+        }
+      }
+    );
+  }
 
+  borrarAlmacen(id: number) {
+    this.almacenService.borrarAlmacen(id).subscribe({
+      next: () => {
+        this.cargarAlmacenes();
+      },
+      error: (error) => {
+        console.error('Error borrando almacen:', error);
+      }
+    });
+
+
+  }
 }
 
 

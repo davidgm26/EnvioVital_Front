@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import { NgFor } from '@angular/common';
 import { AlmacenService } from '../../../services/almacen.service';
+import { ProvinciaService } from '../../../services/provincia.service';
 
 @Component({
   selector: 'app-registro-almacen',
@@ -17,7 +18,8 @@ export class RegistroAlmacenComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private almacenRegistroService: AlmacenService
+    private almacenRegistroService: AlmacenService,
+    private provinciaService: ProvinciaService
   ) {
     this.registroForm = this.fb.group({
       nombre: [''],
@@ -37,7 +39,7 @@ export class RegistroAlmacenComponent implements OnInit {
   }
 
   private cargarProvincias(): void {
-    this.almacenRegistroService.obtenerProvincias().subscribe({
+    this.provinciaService.obtenerProvincias().subscribe({
       next: (provincias) => {
         this.provincias = provincias;
       },
