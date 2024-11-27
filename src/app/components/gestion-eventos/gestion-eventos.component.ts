@@ -3,6 +3,8 @@ import { Component,Input,OnInit } from '@angular/core';
 import { EventoService } from '../../services/evento.service';
 import { MatIcon } from '@angular/material/icon';
 import { Evento } from '../../interfaces/evento';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-gestion-eventos',
@@ -18,7 +20,8 @@ export class GestionEventosComponent implements OnInit{
   listaEventos!: Evento[];
 
   constructor(
-    private eventoService: EventoService
+    private eventoService: EventoService,
+    private dialog:MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -50,5 +53,32 @@ export class GestionEventosComponent implements OnInit{
       }
     });
   }
+
+  abrirConfirmacion(id: number){
+    this.dialog.open(ConfirmDialogComponent,{
+      data: {
+        title: 'Borrar evento',
+        message: '¿Estás seguro de que quieres borrar este evento?'
+      }
+  }).afterClosed().subscribe(
+    confirmado => {
+      if(confirmado){
+        this.borrarEvento(id);
+    }
+  }
+  );
+}
+  
+  borrarEvento(id: number){
+    this.eventoService.deleteEvento(id).subscribe(
+      {
+        next: () => this.cargarEventos(),
+        error: (error) => console.error(error)
+      }
+    );
+    this.cargarEventos();
+  }
+  
+
 
 }

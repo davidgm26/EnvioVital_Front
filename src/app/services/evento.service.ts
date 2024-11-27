@@ -34,4 +34,8 @@ export class EventoService {
   changeEventoState(id: number): Observable<Evento> {
     return this.http.put<Evento>(`${environment.apiUrl}/evento/estado/${id}`, {}, this.autorizarPeticion() );
   }
+  
+  deleteEvento(id: number): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}/evento/${id}`, this.autorizarPeticion());
+  }
 }

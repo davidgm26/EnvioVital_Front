@@ -54,7 +54,6 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    debugger;
     this.loginRequest = this.loginForm.value;
     if (this.loginForm.valid) {
       this.authService.login(this.loginRequest).subscribe(
