@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {catchError, Observable, throwError} from 'rxjs';
 import { environment } from '../../env/environment';
 import { AlmacenResponse } from '../interfaces/almacen-response';
 import { EventoAlmacenResponse } from '../interfaces/evento-almacen-response';
@@ -50,4 +50,19 @@ export class AlmacenService {
   obtenerListaEventos(id: number): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/almacenes/listaEventos/${id}`, { headers: this.getAuthHeaders() });
   }
+
+  obtenerAlmacenesPorEventoYProvincia(idEvento: number, idProvincia: number): Observable<EventoAlmacenResponse[]> {
+    return this.http.get<EventoAlmacenResponse[]>(`${environment.apiUrl}/almacenes`, {
+      params: {
+        idEvento: idEvento.toString(),
+        idProvincia: idProvincia.toString(),
+      },
+    }).pipe(
+      catchError((error: any) => {
+        console.error('Error al obtener almacenes por evento y provincia', error);
+        return throwError(error);
+      })
+    );
+  }
+
 }
