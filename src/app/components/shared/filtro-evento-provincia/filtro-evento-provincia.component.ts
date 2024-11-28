@@ -27,4 +27,10 @@ export class FiltroEventoProvinciaComponent implements OnInit {
   onProvinciaChange(): void {
     this.provinciaChange.emit(this.selectedProvincia);
   }
+
+
+
+  mostrarTodosLosEventos(): void {
+    this.provinciaChange.emit(0); // Emitir 0 para indicar que se deben mostrar todos los eventos
+  }
 }

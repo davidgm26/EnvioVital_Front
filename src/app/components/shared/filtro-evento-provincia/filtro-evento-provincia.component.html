@@ -3,4 +3,6 @@
   <select id="provincia" [(ngModel)]="selectedProvincia" (ngModelChange)="onProvinciaChange()">
     <option *ngFor="let provincia of provincias" [value]="provincia.id">{{ provincia.nombre }}</option>
   </select>
+    <button (click)="mostrarTodosLosEventos()">Mostrar todos los eventos</button>
+
 </div>
