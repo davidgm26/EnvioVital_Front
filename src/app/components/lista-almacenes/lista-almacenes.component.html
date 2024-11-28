@@ -4,7 +4,6 @@
       <app-tarjeta-almacen [almacen]="almacen" ></app-tarjeta-almacen>
     </div>
   </div>
-  <ng-template #noAlmacenes>
-    <p class="text-center text-gray-500">No hay almacenes disponibles para este evento.</p>
-  </ng-template>
+
+  <p class="text-center text-gray-500" *ngIf="almacenes.length === 0">No hay almacenes disponibles.</p>
 </div>
