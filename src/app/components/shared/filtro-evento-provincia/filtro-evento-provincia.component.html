@@ -1,8 +1,12 @@
-<div>
-  <label for="provincia">Selecciona una provincia:</label>
-  <select id="provincia" [(ngModel)]="selectedProvincia" (ngModelChange)="onProvinciaChange()">
-    <option *ngFor="let provincia of provincias" [value]="provincia.id">{{ provincia.nombre }}</option>
-  </select>
-    <button (click)="mostrarTodosLosEventos()">Mostrar todos los eventos</button>
-
+<div class="p-6 flex space-x-2">
+    <div>
+    <label for="provincia" class="block text-sm font-medium text-gray-700 ">Selecciona una provincia:</label>
+    <select id="provincia" [(ngModel)]="selectedProvincia" (ngModelChange)="onProvinciaChange()" class="  mt-1 block pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+        <option value="" disabled selected>Elige provincia</option>
+        <option *ngFor="let provincia of provincias" [value]="provincia.id">{{ provincia.nombre }}</option>
+    </select>
+    </div>
+    <div>
+  <button (click)="mostrarTodosLosEventos()" class="mt-4  inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Mostrar todos los eventos</button>
+</div>
 </div>
