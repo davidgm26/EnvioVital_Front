@@ -17,4 +17,12 @@ export class EventoService {
   getActiveEventos(): Observable<Evento[]> {
     return this.http.get<Evento[]>(`${environment.apiUrl}/evento/activos`);
   }
+
+  getProvincias(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiUrl}/provincias/lista`);
+  }
+
+  getEventosByProvinciaId(provinciaId: number): Observable<Evento[]> {
+    return this.http.get<Evento[]>(`${environment.apiUrl}/evento/provincia/${provinciaId}`);
+  }
 }

@@ -1,0 +1,6 @@
+<div>
+  <label for="provincia">Selecciona una provincia:</label>
+  <select id="provincia" [(ngModel)]="selectedProvincia" (ngModelChange)="onProvinciaChange()">
+    <option *ngFor="let provincia of provincias" [value]="provincia.id">{{ provincia.nombre }}</option>
+  </select>
+</div>
