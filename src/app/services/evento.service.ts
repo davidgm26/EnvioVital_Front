@@ -42,4 +42,9 @@ export class EventoService {
   editEvento(id: number, evento: Evento): Observable<Evento> {
     return this.http.put<Evento>(`${environment.apiUrl}/evento/${id}`, evento, this.autorizarPeticion());
   }
+
+  createEvento(): Observable<Evento> {
+    return this.http.post<Evento>(`${environment.apiUrl}/evento/`, {}, this.autorizarPeticion());
+  }
+
 }

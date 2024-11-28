@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Evento } from '../../interfaces/evento';
 
 @Component({
   selector: 'app-editar-evento',
@@ -9,4 +11,7 @@ import { Component } from '@angular/core';
 })
 export class EditarEventoComponent {
 
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public evento: Evento,
+  ) {}
 }

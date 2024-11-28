@@ -5,6 +5,7 @@ import { MatIcon } from '@angular/material/icon';
 import { Evento } from '../../interfaces/evento';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { EditarEventoComponent } from '../editar-evento/editar-evento.component';
 
 @Component({
   selector: 'app-gestion-eventos',
@@ -80,9 +81,11 @@ export class GestionEventosComponent implements OnInit{
   }
   
 
-  abrirEditar(id: number){
-    console.log('Editar evento:', id);
-  }
+  abrirEditar(evento: Evento){
+    this.dialog.open(EditarEventoComponent,{
+      data: evento
+  });
+}
 
 
 }
