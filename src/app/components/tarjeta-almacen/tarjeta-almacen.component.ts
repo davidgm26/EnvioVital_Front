@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AlmacenService,  } from '../../services/almacen.service';
 import { AlmacenRegistrado } from '../../interfaces/almacen-registrado';
 
 @Component({
@@ -11,14 +10,14 @@ import { AlmacenRegistrado } from '../../interfaces/almacen-registrado';
   imports: [CommonModule]
 })
 export class TarjetaAlmacenComponent implements OnInit {
-
-
   @Input() almacen!: AlmacenRegistrado;
+  mostrarBoton: boolean = false;
 
-
-  constructor(private almacenService: AlmacenService) {}
 
   ngOnInit(): void {
-    console.log(this.almacen)
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const rol = localStorage.getItem('rol');
+      this.mostrarBoton = rol === 'CONDUCTOR';
+    }
   }
 }

@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import { NgFor } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {CommonModule, NgFor} from '@angular/common';
 import { AlmacenService } from '../../../services/almacen.service';
 
 @Component({
   selector: 'app-registro-almacen',
   standalone: true,
-  imports: [ReactiveFormsModule,NgFor],
+  imports: [ReactiveFormsModule, NgFor, CommonModule],
   templateUrl: './registro-almacen.component.html',
   styleUrls: ['./registro-almacen.component.css'],
-  providers: [],
 })
 export class RegistroAlmacenComponent implements OnInit {
   registroForm: FormGroup;
@@ -20,14 +19,14 @@ export class RegistroAlmacenComponent implements OnInit {
     private almacenRegistroService: AlmacenService
   ) {
     this.registroForm = this.fb.group({
-      nombre: [''],
-      direccion: [''],
-      email: [''],
-      idProvincia: [null],
-      descripcion: [''],
+      nombre: ['', Validators.required], // Obligatorio
+      direccion: ['', Validators.required], // Obligatorio
+      email: ['', [Validators.required,Validators.email]], // Obligatorio
+      idProvincia: [null, Validators.required], // Obligatorio
+      descripcion: ['', Validators.required], // Obligatorio
       usuario: this.fb.group({
-        username: [''],
-        password: [''],
+        username: ['', Validators.required], // Obligatorio
+        password: ['', [Validators.required, Validators.minLength(6)]], // Obligatorio + mínimo 6 caracteres
       }),
     });
   }
@@ -46,14 +45,21 @@ export class RegistroAlmacenComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const formData = this.registroForm.value;
-    this.almacenRegistroService.guardarAlmacen(formData).subscribe({
-      next: (response) => {
-        console.log('Almacén registrado con éxito:', response);
-      },
-      error: (error) => {
-        console.error('Error al registrar el almacén:', error);
-      },
-    });
+    if (this.registroForm.valid) {
+      const formData = this.registroForm.value;
+      this.almacenRegistroService.guardarAlmacen(formData).subscribe({
+        next: (response) => {
+          console.log('Almacén registrado con éxito:', response);
+        },
+        error: (error) => {
+          console.error('Error al registrar el almacén:', error);
+        },
+      });
+    } else {
+      console.log('Formulario inválido, revisa los campos.');
+    }
+  }
+  public get usuario() {
+    return this.registroForm.get('usuario') as FormGroup;
   }
 }

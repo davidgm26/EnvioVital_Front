@@ -3,7 +3,10 @@
   <div class="p-8">
     <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{{ almacen.nombre }}</div>
     <p class="block mt-1 text-lg leading-tight font-medium text-black">{{ almacen.provincia }}</p>
-    <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    <button *ngIf="mostrarBoton"  class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+
+    >
+
       Inscribirse
     </button>
   </div>

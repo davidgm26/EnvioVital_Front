@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AlmacenRegistrado } from '../interfaces/almacen-registrado';
+import {ConductorRequestDTO} from "../interfaces/conductor-request-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,9 @@ export class ConductorService {
 
   obtenerListaVehiculos(conductorId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/vehiculosRegistrados/${conductorId}`, { headers: this.getAuthHeaders() });
+  }
+  guardarConductor(data: ConductorRequestDTO): Observable<any> {
+    return this.http.post<ConductorRequestDTO>(`${this.apiUrl}/guardar`, data);
+    console.log(data)
   }
 }

@@ -1,6 +1,6 @@
 <header class="w-full bg-white py-4 shadow-md fixed top-0 left-0 flex justify-center items-center px-6">
   <div class="container flex items-center justify-between max-w-5xl w-full">
-    <img src="assets/logo_ev_1-removebg-preview.png" alt="Logo" class="h-12 absolute left-4 sm:left-10">
+    <img src="/logo_ev_1-removebg-preview.png" alt="Logo" class="h-12 absolute left-4 sm:left-10">
     <h2 class="text-3xl font-semibold text-blue-600 text-center flex-grow">ALMACÉN</h2>
     <div class="w-10"></div>
   </div>
@@ -9,54 +9,80 @@
 <div class="w-full max-w-3xl bg-blue-500 p-6 sm:p-8 rounded-lg shadow-lg mt-32 mx-auto text-white space-y-6 relative z-10">
   <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <!-- Campo Nombre -->
       <div class="relative">
         <input id="nombre" formControlName="nombre" type="text" placeholder="Nombre" class="input-field" />
+        <div *ngIf="registroForm.get('nombre')?.touched && registroForm.get('nombre')?.errors" class="text-yellow-300 text-sm mt-1">
+          <span *ngIf="registroForm.get('nombre')?.errors?.['required']">El nombre es obligatorio.</span>
+        </div>
       </div>
+
+      <!-- Campo Dirección -->
       <div class="relative">
         <input id="direccion" formControlName="direccion" type="text" placeholder="Dirección" class="input-field" />
+        <div *ngIf="registroForm.get('direccion')?.touched && registroForm.get('direccion')?.errors" class="text-yellow-300 text-sm mt-1">
+          <span *ngIf="registroForm.get('direccion')?.errors?.['required']">La dirección es obligatoria.</span>
+        </div>
       </div>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <!-- Campo Email -->
       <div class="relative">
         <input id="email" formControlName="email" type="email" placeholder="E-mail" class="input-field" />
+        <div *ngIf="registroForm.get('email')?.touched && registroForm.get('email')?.errors" class="text-yellow-300 text-sm mt-1">
+          <span *ngIf="registroForm.get('email')?.errors?.['required']">El email es obligatorio.</span>
+          <span *ngIf="registroForm.get('email')?.errors?.['email']">Debe tener un formato válido.</span>
+        </div>
       </div>
 
+      <!-- Campo Provincia -->
       <div class="relative">
-        <span class="absolute top-3 left-3 text-white opacity-80 pointer-events-none"
-              [class.hidden]="registroForm.get('idProvincia')?.value">
-      Provincia
-    </span>
-        <select
-          formControlName="idProvincia"
-          class="input-field bg-transparent appearance-none text-white border-b-2 border-white focus:outline-none focus:border-white"
-        >
+        <span class="absolute top-3 left-3 text-white opacity-80 pointer-events-none" [class.hidden]="registroForm.get('idProvincia')?.value">
+          Provincia
+        </span>
+        <select formControlName="idProvincia" class="input-field bg-transparent appearance-none text-white border-b-2 border-white focus:outline-none focus:border-white">
           <option class="bg-blue-500 text-white" *ngFor="let provincia of provincias" [value]="provincia.id">
             {{ provincia.nombre }}
           </option>
         </select>
+        <div *ngIf="registroForm.get('idProvincia')?.touched && registroForm.get('idProvincia')?.errors" class="text-yellow-300 text-sm mt-1">
+          <span *ngIf="registroForm.get('idProvincia')?.errors?.['required']">Seleccionar una provincia es obligatorio.</span>
+        </div>
       </div>
     </div>
 
-
-
-    <div>
+    <!-- Campo Descripción -->
+    <div class="relative">
       <textarea id="descripcion" formControlName="descripcion" placeholder="Escribe una descripción..." class="input-field h-24"></textarea>
+      <div *ngIf="registroForm.get('descripcion')?.touched && registroForm.get('descripcion')?.errors" class="text-yellow-300 text-sm mt-1">
+        <span *ngIf="registroForm.get('descripcion')?.errors?.['required']">La descripción es obligatoria.</span>
+      </div>
     </div>
 
     <fieldset formGroupName="usuario">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
+        <!-- Campo Nombre de Usuario -->
         <div class="relative">
           <input id="username" formControlName="username" type="text" placeholder="Nombre de usuario" class="input-field" />
+          <div *ngIf="usuario.get('username')?.touched && usuario.get('username')?.errors" class="text-yellow-300 text-sm mt-1">
+            <span *ngIf="usuario.get('username')?.errors?.['required']">El nombre de usuario es obligatorio.</span>
+          </div>
         </div>
+
+        <!-- Campo Contraseña -->
         <div class="relative">
           <input id="password" formControlName="password" type="password" placeholder="Contraseña" class="input-field" />
+          <div *ngIf="usuario.get('password')?.touched && usuario.get('password')?.errors" class="text-yellow-300 text-sm mt-1">
+            <span *ngIf="usuario.get('password')?.errors?.['required']">La contraseña es obligatoria.</span>
+            <span *ngIf="usuario.get('password')?.errors?.['minlength']">Debe tener al menos 6 caracteres.</span>
+          </div>
         </div>
       </div>
     </fieldset>
 
     <div class="flex justify-center">
-      <button type="submit" class="bg-yellow-500 text-white mt-5 font-bold py-2 px-6 sm:px-8 rounded-full hover:bg-yellow-600 transition">
+      <button type="submit" class="bg-yellow-500 text-white mt-5 font-bold py-2 px-6 sm:px-8 rounded-full hover:bg-yellow-600 transition" [disabled]="!registroForm.valid">
         Registrar
       </button>
     </div>
@@ -78,5 +104,8 @@
   }
   .input-field:focus {
     border-bottom-color: #ffffff;
+  }
+  .text-yellow-300 {
+    color: #fcd34d;
   }
 </style>
