@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Evento } from '../interfaces/evento';
 import { environment } from '../../env/environment';
+import { EventoRequest } from '../interfaces/evento-request';
 
 @Injectable({
   providedIn: 'root'
@@ -47,4 +48,7 @@ export class EventoService {
     return this.http.post<Evento>(`${environment.apiUrl}/evento/`, {}, this.autorizarPeticion());
   }
 
+  editarEvento(id: number, body: EventoRequest): Observable<Evento> {
+    return this.http.put<Evento>(`${environment.apiUrl}/evento/${id}`,body,this.autorizarPeticion());
+  }
 }

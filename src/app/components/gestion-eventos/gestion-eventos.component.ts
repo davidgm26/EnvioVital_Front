@@ -1,47 +1,50 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { Component,Input,OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EventoService } from '../../services/evento.service';
 import { MatIcon } from '@angular/material/icon';
 import { Evento } from '../../interfaces/evento';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { EditarEventoComponent } from '../editar-evento/editar-evento.component';
+import { EventoRequest } from '../../interfaces/evento-request';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-gestion-eventos',
   standalone: true,
-  imports: [NgFor,MatIcon,NgClass],
+  imports: [NgFor, MatIcon, NgClass],
   templateUrl: './gestion-eventos.component.html',
   styleUrl: './gestion-eventos.component.css'
 })
-export class GestionEventosComponent implements OnInit{
+export class GestionEventosComponent implements OnInit {
 
-  
+
 
   listaEventos!: Evento[];
 
   constructor(
     private eventoService: EventoService,
-    private dialog:MatDialog,
+    private dialog: MatDialog,
+    private toast: ToastrService
   ) { }
 
   ngOnInit(): void {
-      this.cargarEventos();
+    this.cargarEventos();
   }
 
-  cargarEventos(){
-    this.eventoService.getAllEventos().subscribe(
-      resp =>{
+  cargarEventos() {
+    this.eventoService.getAllEventos().subscribe({
+      next:(resp) => {
         this.listaEventos = resp;
       },
-      error =>{
+      error:(error) => {
         console.error(error);
       }
 
-    );
+    });
   }
 
-  cambiarEstado(id: number){
+  cambiarEstado(id: number) {
     this.eventoService.changeEventoState(id).subscribe({
       next: (resp) => {
         const index = this.listaEventos.findIndex(evento => evento.id === id);
@@ -55,22 +58,22 @@ export class GestionEventosComponent implements OnInit{
     });
   }
 
-  abrirBorrado(id: number){
-    this.dialog.open(ConfirmDialogComponent,{
+  abrirBorrado(id: number) {
+    this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'Borrar evento',
         message: '¿Estás seguro de que quieres borrar este evento?'
       }
-  }).afterClosed().subscribe(
-    confirmado => {
-      if(confirmado){
-        this.borrarEvento(id);
-    }
+    }).afterClosed().subscribe(
+      confirmado => {
+        if (confirmado) {
+          this.borrarEvento(id);
+        }
+      }
+    );
   }
-  );
-}
-  
-  borrarEvento(id: number){
+
+  borrarEvento(id: number) {
     this.eventoService.deleteEvento(id).subscribe(
       {
         next: () => this.cargarEventos(),
@@ -79,13 +82,32 @@ export class GestionEventosComponent implements OnInit{
     );
     this.cargarEventos();
   }
-  
 
-  abrirEditar(evento: Evento){
-    this.dialog.open(EditarEventoComponent,{
+
+  abrirEditar(evento: Evento) {
+    this.dialog.open(EditarEventoComponent, {
       data: evento
-  });
-}
+    }).afterClosed().subscribe(
+      (eventoEditado) => {
+        if (eventoEditado) {
+          this.peticionEditar(evento, eventoEditado);
+        }
+      }
+    );
+  }
 
-
+  peticionEditar(evento: Evento, body: EventoRequest) {
+    this.eventoService.editarEvento(evento.id, body).subscribe({
+      next: (resp) => {
+        const index = this.listaEventos.findIndex(e => e.id === evento.id);
+        if (index !== -1) {
+          this.listaEventos[index] = resp;
+        }
+        this.toast.info('Evento editado');
+      },
+      error: (error) => {
+        this.toast.error('Error al editar el evento', 'Error');
+      }}
+    );
+  }
 }

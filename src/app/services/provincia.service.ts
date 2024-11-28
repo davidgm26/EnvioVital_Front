@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../env/environment';
+import { Provincia } from '../interfaces/provincia';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class ProvinciaService {
     });
   }
 
-  obtenerProvincias(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/provincias/lista`, { headers: this.getAuthHeaders() });
+  obtenerProvincias(): Observable<Provincia[]> {
+    return this.http.get<Provincia[]>(`${environment.apiUrl}/provincias/lista`);
   }
+
 }

@@ -54,4 +54,12 @@ export class ConductorService {
   obtenerConductores(): Observable<ConductorResponse[]> {
     return this.http.get<ConductorResponse[]>(`${environment.apiUrl}/conductores/lista`);
   }
+
+  changeConductorState(id: number): Observable<ConductorResponse> {
+    return this.http.put<ConductorResponse>(`${environment.apiUrl}/conductores/estado/${id}`, {}, {headers: this.getAuthHeaders()});
+  }
+
+  deleteConductor(id: number): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}/conductores/eliminar/${id}`, {headers: this.getAuthHeaders()});
+  }
 }

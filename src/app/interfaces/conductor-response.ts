@@ -8,4 +8,5 @@ export interface ConductorResponse {
         fechaNacimiento: Date;
         email:           string;
         idUsuario:       number;    
+        activo:           boolean;
 }
