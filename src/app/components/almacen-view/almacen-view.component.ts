@@ -5,13 +5,14 @@ import { Evento } from '../../interfaces/evento';
 import { AlmacenService } from '../../services/almacen.service';
 import { AlmacenFormComponent } from "../almacen-form/almacen-form.component";
 import { CambiarPassComponent } from "../cambiar-pass/cambiar-pass.component";
-import { NgClass, NgIf } from "@angular/common";
+import {NgClass, NgIf, NgStyle} from "@angular/common";
+import {UploadComponent} from "../upload/upload.component";
 
 @Component({
   selector: 'app-almacen-view',
   templateUrl: './almacen-view.component.html',
   standalone: true,
-  imports: [ListaEventosAlmacenComponent, AlmacenFormComponent, CambiarPassComponent, NgClass, NgIf],
+  imports: [ListaEventosAlmacenComponent, AlmacenFormComponent, CambiarPassComponent, NgClass, NgIf, UploadComponent, NgStyle],
   styleUrls: ['./almacen-view.component.css']
 })
 export class AlmacenViewComponent implements OnInit {
@@ -22,6 +23,8 @@ export class AlmacenViewComponent implements OnInit {
   activeTab: string = 'details';
   eventos: Evento[] = [];
   provinciaNombre: string = '';
+  fotoUrl: string | null = null; // URL de la imagen subida
+
   @Output() reloadDataEvent = new EventEmitter<void>();
 
   constructor(
@@ -98,4 +101,13 @@ export class AlmacenViewComponent implements OnInit {
     this.activeTab = 'details';
     this.reloadData();
   }
+
+  onPhotoUploaded(url: string): void {
+    this.fotoUrl = url; // Actualiza la URL de la foto
+    console.log('URL de la foto cargada:', url);
+  }
+
+
+
+
 }

@@ -1,0 +1,12 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px;
+}
+
+img {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}

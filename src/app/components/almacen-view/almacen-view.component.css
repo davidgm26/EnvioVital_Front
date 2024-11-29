@@ -1,0 +1,13 @@
+.w-32 {
+  width: 8rem;
+  height: 8rem;
+}
+.rounded-full {
+  border-radius: 50%;
+}
+.relative {
+  position: relative;
+}
+.overflow-hidden {
+  overflow: hidden;
+}

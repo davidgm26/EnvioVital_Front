@@ -3,9 +3,16 @@
   <div class="flex flex-col md:flex-row items-start md:items-center bg-white p-6 rounded-lg shadow-xl">
     <!-- Parte del Icono y Nombre (Izquierda) -->
     <div class="flex flex-col items-center w-full md:w-1/4 mb-4 md:mb-0 md:mr-8">
-      <div class="w-32 h-32 bg-blue-500 text-white rounded-full flex items-center justify-center mb-4">
-        <span class="material-icons text-4xl">store</span>
+      <div
+        class="w-32 h-32 rounded-full flex items-center justify-center mb-4 relative overflow-hidden"
+        [ngStyle]="{'background-image': fotoUrl ? 'url(' + fotoUrl + ')' : '', 'background-size': 'cover', 'background-position': 'center'}">
+        <!-- Mostrar el botón de subida si no hay foto -->
+        <ng-container *ngIf="!fotoUrl">
+          <app-upload (photoUploaded)="onPhotoUploaded($event)"></app-upload>
+        </ng-container>
       </div>
+
+
       <p class="text-xl font-semibold text-gray-800">{{ usuarioUsername }}</p>
     </div>
 
