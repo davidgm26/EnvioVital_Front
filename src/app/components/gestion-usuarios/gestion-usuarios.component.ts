@@ -6,6 +6,8 @@ import { ConductorResponse } from '../../interfaces/conductor-response';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { EditarUsuarioComponent } from '../editar-usuario/editar-usuario.component';
+import { ConductorRequestDTO } from '../../interfaces/conductor-request-dto';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -21,6 +23,7 @@ export class GestionUsuariosComponent implements OnInit {
   constructor(
     private conductorService: ConductorService,
     private dialog: MatDialog,
+    private toast: ToastrService,
 
   ) { }
 
@@ -88,6 +91,31 @@ export class GestionUsuariosComponent implements OnInit {
   abrirEditar(conductor: ConductorResponse) {
     this.dialog.open(EditarUsuarioComponent, {
       data: conductor
-    }).afterClosed().subscribe();
+    }).afterClosed().subscribe({
+      next: (conductorEdit) =>{
+        if(conductorEdit){
+          this.peticionEditar(conductor, conductorEdit);
+        }
+      }}
+    );
+  }
+
+  peticionEditar(conductor: ConductorResponse, body: ConductorRequestDTO) {
+    debugger;
+    this.conductorService.actualizarConductor(conductor.id, body).subscribe({
+      next: (resp) => {
+        const index = this.listaConductores.findIndex(c => c.id === conductor.id);
+        if (index !== -1) {
+          this.listaConductores[index] = resp;
+        }
+        this.toast.success('Evento editado','',{
+          timeOut: 2000,
+        });
+        this.cargarUsuarios();
+      },
+      error: () => {
+        this.toast.error('Error al editar el evento', 'Error');
+      }}
+    );
   }
 }

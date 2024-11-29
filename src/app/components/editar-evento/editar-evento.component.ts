@@ -5,11 +5,14 @@ import { FormGroup, ReactiveFormsModule, Validators, FormBuilder } from '@angula
 import { ProvinciaService } from '../../services/provincia.service';
 import { Provincia } from '../../interfaces/provincia';
 import { NgFor } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-editar-evento',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor],
+  imports: [ReactiveFormsModule, NgFor,MatFormFieldModule , MatSelectModule, MatInputModule],
   templateUrl: './editar-evento.component.html',
   styleUrl: './editar-evento.component.css'
 })
@@ -17,6 +20,8 @@ export class EditarEventoComponent implements OnInit {
 
   editForm: FormGroup;
   provincias: Provincia[] = []
+  provinciaInicio!: string;
+
 
 
   constructor(
@@ -24,7 +29,6 @@ export class EditarEventoComponent implements OnInit {
     private provinciaService: ProvinciaService,
     private formBuilder: FormBuilder,
     private dialog: MatDialogRef<EditarEventoComponent>
-
   ) {
     this.editForm = this.formBuilder.group({
       nombre: [
@@ -36,8 +40,7 @@ export class EditarEventoComponent implements OnInit {
       idProvincia: [
         evento.provincia, Validators.required
       ]
-    })
-
+    });
   }
 
   ngOnInit(): void {
@@ -54,6 +57,7 @@ export class EditarEventoComponent implements OnInit {
       }
     );
   }
+
 
   cancelar() {
     this.dialog.close();

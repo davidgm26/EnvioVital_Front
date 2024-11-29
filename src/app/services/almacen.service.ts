@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../env/environment';
 import { AlmacenResponse } from '../interfaces/almacen-response';
 import { EventoAlmacenResponse } from '../interfaces/evento-almacen-response';
-import { AlmacenRegistrado } from '../interfaces/almacen-registrado';
+import { AlmacenRequestDTO } from '../interfaces/almacen-request-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +19,8 @@ export class AlmacenService {
       'Authorization': `Bearer ${token}`
     });
   }
-  obtenerTodosLosAlmacenes(): Observable<AlmacenRegistrado[]>{
-    return this.http.get<AlmacenRegistrado[]>(`${environment.apiUrl}/almacenes/lista`);
+  obtenerTodosLosAlmacenes(): Observable<AlmacenResponse[]>{
+    return this.http.get<AlmacenResponse[]>(`${environment.apiUrl}/almacenes/lista`);
   }
 
   obtenerAlmacenPorId(id: number): Observable<any> {
@@ -31,8 +31,8 @@ export class AlmacenService {
     return this.http.get(`${environment.apiUrl}/almacenes/usuario/${idUsuario}`, { headers: this.getAuthHeaders() });
   }
 
-  actualizarAlmacen(id: number, datos: any): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/almacenes/editar/${id}`, datos, { headers: this.getAuthHeaders() });
+  actualizarAlmacen(id: number, datos: AlmacenRequestDTO): Observable<AlmacenResponse> {
+    return this.http.put<AlmacenResponse>(`${environment.apiUrl}/almacenes/editar/${id}`, datos, { headers: this.getAuthHeaders() });
   }
 
   guardarAlmacen(data: AlmacenResponse): Observable<any> {
@@ -53,5 +53,9 @@ export class AlmacenService {
 
   borrarAlmacen(id: number): Observable<any> {
     return this.http.delete(`${environment.apiUrl}/almacenes/eliminar/${id}`, { headers: this.getAuthHeaders() });
+  }
+
+  changeAlmacenState(id: number): Observable<AlmacenResponse> {
+    return this.http.put<AlmacenResponse>(`${environment.apiUrl}/almacenes/estado/${id}`, {}, { headers: this.getAuthHeaders() });
   }
 }

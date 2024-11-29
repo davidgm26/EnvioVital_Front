@@ -4,12 +4,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ConductorResponse } from '../../interfaces/conductor-response';
 import { ProvinciaService } from '../../services/provincia.service';
 import { Provincia } from '../../interfaces/provincia';
-import { NgFor } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-editar-usuario',
   standalone: true,
-  imports: [ReactiveFormsModule,NgFor],
+  imports: [ReactiveFormsModule,MatFormFieldModule, MatSelectModule, MatInputModule,],
   templateUrl: './editar-usuario.component.html',
   styleUrl: './editar-usuario.component.css'
 })
@@ -51,5 +53,17 @@ export class EditarUsuarioComponent implements OnInit {
       }
     );
   }
+
+  cancelar() {
+    this.dialog.close();
+  }
+
+  guardarCambios() {
+    if(this.editForm.valid){
+      this.dialog.close(this.editForm.value);
+    }
+  }
+ 
+
 
 }

@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AlmacenService } from '../../services/almacen.service';
 import { TarjetaAlmacenComponent } from '../tarjeta-almacen/tarjeta-almacen.component';
-import { AlmacenRegistrado } from '../../interfaces/almacen-registrado';
 import { log } from 'node:console';
 import { ToastrService } from 'ngx-toastr';
+import { AlmacenResponse } from '../../interfaces/almacen-response';
 
 @Component({
   selector: 'app-lista-almacenes',
@@ -19,7 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ListaAlmacenesComponent implements OnInit {
   eventoId!: number;
-  almacenes: AlmacenRegistrado[] = [];
+  almacenes: AlmacenResponse[] = [];
 
   constructor(
     private route: ActivatedRoute,

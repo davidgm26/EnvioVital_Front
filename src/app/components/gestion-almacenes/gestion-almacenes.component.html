@@ -1,23 +1,39 @@
-<table class="min-w-full divide-y divide-gray-200">
-    <thead class="bg-gray-50">
-        <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Provincia</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
-            <th class="px-6 py-3"></th>
-            <th class="px-6 py-3"></th>
-        </tr>
-    </thead>
-    <tbody class="bg-white divide-y divide-gray-200" *ngFor="let almacen of listaAlmacen">
-        <tr>
-            <td class="px-6 py-4 whitespace-nowrap">{{almacen.nombre}}</td>
-            <td class="px-6 py-4 whitespace-nowrap">{{almacen.provincia}}</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"  *ngIf="almacen.esActivo">Activo</span>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800" *ngIf="!almacen.esActivo">Inactivo</span>         
-            </td>
-            <td><a ><mat-icon aria-hidden="false" aria-label="edit">edit</mat-icon>            </a></td>
-            <td><a ><mat-icon aria-hidden="false" aria-label="delete" (click)="abrirConfirmacion(almacen.id)">delete</mat-icon>            </a></td>
-        </tr>
-    </tbody>
-</table>
+<div class="max-w-4xl mx-auto my-8 p-4 bg-white shadow-lg rounded-lg">
+    <table class="min-w-full divide-y divide-gray-300 border border-gray-300 rounded-lg overflow-hidden">
+        <thead class="bg-gradient-to-r from-gray-100 to-gray-200">
+            <tr>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Nombre</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Provincia</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Estado</th>
+                <th class="px-6 py-3"></th>
+                <th class="px-6 py-3"></th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let almacen of listaAlmacen" class="hover:bg-gray-50 transition duration-150 ease-in-out">
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{almacen.nombre}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{almacen.provincia}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span 
+                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold cursor-pointer transition duration-150 ease-in-out" 
+                        [ngClass]="{'bg-green-100 text-green-800': almacen.esActivo, 'bg-red-100 text-red-800': !almacen.esActivo}" 
+                        (click)="cambiarEstado(almacen.id)"
+                    >
+                        {{ almacen.esActivo ? 'Activo' : 'Inactivo' }}
+                    </span>
+                </td>
+
+                <td>
+                    <button class="text-red-600 hover:text-red-800 focus:outline-none transition duration-150 ease-in-out" (click)="abrirConfirmacion(almacen.id)">
+                        <mat-icon aria-hidden="false" aria-label="delete">delete</mat-icon>
+                    </button>
+                </td>
+                <td>
+                    <button class="text-blue-600 hover:text-blue-800 focus:outline-none transition duration-150 ease-in-out">
+                        <mat-icon aria-hidden="false" aria-label="edit" (click)="abrirEditar(almacen)">edit</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -25,4 +25,8 @@ export class ProvinciaService {
     return this.http.get<Provincia[]>(`${environment.apiUrl}/provincias/lista`);
   }
 
+  obtenerProvinciaById(id: number): Observable<Provincia> {
+    return this.http.get<Provincia>(`${environment.apiUrl}/provincias/${id}`);
+  }
+
 }

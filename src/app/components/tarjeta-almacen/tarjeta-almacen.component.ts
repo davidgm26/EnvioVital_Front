@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AlmacenService,  } from '../../services/almacen.service';
-import { AlmacenRegistrado } from '../../interfaces/almacen-registrado';
+import { AlmacenResponse } from '../../interfaces/almacen-response';
 
 @Component({
   selector: 'app-tarjeta-almacen',
@@ -13,7 +13,7 @@ import { AlmacenRegistrado } from '../../interfaces/almacen-registrado';
 export class TarjetaAlmacenComponent implements OnInit {
 
 
-  @Input() almacen!: AlmacenRegistrado;
+  @Input() almacen!: AlmacenResponse;
 
 
   constructor(private almacenService: AlmacenService) {}

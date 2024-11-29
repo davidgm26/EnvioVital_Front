@@ -103,7 +103,9 @@ export class GestionEventosComponent implements OnInit {
         if (index !== -1) {
           this.listaEventos[index] = resp;
         }
-        this.toast.info('Evento editado');
+        this.toast.success('Evento editado','',{
+          timeOut: 2000,
+        });
       },
       error: (error) => {
         this.toast.error('Error al editar el evento', 'Error');

@@ -2,15 +2,15 @@
     <form action="" [formGroup]="editForm" class="edit-form space-y-6">
         <div class="form-group">
             <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre:</label>
-            <input type="text" name="name" placeholder="{{evento.nombre}}" formControlName="nombre" class="form-control mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <input type="text" name="name" placeholder="{{almacen.nombre}}" formControlName="nombre" class="form-control mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         </div>
         <div class="form-group">
             <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripcion:</label>
-            <textarea name="descripcion" placeholder="{{evento.descripcion}}" formControlName="descripcion" class="form-control mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" rows="4"></textarea>
+            <textarea name="descripcion" placeholder="{{almacen.descripcion}}" formControlName="descripcion" class="form-control mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" rows="4"></textarea>
         </div>
         <div class="form-group">
             <label for="provincia" class="block text-sm font-medium text-gray-700">Provincia:</label>
-            <mat-select name="provincia" formControlName="idProvincia" placeholder="{{evento.provincia}}"  class="form-control mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <mat-select name="idProvincia" formControlName="idProvincia" placeholder="{{almacen.provincia}}"  class="form-control mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 <mat-option value="" disabled selected>Seleccione una provincia</mat-option>
                 <mat-option *ngFor="let provincia of provincias" [value]="provincia.id">{{provincia.nombre}}</mat-option>
             </mat-select>

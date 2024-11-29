@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
-import { AlmacenRegistrado } from '../../interfaces/almacen-registrado';
 import { NgClass } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { environment } from '../../../env/environment';
+import { AlmacenResponse } from '../../interfaces/almacen-response';
 
 @Component({
   selector: 'app-lista-almacenes-registrados',
@@ -15,7 +15,7 @@ import { environment } from '../../../env/environment';
   styleUrls: ['./lista-almacenes-registrados.component.css'],
 })
 export class ListaAlmacenesRegistradosComponent implements OnInit {
-  @Input() almacenes: AlmacenRegistrado[] = [];
+  @Input() almacenes: AlmacenResponse[] = [];
 
   displayedColumns: string[] = ['nombreAlmacen', 'direccionAlmacen', 'nombreEvento', 'descripcionEvento', 'nombreProvincia', 'estado', 'eliminar'];
 
