@@ -52,4 +52,14 @@ export class ConductorService {
     return this.http.post<ConductorRequestDTO>(`${this.apiUrl}/guardar`, data);
     console.log(data)
   }
+  registrarConductorEnEvento(eventoAlmacenId: number, conductorId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/registrarse/${eventoAlmacenId}/${conductorId}`, null, { headers: this.getAuthHeaders() });
+  }
+  obtenerIdConductorPorUsuario(idUsuario: number): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/conductor/${idUsuario}`, {
+      headers: this.getAuthHeaders(),
+    });
+  }
+
+
 }
