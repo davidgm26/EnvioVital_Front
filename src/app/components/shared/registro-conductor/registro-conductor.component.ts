@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import { ConductorService } from '../../../services/conductor.service';
+import { NavbarFormComponent } from '../../navbar-form/navbar-form.component';
+
 
 @Component({
   selector: 'app-registro-conductor',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NavbarFormComponent],
   templateUrl: './registro-conductor.component.html',
   styleUrls: ['./registro-conductor.component.css'],
   providers: [],
@@ -13,6 +15,7 @@ import { ConductorService } from '../../../services/conductor.service';
 
 export class RegistroConductorComponent implements OnInit{
   registroForm: FormGroup;
+  rol = "CONDUCTOR/A"
 
   constructor(
     private fb: FormBuilder,
@@ -24,12 +27,11 @@ export class RegistroConductorComponent implements OnInit{
       dni: [''],
       direccion: [''],
       telefono: [''],
-      fechaNacimiento: [''], // Este campo debería recibir una fecha en formato string ISO
+      fechaNacimiento: [''],
       email: [''],
       usuario: this.fb.group({
         username: [''],
         password: [''],
-        // Agrega más campos de usuario si es necesario
       }),
     });
   }
@@ -45,6 +47,16 @@ export class RegistroConductorComponent implements OnInit{
       },
       error: (error) => {
         console.error('Error al registrar el conductor:', error);
+      },
+    });
+    this.conductorRegistroService.guardarConductor(formData).subscribe({
+      next: (response) => {
+        console.log('Conductor registrado con éxito:', response);
+        alert('¡Registro exitoso! Se ha enviado un correo de confirmación a ' + formData.email);
+      },
+      error: (error) => {
+        console.error('Error al registrar el conductor:', error);
+        alert('Hubo un error al registrar el conductor. Inténtalo de nuevo.');
       },
     });
   }
