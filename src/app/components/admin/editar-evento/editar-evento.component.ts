@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Evento } from '../../interfaces/evento';
+import { Evento } from '../../../interfaces/evento';
 import { FormGroup, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
-import { ProvinciaService } from '../../services/provincia.service';
-import { Provincia } from '../../interfaces/provincia';
+import { ProvinciaService } from '../../../services/provincia.service';
+import { Provincia } from '../../../interfaces/provincia';
 import { NgFor } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';

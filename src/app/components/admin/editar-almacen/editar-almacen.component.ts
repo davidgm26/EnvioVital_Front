@@ -3,10 +3,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { AlmacenResponse } from '../../interfaces/almacen-response';
+import { AlmacenResponse } from '../../../interfaces/almacen-response';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Provincia } from '../../interfaces/provincia';
-import { ProvinciaService } from '../../services/provincia.service';
+import { Provincia } from '../../../interfaces/provincia';
+import { ProvinciaService } from '../../../services/provincia.service';
 import { NgFor } from '@angular/common';
 
 @Component({

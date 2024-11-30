@@ -1,13 +1,13 @@
 import { NgClass, NgFor } from '@angular/common';
 import { Component,OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { AlmacenService } from '../../services/almacen.service';
+import { AlmacenService } from '../../../services/almacen.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-import { AlmacenResponse } from '../../interfaces/almacen-response';
+import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
+import { AlmacenResponse } from '../../../interfaces/almacen-response';
 import { EditarAlmacenComponent } from '../editar-almacen/editar-almacen.component';
 import { ToastrService } from 'ngx-toastr';
-import { AlmacenRequestDTO } from '../../interfaces/almacen-request-dto';
+import { AlmacenRequestDTO } from '../../../interfaces/almacen-request-dto';
 
 @Component({
   selector: 'app-gestion-almacenes',

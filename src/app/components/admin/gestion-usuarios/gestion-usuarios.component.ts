@@ -1,12 +1,12 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { ConductorService } from '../../services/conductor.service';
-import { ConductorResponse } from '../../interfaces/conductor-response';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ConductorService } from '../../../services/conductor.service';
+import { ConductorResponse } from '../../../interfaces/conductor-response';
+import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { EditarUsuarioComponent } from '../editar-usuario/editar-usuario.component';
-import { ConductorRequestDTO } from '../../interfaces/conductor-request-dto';
+import { ConductorRequestDTO } from '../../../interfaces/conductor-request-dto';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

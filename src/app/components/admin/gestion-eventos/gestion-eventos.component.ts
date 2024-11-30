@@ -1,12 +1,12 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { EventoService } from '../../services/evento.service';
+import { EventoService } from '../../../services/evento.service';
 import { MatIcon } from '@angular/material/icon';
-import { Evento } from '../../interfaces/evento';
+import { Evento } from '../../../interfaces/evento';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
 import { EditarEventoComponent } from '../editar-evento/editar-evento.component';
-import { EventoRequest } from '../../interfaces/evento-request';
+import { EventoRequest } from '../../../interfaces/evento-request';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

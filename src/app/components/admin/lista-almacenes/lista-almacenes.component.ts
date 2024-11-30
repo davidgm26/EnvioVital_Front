@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AlmacenService } from '../../services/almacen.service';
-import { TarjetaAlmacenComponent } from '../tarjeta-almacen/tarjeta-almacen.component';
+import { AlmacenService } from '../../../services/almacen.service';
+import { TarjetaAlmacenComponent } from '../../tarjeta-almacen/tarjeta-almacen.component';
 import { log } from 'node:console';
 import { ToastrService } from 'ngx-toastr';
-import { AlmacenResponse } from '../../interfaces/almacen-response';
+import { AlmacenResponse } from '../../../interfaces/almacen-response';
 
 @Component({
   selector: 'app-lista-almacenes',

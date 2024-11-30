@@ -1,12 +1,20 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ConductorResponse } from '../../interfaces/conductor-response';
-import { ProvinciaService } from '../../services/provincia.service';
-import { Provincia } from '../../interfaces/provincia';
+import { ConductorResponse } from '../../../interfaces/conductor-response';
+import { ProvinciaService } from '../../../services/provincia.service';
+import { Provincia } from '../../../interfaces/provincia';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+
+// const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+// const PHONE_REGEX = /^(?:(?:\+|00)34)?[6-9]\d{8}$/;
+// const DNI_REGEX = /^\d{8}[A-HJ-NP-TV-Z]$/;
+// const NAME_REGEX = /^[a-zA-Z]+$/;
+// const USERNAME_REGEX = /^[a-zA-Z\s-]+$/;
+
+
 
 @Component({
   selector: 'app-editar-usuario',
@@ -27,7 +35,7 @@ export class EditarUsuarioComponent implements OnInit {
     private dialog: MatDialogRef<EditarUsuarioComponent>, 
     private provinciaService: ProvinciaService,
   ) {
-    this.editForm = this.formBuilder.group({
+    this.editForm = this.formBuilder.group({  
       nombre: [conductor.nombre, Validators.required],
       apellidos: [conductor.apellidos, Validators.required],
       email: [conductor.email, Validators.required],
