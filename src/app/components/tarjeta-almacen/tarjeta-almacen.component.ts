@@ -21,4 +21,8 @@ export class TarjetaAlmacenComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.almacen)
   }
+
+
+
+
 }

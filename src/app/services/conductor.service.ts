@@ -60,4 +60,5 @@ export class ConductorService {
   deleteConductor(id: number): Observable<void> {
     return this.http.delete<void>(`${environment.apiUrl}/conductores/eliminar/${id}`, {headers: this.getAuthHeaders()});
   }
+
 }
