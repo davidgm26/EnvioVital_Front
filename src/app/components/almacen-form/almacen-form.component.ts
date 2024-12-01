@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AlmacenService } from '../../services/almacen.service';
+import { ProvinciaService } from '../../services/provincia.service';
 
 @Component({
   selector: 'app-almacen-form',
@@ -23,7 +24,8 @@ export class AlmacenFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private almacenService: AlmacenService
+    private almacenService: AlmacenService,
+    private provinciaService: ProvinciaService
   ) {
     this.formulario = this.crearFormulario();
   }
@@ -73,7 +75,7 @@ export class AlmacenFormComponent implements OnInit {
   }
 
   private cargarProvincias(): void {
-    this.almacenService.obtenerProvincias().subscribe({
+    this.provinciaService.obtenerProvincias().subscribe({
       next: (provincias) => {
         this.provincias = provincias;
         this.cargarDatosAlmacen();

@@ -5,6 +5,6 @@ export interface AlmacenRegistrado {
   direccion:   string;
   email:       string;
   esActivo:    boolean;
-  provincia:   string;
+  provincia: number;
   idUsuario:   number;
 }

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import { ConductorRegistroService } from '../../../services/conductor-registro.service';
+import { ConductorService } from '../../../services/conductor.service';
+import { NavbarFormComponent } from '../navbar-form/navbar-form.component';
+
 
 @Component({
   selector: 'app-registro-conductor',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NavbarFormComponent],
   templateUrl: './registro-conductor.component.html',
   styleUrls: ['./registro-conductor.component.css'],
   providers: [],
@@ -13,10 +15,11 @@ import { ConductorRegistroService } from '../../../services/conductor-registro.s
 
 export class RegistroConductorComponent implements OnInit{
   registroForm: FormGroup;
+  rol = "CONDUCTOR/A"
 
   constructor(
     private fb: FormBuilder,
-    private conductorRegistroService: ConductorRegistroService
+    private conductorRegistroService: ConductorService
   ) {
     this.registroForm = this.fb.group({
       nombre: [''],
@@ -24,12 +27,11 @@ export class RegistroConductorComponent implements OnInit{
       dni: [''],
       direccion: [''],
       telefono: [''],
-      fechaNacimiento: [''], // Este campo debería recibir una fecha en formato string ISO
+      fechaNacimiento: [''],
       email: [''],
       usuario: this.fb.group({
         username: [''],
         password: [''],
-        // Agrega más campos de usuario si es necesario
       }),
     });
   }

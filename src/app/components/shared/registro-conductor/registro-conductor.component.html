@@ -1,77 +1,54 @@
-<header class="w-full bg-white py-4 shadow-md fixed top-0 left-0 flex justify-center items-center px-6">
-  <div class="container flex items-center justify-between max-w-5xl w-full">
-    <img src="assets/logo_ev_1-removebg-preview.png" alt="Logo" class="h-12 absolute left-4 sm:left-10">
-    <h2 class="text-3xl font-semibold text-[#009FB7] text-center flex-grow">CONDUCTOR/A</h2>
-    <div class="w-10"></div>
+<div class="min-h-screen relative bg-gray-100">
+  <app-navbar-form [rol] = rol></app-navbar-form>
+  <div class="m-auto mt-10 w-full max-w-3xl bg-[#009FB7] p-6 sm:p-8 rounded-lg shadow-lg text-white space-y-6 z-20">
+    <form action="" [formGroup]="registroForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="relative">
+          <label for="nombre" class="block text-sm font-medium text-white">Nombre:</label>
+          <input id="nombre" formControlName="nombre" type="text" placeholder="Nombre" class="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+        </div>
+        <div class="relative">
+          <label for="apellidos">Apellidos:</label>
+          <input id="apellidos" formControlName="apellidos" type="text" placeholder="Nombre" class="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+        </div>
+        <div class="relative">
+          <label for="dni" class="block text-sm font-medium text-white">Dni:</label>
+          <input id="dni" formControlName="dni" type="text" placeholder="Nombre" class="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+        </div>
+        <div class="relative">
+          <label for="direccion" class="block text-sm font-medium text-white">Direccion</label>
+          <input id="direccion" formControlName="direccion" type="text" placeholder="Introduzca la direccion" class="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-white">Email</label>
+          <input id="email" formControlName="email" type="email" placeholder="E-mail" class="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+        </div>
+        <div class="relative">
+          <label for="telefono" class="block text-sm font-medium text-white">Telefono:</label>
+          <input id="telefono" formControlName="telefono" type="text" placeholder="Nombre" class="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+        </div>
+      </div>
+      <div class="relative">
+        <label for="fechaNacimiento" class="block text-sm font-medium text-white">Fecha de Nacimiento:</label>
+        <input id="fechaNacimiento" formControlName="fechaNacimiento" type="date" placeholder="Fecha de Nacimiento" class="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+      </div>
+      <fieldset formGroupName="usuario">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
+          <div class="relative">
+            <label for="username" class="block text-sm font-medium text-white">Nombre de usuario</label>
+            <input id="username" formControlName="username" type="text" placeholder="Nombre de usuario" class="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+          </div>
+          <div class="relative">
+            <label for="password" class="block text-sm font-medium text-white">Contraseña</label>
+            <input id="password" formControlName="password" type="password" placeholder="Contraseña" class="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+          </div>
+        </div>
+      </fieldset>
+      <div class="flex justify-center">
+        <button type="submit" class="bg-yellow-500 text-white mt-5 font-bold py-2 px-6 sm:px-8 rounded-full hover:bg-yellow-600 transition">
+          Registrar
+        </button>
+      </div>
+    </form>
   </div>
-</header>
-
-<div class="w-full max-w-3xl bg-[#009FB7] p-6 sm:p-8 rounded-lg shadow-lg mt-32 mx-auto text-white space-y-6 relative z-10">
-  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      <div class="relative">
-        <input id="nombre" formControlName="nombre" type="text" placeholder="Nombre" class="input-field" />
-      </div>
-      <div class="relative">
-        <input id="apellidos" formControlName="apellidos" type="text" placeholder="Apellidos" class="input-field" />
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      <div class="relative">
-        <input id="dni" formControlName="dni" type="text" placeholder="DNI" class="input-field" />
-      </div>
-      <div class="relative">
-        <input id="direccion" formControlName="direccion" type="text" placeholder="Dirección" class="input-field" />
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      <div class="relative">
-        <input id="telefono" formControlName="telefono" type="tel" placeholder="Teléfono" class="input-field" />
-      </div>
-      <div class="relative">
-        <input id="fechaNacimiento" formControlName="fechaNacimiento" type="date" placeholder="Fecha de Nacimiento" class="input-field" />
-      </div>
-    </div>
-
-    <div class="relative">
-      <input id="email" formControlName="email" type="email" placeholder="E-mail" class="input-field" />
-    </div>
-
-    <fieldset formGroupName="usuario">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
-        <div class="relative">
-          <input id="username" formControlName="username" type="text" placeholder="Nombre de usuario" class="input-field" />
-        </div>
-        <div class="relative">
-          <input id="password" formControlName="password" type="password" placeholder="Contraseña" class="input-field" />
-        </div>
-      </div>
-    </fieldset>
-
-    <div class="flex justify-center">
-      <button type="submit" class="bg-yellow-500 text-white mt-5 font-bold py-2 px-6 sm:px-8 rounded-full hover:bg-yellow-600 transition">
-        Registrar
-      </button>
-    </div>
-  </form>
 </div>
-
-<style>
-  .input-field {
-    width: 100%;
-    padding: 0.75rem;
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.6);
-    color: white;
-    outline: none;
-  }
-  .input-field::placeholder {
-    color: rgba(255, 255, 255, 0.8);
-  }
-  .input-field:focus {
-    border-bottom-color: #ffffff;
-  }
-</style>
