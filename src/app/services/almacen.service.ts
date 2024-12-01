@@ -54,4 +54,11 @@ export class AlmacenService {
   obtenerListaConductores(idAlmacen: number): Observable<any[]> {
     return this.http.get<any[]>(`${environment.apiUrl}/almacenes/listaConductores/${idAlmacen}`, { headers: this.getAuthHeaders() });
   }
+  registrarseEnEvento(idEvento: number, idAlmacen: number): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/almacenes/registrarse/${idEvento}/${idAlmacen}`, {}, { headers: this.getAuthHeaders() });
+  }
+
+  estaRegistradoEnEvento(idEvento: number, idAlmacen: number): Observable<boolean> {
+    return this.http.get<boolean>(`${environment.apiUrl}/almacenes/estaRegistrado/${idEvento}/${idAlmacen}`, { headers: this.getAuthHeaders() });
+  }
 }

@@ -36,7 +36,9 @@ export class NavbarComponent implements OnInit {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       this.authService.clearLocalStorage();
       this.logged = false;
-      this.router.navigate(['/main']);
+      this.router.navigate(['/main']).then(() => {
+        window.location.reload();
+      });
     }
   }
 
