@@ -6,12 +6,13 @@ import { AlmacenService } from '../../services/almacen.service';
 import { AlmacenFormComponent } from "../almacen-form/almacen-form.component";
 import { CambiarPassComponent } from "../cambiar-pass/cambiar-pass.component";
 import { NgClass, NgIf } from "@angular/common";
+import { ListaConductoresComponent } from "../lista-conductores/lista-conductores.component";
 
 @Component({
   selector: 'app-almacen-view',
   templateUrl: './almacen-view.component.html',
   standalone: true,
-  imports: [ListaEventosAlmacenComponent, AlmacenFormComponent, CambiarPassComponent, NgClass, NgIf],
+  imports: [ListaEventosAlmacenComponent, AlmacenFormComponent, CambiarPassComponent, NgClass, NgIf, ListaConductoresComponent],
   styleUrls: ['./almacen-view.component.css']
 })
 export class AlmacenViewComponent implements OnInit {
@@ -21,6 +22,7 @@ export class AlmacenViewComponent implements OnInit {
   userId!: number;
   activeTab: string = 'details';
   eventos: Evento[] = [];
+  conductores: any[] = [];
   provinciaNombre: string = '';
   @Output() reloadDataEvent = new EventEmitter<void>();
 
@@ -50,6 +52,7 @@ export class AlmacenViewComponent implements OnInit {
         this.usuarioUsername = almacen.nombre;
         this.obtenerProvinciaNombre(almacen.idProvincia);
         this.obtenerListaEventos();
+        this.obtenerListaConductores();
       },
       error: (error) => {
         console.error('Error al cargar los datos del almacén:', error);
@@ -76,6 +79,15 @@ export class AlmacenViewComponent implements OnInit {
     });
   }
 
+  private obtenerListaConductores(): void {
+    this.almacenService.obtenerListaConductores(this.almacenId).subscribe({
+      next: (conductores) => {
+        this.conductores = conductores;
+      },
+      error: (error) => console.error('Error al obtener la lista de conductores:', error)
+    });
+  }
+
   private redirigirAInicio(): void {
     console.error('No userId provided');
     this.router.navigate(['/']);
@@ -92,6 +104,7 @@ export class AlmacenViewComponent implements OnInit {
   reloadData(): void {
     this.cargarDatosAlmacen();
     this.obtenerListaEventos();
+    this.obtenerListaConductores();
   }
 
   handleSave(): void {

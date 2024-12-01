@@ -1,0 +1,67 @@
+<div class="border-t border-gray-300 pt-8">
+  <div class="overflow-x-auto bg-teal-500 p-4 rounded-lg shadow-md">
+    <table mat-table [dataSource]="conductores" class="min-w-full bg-white rounded-lg">
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Nombre</th>
+        <td mat-cell *matCellDef="let conductor" class="py-2 px-4">{{ conductor.nombre }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="apellidos">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Apellidos</th>
+        <td mat-cell *matCellDef="let conductor" class="py-2 px-4">{{ conductor.apellidos }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="telefono">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Teléfono</th>
+        <td mat-cell *matCellDef="let conductor" class="py-2 px-4">{{ conductor.telefono }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Email</th>
+        <td mat-cell *matCellDef="let conductor" class="py-2 px-4">{{ conductor.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="vehiculos">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Vehículos</th>
+        <td mat-cell *matCellDef="let conductor" class="py-2 px-4">
+          <button mat-icon-button color="primary" (click)="openVehiculosPopup(conductor.id)">
+            <mat-icon>directions_car</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>
+
+<ng-template #vehiculosTemplate let-vehiculos="vehiculos">
+  <div *ngIf="vehiculos.length === 0" class="text-center py-4">
+    No hay Vehículos
+  </div>
+  <table mat-table *ngIf="vehiculos.length > 0" [dataSource]="vehiculos" class="min-w-full bg-white rounded-lg">
+    <ng-container matColumnDef="marca">
+      <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Marca</th>
+      <td mat-cell *matCellDef="let vehiculo" class="py-2 px-4">{{ vehiculo.marca }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="modelo">
+      <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Modelo</th>
+      <td mat-cell *matCellDef="let vehiculo" class="py-2 px-4">{{ vehiculo.modelo }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="matricula">
+      <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Matrícula</th>
+      <td mat-cell *matCellDef="let vehiculo" class="py-2 px-4">{{ vehiculo.matricula }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="tipo">
+      <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Tipo</th>
+      <td mat-cell *matCellDef="let vehiculo" class="py-2 px-4">{{ vehiculo.tipoNombre }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['marca', 'modelo', 'matricula', 'tipo']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['marca', 'modelo', 'matricula', 'tipo'];"></tr>
+  </table>
+</ng-template>
