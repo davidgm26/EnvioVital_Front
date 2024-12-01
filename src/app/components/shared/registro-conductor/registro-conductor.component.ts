@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import { ConductorService } from '../../../services/conductor.service';
-import { NavbarFormComponent } from '../../navbar-form/navbar-form.component';
+import { NavbarFormComponent } from '../navbar-form/navbar-form.component';
 
 
 @Component({
@@ -47,16 +47,6 @@ export class RegistroConductorComponent implements OnInit{
       },
       error: (error) => {
         console.error('Error al registrar el conductor:', error);
-      },
-    });
-    this.conductorRegistroService.guardarConductor(formData).subscribe({
-      next: (response) => {
-        console.log('Conductor registrado con éxito:', response);
-        alert('¡Registro exitoso! Se ha enviado un correo de confirmación a ' + formData.email);
-      },
-      error: (error) => {
-        console.error('Error al registrar el conductor:', error);
-        alert('Hubo un error al registrar el conductor. Inténtalo de nuevo.');
       },
     });
   }

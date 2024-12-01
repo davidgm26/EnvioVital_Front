@@ -46,7 +46,7 @@ export class ConductorService {
   }
 
   guardarConductor(data: ConductorRequestDTO): Observable<any> {
-    return this.http.post<ConductorRequestDTO>(`${environment.apiUrl}/guardar`, data);
+    return this.http.post<ConductorRequestDTO>(`${environment.apiUrl}/conductores/guardar`, data);
   }
 
   obtenerConductores(): Observable<ConductorResponse[]> {

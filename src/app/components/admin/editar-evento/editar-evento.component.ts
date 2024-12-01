@@ -48,13 +48,13 @@ export class EditarEventoComponent implements OnInit {
   }
 
   cargarProvincias() {
-    this.provinciaService.obtenerProvincias().subscribe(
-      resp => {
+    this.provinciaService.obtenerProvincias().subscribe({
+      next: (resp) => {
         this.provincias = resp;
       },
-      error => {
+      error: (error) => {
         console.error(error);
-      }
+      }}
     );
   }
 

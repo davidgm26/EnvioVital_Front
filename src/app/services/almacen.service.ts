@@ -27,8 +27,8 @@ export class AlmacenService {
     return this.http.get(`${environment.apiUrl}/almacenes/${id}`, { headers: this.getAuthHeaders() });
   }
 
-  obtenerAlmacenPorUsuario(idUsuario: number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/almacenes/usuario/${idUsuario}`, { headers: this.getAuthHeaders() });
+  obtenerAlmacenPorUsuario(idUsuario: number): Observable<AlmacenResponse> {
+    return this.http.get<AlmacenResponse>(`${environment.apiUrl}/almacenes/usuario/${idUsuario}`, { headers: this.getAuthHeaders() });
   }
 
   actualizarAlmacen(id: number, datos: AlmacenRequestDTO): Observable<AlmacenResponse> {
