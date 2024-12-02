@@ -37,6 +37,7 @@ export class ListaAlmacenesComponent implements OnInit {
       (almacenes) => {
         almacenes.forEach((almacen => {
           this.almacenes.push(almacen.almacen);
+          this.eventoId = almacen.idEvento;
           console.log(this.almacenes);
         }));
       },

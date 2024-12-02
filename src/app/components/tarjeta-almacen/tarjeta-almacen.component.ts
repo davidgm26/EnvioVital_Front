@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class TarjetaAlmacenComponent implements OnInit {
   @Input() almacen!: AlmacenRegistrado;
+  @Input() eventoId!: number;
   mostrarBoton: boolean = false;
   conductorId: number | null = null;
 
