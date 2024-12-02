@@ -68,6 +68,11 @@
       <div *ngIf="activeTab === 'events'">
         <app-lista-eventos-almacen [eventos]="eventos"></app-lista-eventos-almacen>
       </div>
+
+      <div *ngIf="activeTab === 'conductores'">
+        <app-lista-conductores [conductores]="conductores"></app-lista-conductores>
+      </div>
+      
     </div>
   </div>
 </div>

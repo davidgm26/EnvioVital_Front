@@ -33,7 +33,7 @@ export class VehiculoFormComponent implements OnInit {
     return this.fb.group({
       marca: ['', Validators.required],
       modelo: ['', Validators.required],
-      matricula: ['', [Validators.required, Validators.pattern(/^[A-Z]{3}\d{3}[A-Z]{1}$/)]],
+      matricula: ['', [Validators.required, Validators.pattern(/^\d{4}[BCDFGHJKLMNPQRSTVWXYZ]{3}$/)]],
       idConductor: ['', Validators.required],
       idTipoVehiculo: ['', Validators.required]
     });

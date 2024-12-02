@@ -51,6 +51,17 @@ export class AlmacenService {
     return this.http.get<any>(`${environment.apiUrl}/almacenes/listaEventos/${id}`, { headers: this.getAuthHeaders() });
   }
 
+  obtenerListaConductores(idAlmacen: number): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiUrl}/almacenes/listaConductores/${idAlmacen}`, { headers: this.getAuthHeaders() });
+  }
+  registrarseEnEvento(idEvento: number, idAlmacen: number): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/almacenes/registrarse/${idEvento}/${idAlmacen}`, {}, { headers: this.getAuthHeaders() });
+  }
+
+  estaRegistradoEnEvento(idEvento: number, idAlmacen: number): Observable<boolean> {
+    return this.http.get<boolean>(`${environment.apiUrl}/almacenes/estaRegistrado/${idEvento}/${idAlmacen}`, { headers: this.getAuthHeaders() });
+  }
+  
   borrarAlmacen(id: number): Observable<any> {
     return this.http.delete(`${environment.apiUrl}/almacenes/eliminar/${id}`, { headers: this.getAuthHeaders() });
   }

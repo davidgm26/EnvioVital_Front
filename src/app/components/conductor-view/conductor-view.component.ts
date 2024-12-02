@@ -6,13 +6,14 @@ import { ConductorFormComponent } from "../conductor-form/conductor-form.compone
 import { CambiarPassComponent } from "../cambiar-pass/cambiar-pass.component";
 import { DatePipe, NgClass, NgIf } from "@angular/common";
 import { VehiculoFormComponent } from "../vehiculo-form/vehiculo-form.component";
+import { ListaVehiculosComponent } from "../lista-vehiculos/lista-vehiculos.component";
 import { AlmacenResponse } from '../../interfaces/almacen-response';
 
 @Component({
   selector: 'app-conductor-view',
   templateUrl: './conductor-view.component.html',
   standalone: true,
-  imports: [ListaAlmacenesRegistradosComponent, ConductorFormComponent, CambiarPassComponent, NgClass, NgIf, DatePipe, VehiculoFormComponent],
+  imports: [ListaAlmacenesRegistradosComponent, ConductorFormComponent, CambiarPassComponent, NgClass, NgIf, DatePipe, VehiculoFormComponent, ListaVehiculosComponent],
   styleUrls: ['./conductor-view.component.css']
 })
 export class ConductorViewComponent implements OnInit {
@@ -21,6 +22,7 @@ export class ConductorViewComponent implements OnInit {
   conductorId!: number;
   userId!: number;
   activeTab: string = 'details';
+  vehiculos: any[] = [];
   almacenes: AlmacenResponse[] = [];
   @Output() reloadDataEvent = new EventEmitter<void>();
 
@@ -49,6 +51,7 @@ export class ConductorViewComponent implements OnInit {
         this.conductorId = conductor.id;
         this.usuarioUsername = conductor.nombre;
         this.obtenerListaAlmacenes();
+        this.obtenerListaVehiculos();
       },
       error: (error) => {
         console.error('Error al cargar los datos del conductor:', error);
@@ -62,6 +65,15 @@ export class ConductorViewComponent implements OnInit {
         this.almacenes = almacenes;
       },
       error: (error) => console.error('Error al obtener la lista de almacenes:', error)
+    });
+  }
+
+  private obtenerListaVehiculos(): void {
+    this.conductorService.obtenerListaVehiculos(this.conductorId).subscribe({
+      next: (vehiculos) => {
+        this.vehiculos = vehiculos;
+      },
+      error: (error) => console.error('Error al obtener la lista de vehículos:', error)
     });
   }
 
@@ -81,6 +93,7 @@ export class ConductorViewComponent implements OnInit {
   reloadData(): void {
     this.cargarDatosConductor();
     this.obtenerListaAlmacenes();
+    this.obtenerListaVehiculos();
   }
 
   handleSave(): void {

@@ -1,3 +1,4 @@
+<!-- conductor-view.component.html -->
 <div class="max-w-5xl mx-auto mt-10 space-y-8">
   <div class="flex flex-col md:flex-row items-start md:items-center bg-white p-6 rounded-lg shadow-xl">
     <div class="flex flex-col items-center w-full md:w-1/4 mb-4 md:mb-0 md:mr-8">
@@ -20,6 +21,9 @@
         </li>
         <li class="mr-6 mb-2 md:mb-0">
           <button (click)="activeTab = 'almacenes'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'almacenes'}" class="text-blue-600 hover:text-blue-800 font-semibold">Almacenes</button>
+        </li>
+        <li class="mr-6 mb-2 md:mb-0">
+          <button (click)="activeTab = 'vehiculos'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'vehiculos'}" class="text-blue-600 hover:text-blue-800 font-semibold">Vehículos</button>
         </li>
         <li class="mb-2 md:mb-0">
           <button (click)="activeTab = 'addVehicle'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'addVehicle'}" class="text-blue-600 hover:text-blue-800 font-semibold">Añadir Vehículo</button>
@@ -66,6 +70,10 @@
 
         <div *ngIf="activeTab === 'almacenes'">
           <app-lista-almacenes-registrados [almacenes]="almacenes"></app-lista-almacenes-registrados>
+        </div>
+
+        <div *ngIf="activeTab === 'vehiculos'">
+          <app-lista-vehiculos [vehiculos]="vehiculos"></app-lista-vehiculos>
         </div>
 
         <div *ngIf="activeTab === 'addVehicle'">
