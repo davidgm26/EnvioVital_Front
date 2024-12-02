@@ -1,3 +1,4 @@
+import { Usuario } from "./usuario";
 
 export interface AlmacenRequestDTO {
   nombre: string;
@@ -5,8 +6,5 @@ export interface AlmacenRequestDTO {
   email: string;
   idProvincia: number;
   descripcion: string;
-  usuario: {
-     username: string;
-     password: string;
-  };
+  usuario: Usuario;
 }

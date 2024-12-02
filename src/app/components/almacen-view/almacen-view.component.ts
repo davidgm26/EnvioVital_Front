@@ -7,6 +7,7 @@ import { AlmacenFormComponent } from "../almacen-form/almacen-form.component";
 import { CambiarPassComponent } from "../cambiar-pass/cambiar-pass.component";
 import { NgClass, NgIf } from "@angular/common";
 import { ListaConductoresComponent } from "../lista-conductores/lista-conductores.component";
+import { ProvinciaService } from '../../services/provincia.service';
 
 @Component({
   selector: 'app-almacen-view',
@@ -29,7 +30,8 @@ export class AlmacenViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private almacenService: AlmacenService
+    private almacenService: AlmacenService,
+    private provinciaService: ProvinciaService
   ) {}
 
   ngOnInit(): void {
@@ -43,14 +45,13 @@ export class AlmacenViewComponent implements OnInit {
     }
   }
 
-  private cargarDatosAlmacen(): void {
+   cargarDatosAlmacen(): void {
     this.almacenService.obtenerAlmacenPorUsuario(this.userId).subscribe({
       next: (almacen) => {
         console.log('Datos del almacén recibidos:', almacen);
         this.almacen = almacen;
         this.almacenId = almacen.id;
         this.usuarioUsername = almacen.nombre;
-        this.obtenerProvinciaNombre(almacen.idProvincia);
         this.obtenerListaEventos();
         this.obtenerListaConductores();
       },
@@ -60,8 +61,9 @@ export class AlmacenViewComponent implements OnInit {
     });
   }
 
-  private obtenerProvinciaNombre(idProvincia: number): void {
-    this.almacenService.obtenerProvincias().subscribe({
+  
+   obtenerProvinciaNombre(idProvincia: number): void {
+    this.provinciaService.obtenerProvincias().subscribe({
       next: (provincias) => {
         const provincia = provincias.find(p => p.id === idProvincia);
         this.provinciaNombre = provincia ? provincia.nombre : 'Desconocida';
@@ -70,7 +72,8 @@ export class AlmacenViewComponent implements OnInit {
     });
   }
 
-  private obtenerListaEventos(): void {
+  
+   obtenerListaEventos(): void {
     this.almacenService.obtenerListaEventos(this.almacenId).subscribe({
       next: (eventos) => {
         this.eventos = eventos;

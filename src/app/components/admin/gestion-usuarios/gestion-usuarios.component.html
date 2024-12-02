@@ -1,0 +1,38 @@
+<div class="max-w-4xl mx-auto my-8 p-4 bg-white shadow-lg rounded-lg">
+    <table class="min-w-full divide-y divide-gray-300 border border-gray-300 rounded-lg overflow-hidden">
+        <thead class="bg-gradient-to-r from-gray-100 to-gray-200">
+            <tr>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Nombre</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Provincia</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Estado</th>
+                <th class="px-6 py-3"></th>
+                <th class="px-6 py-3"></th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let conductor of listaConductores" class="hover:bg-gray-50 transition duration-150 ease-in-out">
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{conductor.nombre}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{conductor.apellidos}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span 
+                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold cursor-pointer transition duration-150 ease-in-out" 
+                        [ngClass]="{'bg-green-100 text-green-800': conductor.activo, 'bg-red-100 text-red-800': !conductor.activo}" 
+                        (click)="cambiarEstado(conductor.id)"
+                    >
+                        {{ conductor.activo ? 'Activo' : 'Inactivo' }}
+                    </span>
+                </td>
+                <td>
+                    <button class="text-blue-600 hover:text-blue-800 focus:outline-none transition duration-150 ease-in-out">
+                        <mat-icon aria-hidden="false" aria-label="edit" (click)="abrirEditar(conductor)">edit</mat-icon>
+                    </button> 
+                </td>
+                <td>
+                    <button class="text-red-600 hover:text-red-800 focus:outline-none transition duration-150 ease-in-out" (click)="abrirBorrado(conductor.id)">
+                        <mat-icon aria-hidden="false" aria-label="delete">delete</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

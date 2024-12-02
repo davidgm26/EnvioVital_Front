@@ -1,3 +1,5 @@
+import { Usuario } from "./usuario";
+
 export interface ConductorRequestDTO {
   nombre: string;
   apellidos: string;
@@ -6,7 +8,5 @@ export interface ConductorRequestDTO {
   telefono: string;
   fechaNacimiento: string; 
   email: string;
-  usuario: { username: string;
-    password: string;
-  };
+  usuario: Usuario;
 }

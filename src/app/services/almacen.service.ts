@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../env/environment';
 import { AlmacenResponse } from '../interfaces/almacen-response';
 import { EventoAlmacenResponse } from '../interfaces/evento-almacen-response';
+import { AlmacenRequestDTO } from '../interfaces/almacen-request-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -18,25 +19,24 @@ export class AlmacenService {
       'Authorization': `Bearer ${token}`
     });
   }
+  obtenerTodosLosAlmacenes(): Observable<AlmacenResponse[]>{
+    return this.http.get<AlmacenResponse[]>(`${environment.apiUrl}/almacenes/lista`);
+  }
 
   obtenerAlmacenPorId(id: number): Observable<any> {
     return this.http.get(`${environment.apiUrl}/almacenes/${id}`, { headers: this.getAuthHeaders() });
   }
 
-  obtenerAlmacenPorUsuario(idUsuario: number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/almacenes/usuario/${idUsuario}`, { headers: this.getAuthHeaders() });
+  obtenerAlmacenPorUsuario(idUsuario: number): Observable<AlmacenResponse> {
+    return this.http.get<AlmacenResponse>(`${environment.apiUrl}/almacenes/usuario/${idUsuario}`, { headers: this.getAuthHeaders() });
   }
 
-  actualizarAlmacen(id: number, datos: any): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/almacenes/editar/${id}`, datos, { headers: this.getAuthHeaders() });
+  actualizarAlmacen(id: number, datos: AlmacenRequestDTO): Observable<AlmacenResponse> {
+    return this.http.put<AlmacenResponse>(`${environment.apiUrl}/almacenes/editar/${id}`, datos, { headers: this.getAuthHeaders() });
   }
 
   guardarAlmacen(data: AlmacenResponse): Observable<any> {
     return this.http.post<AlmacenResponse>(`${environment.apiUrl}/almacenes/guardar`, data,);
-  }
-
-  obtenerProvincias(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/provincias/lista`);
   }
 
   obtenerUsuarioPorId(id: number): Observable<any> {
@@ -60,5 +60,13 @@ export class AlmacenService {
 
   estaRegistradoEnEvento(idEvento: number, idAlmacen: number): Observable<boolean> {
     return this.http.get<boolean>(`${environment.apiUrl}/almacenes/estaRegistrado/${idEvento}/${idAlmacen}`, { headers: this.getAuthHeaders() });
+  }
+  
+  borrarAlmacen(id: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/almacenes/eliminar/${id}`, { headers: this.getAuthHeaders() });
+  }
+
+  changeAlmacenState(id: number): Observable<AlmacenResponse> {
+    return this.http.put<AlmacenResponse>(`${environment.apiUrl}/almacenes/estado/${id}`, {}, { headers: this.getAuthHeaders() });
   }
 }

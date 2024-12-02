@@ -1,5 +1,7 @@
 <div class="max-w-5xl mx-auto mt-10 space-y-8">
+  <!-- Contenedor Principal con Icono a la Izquierda y NavTabs a la Derecha -->
   <div class="flex flex-col md:flex-row items-start md:items-center bg-white p-6 rounded-lg shadow-xl">
+    <!-- Parte del Icono y Nombre (Izquierda) -->
     <div class="flex flex-col items-center w-full md:w-1/4 mb-4 md:mb-0 md:mr-8">
       <div class="w-32 h-32 bg-blue-500 text-white rounded-full flex items-center justify-center mb-4">
         <span class="material-icons text-4xl">store</span>
@@ -7,7 +9,9 @@
       <p class="text-xl font-semibold text-gray-800">{{ usuarioUsername }}</p>
     </div>
 
+    <!-- Parte del NavTab y Contenido (Derecha) -->
     <div class="w-full md:w-3/4">
+      <!-- Nav Tabs -->
       <ul class="flex flex-wrap border-b-2 pb-2 mb-6">
         <li class="mr-6 mb-2 md:mb-0">
           <button (click)="activeTab = 'details'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'details'}" class="text-blue-600 hover:text-blue-800 font-semibold">Detalles</button>
@@ -18,60 +22,57 @@
         <li class="mr-6 mb-2 md:mb-0">
           <button (click)="activeTab = 'changePass'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'changePass'}" class="text-blue-600 hover:text-blue-800 font-semibold">Cambiar Contraseña</button>
         </li>
-        <li class="mr-6 mb-2 md:mb-0">
+        <li class="mb-2 md:mb-0">
           <button (click)="activeTab = 'events'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'events'}" class="text-blue-600 hover:text-blue-800 font-semibold">Eventos</button>
-        </li>
-        <li class="mr-6 mb-2 md:mb-0">
-          <button (click)="activeTab = 'conductores'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'conductores'}" class="text-blue-600 hover:text-blue-800 font-semibold">Conductores</button>
         </li>
       </ul>
 
-      <div class="min-h-[40vh]">
-        <div *ngIf="activeTab === 'details'" class="p-6 bg-gradient-to-r from-teal-400 to-teal-600 text-white rounded-lg shadow-xl">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <p><strong>Nombre</strong></p>
-              <p>{{ almacen.nombre }}</p>
-            </div>
-            <div>
-              <p><strong>Descripción</strong></p>
-              <p>{{ almacen.descripcion }}</p>
-            </div>
-            <div>
-              <p><strong>Dirección</strong></p>
-              <p>{{ almacen.direccion }}</p>
-            </div>
-            <div>
-              <p><strong>Email</strong></p>
-              <p>{{ almacen.email }}</p>
-            </div>
-            <div>
-              <p><strong>Provincia</strong></p>
-              <p>{{ provinciaNombre }}</p>
-            </div>
-            <div>
-              <p><strong>Estado Activo</strong></p>
-              <p>{{ almacen.esActivo ? 'Sí' : 'No' }}</p>
-            </div>
+      <!-- Tab Content -->
+      <div *ngIf="activeTab === 'details'" class="p-6 bg-gradient-to-r from-teal-400 to-teal-600 text-white rounded-lg shadow-xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <p><strong>Nombre</strong></p>
+            <p>{{ almacen.nombre }}</p>
+          </div>
+          <div>
+            <p><strong>Descripción</strong></p>
+            <p>{{ almacen.descripcion }}</p>
+          </div>
+          <div>
+            <p><strong>Dirección</strong></p>
+            <p>{{ almacen.direccion }}</p>
+          </div>
+          <div>
+            <p><strong>Email</strong></p>
+            <p>{{ almacen.email }}</p>
+          </div>
+          <div>
+            <p><strong>Provincia</strong></p>
+            <p>{{ almacen.provincia }}</p>
+          </div>
+          <div>
+            <p><strong>Estado Activo</strong></p>
+            <p>{{ almacen.esActivo ? 'Sí' : 'No' }}</p>
           </div>
         </div>
-
-        <div *ngIf="activeTab === 'edit'">
-          <app-almacen-form (onSave)="handleSave()"></app-almacen-form>
-        </div>
-
-        <div *ngIf="activeTab === 'changePass'">
-          <app-cambiar-pass [usuarioId]="userId"></app-cambiar-pass>
-        </div>
-
-        <div *ngIf="activeTab === 'events'">
-          <app-lista-eventos-almacen [eventos]="eventos"></app-lista-eventos-almacen>
-        </div>
-
-        <div *ngIf="activeTab === 'conductores'">
-          <app-lista-conductores [conductores]="conductores"></app-lista-conductores>
-        </div>
       </div>
+
+      <div *ngIf="activeTab === 'edit'">
+        <app-almacen-form (onSave)="handleSave()"></app-almacen-form>
+      </div>
+
+      <div *ngIf="activeTab === 'changePass'">
+        <app-cambiar-pass [usuarioId]="userId"></app-cambiar-pass>
+      </div>
+
+      <div *ngIf="activeTab === 'events'">
+        <app-lista-eventos-almacen [eventos]="eventos"></app-lista-eventos-almacen>
+      </div>
+
+      <div *ngIf="activeTab === 'conductores'">
+        <app-lista-conductores [conductores]="conductores"></app-lista-conductores>
+      </div>
+      
     </div>
   </div>
 </div>

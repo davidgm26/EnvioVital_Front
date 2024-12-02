@@ -7,12 +7,13 @@ import { environment } from '../../env/environment';
   providedIn: 'root'
 })
 export class VehiculoService {
-  private apiUrl = `${environment.apiUrl}/vehiculos`;
-  private tiposVehiculoUrl = `${environment.apiUrl}/tiposVehiculo/lista`;
+
 
   constructor(private http: HttpClient) { }
 
   obtenerTiposVehiculo(): Observable<any[]> {
-    return this.http.get<any[]>(this.tiposVehiculoUrl);
+    return this.http.get<any[]>(`${environment.apiUrl}/tiposVehiculo/lista`);
   }
+
+
 }

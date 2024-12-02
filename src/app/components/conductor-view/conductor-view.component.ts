@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlmacenRegistrado } from "../../interfaces/almacen-registrado";
 import { ListaAlmacenesRegistradosComponent } from "../lista-almacenes-registrados/lista-almacenes-registrados.component";
 import { ConductorService } from '../../services/conductor.service';
 import { ConductorFormComponent } from "../conductor-form/conductor-form.component";
@@ -8,6 +7,7 @@ import { CambiarPassComponent } from "../cambiar-pass/cambiar-pass.component";
 import { DatePipe, NgClass, NgIf } from "@angular/common";
 import { VehiculoFormComponent } from "../vehiculo-form/vehiculo-form.component";
 import { ListaVehiculosComponent } from "../lista-vehiculos/lista-vehiculos.component";
+import { AlmacenResponse } from '../../interfaces/almacen-response';
 
 @Component({
   selector: 'app-conductor-view',
@@ -22,8 +22,8 @@ export class ConductorViewComponent implements OnInit {
   conductorId!: number;
   userId!: number;
   activeTab: string = 'details';
-  almacenes: AlmacenRegistrado[] = [];
   vehiculos: any[] = [];
+  almacenes: AlmacenResponse[] = [];
   @Output() reloadDataEvent = new EventEmitter<void>();
 
   constructor(

@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AlmacenRegistrado } from '../interfaces/almacen-registrado';
 import { environment } from '../../env/environment';
+import { ConductorResponse } from '../interfaces/conductor-response';
+import { ConductorRequestDTO } from '../interfaces/conductor-request-dto';
+import { AlmacenResponse } from '../interfaces/almacen-response';
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,24 +29,39 @@ export class ConductorService {
     return this.http.get(`${environment.apiUrl}/conductores/usuario/${idUsuario}`, { headers: this.getAuthHeaders() });
   }
 
-  actualizarConductor(id: number, datos: any): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/conductores/editar/${id}`, datos, { headers: this.getAuthHeaders() });
-  }
-
   obtenerProvincias(): Observable<any[]> {
     return this.http.get<any[]>(`${environment.apiUrl}/provincias/lista`, { headers: this.getAuthHeaders() });
+  }
+
+  actualizarConductor(id: number, datos: ConductorRequestDTO): Observable<ConductorResponse> {
+    return this.http.put<ConductorResponse>(`${environment.apiUrl}/conductores/editar/${id}`, datos, { headers: this.getAuthHeaders() });
   }
 
   obtenerUsuarioPorId(id: number): Observable<any> {
     return this.http.get(`${environment.apiUrl}/usuarios/${id}`, { headers: this.getAuthHeaders() });
   }
 
-  obtenerAlmacenesRegistrados(conductorId: number): Observable<AlmacenRegistrado[]> {
-    return this.http.get<AlmacenRegistrado[]>(`${environment.apiUrl}/conductores/almacenesRegistrados/${conductorId}`, { headers: this.getAuthHeaders() });
-  }
-
   obtenerListaVehiculos(conductorId: number): Observable<any[]> {
     return this.http.get<any[]>(`${environment.apiUrl}/conductores/vehiculosRegistrados/${conductorId}`);
+  }
+  obtenerAlmacenesRegistrados(conductorId: number): Observable<AlmacenResponse[]> {
+    return this.http.get<AlmacenResponse[]>(`${environment.apiUrl}/almacenesRegistrados/${conductorId}`, { headers: this.getAuthHeaders() });
+  }
+
+  guardarConductor(data: ConductorRequestDTO): Observable<any> {
+    return this.http.post<ConductorRequestDTO>(`${environment.apiUrl}/conductores/guardar`, data);
+  }
+
+  obtenerConductores(): Observable<ConductorResponse[]> {
+    return this.http.get<ConductorResponse[]>(`${environment.apiUrl}/conductores/lista`);
+  }
+
+  changeConductorState(id: number): Observable<ConductorResponse> {
+    return this.http.put<ConductorResponse>(`${environment.apiUrl}/conductores/estado/${id}`, {}, {headers: this.getAuthHeaders()});
+  }
+
+  deleteConductor(id: number): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}/conductores/eliminar/${id}`, {headers: this.getAuthHeaders()});
   }
 
   eliminarVehiculo(idVehiculo: number): Observable<any> {

@@ -1,21 +1,28 @@
-import { CanActivateFn } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { Router } from 'express';
 import { ToastrService } from 'ngx-toastr';
 import { inject } from '@angular/core';
 
-export const adminGuard: CanActivateFn = (route, state) => {
+export const adminGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
   const toastService = inject(ToastrService);
 
-  if(authService.isUserLogged()){
-    if(localStorage.getItem('rol')=== 'ADMIN'){
+  if (authService.isUserLogged()) {
+    if (localStorage.getItem('rol') === 'ADMIN') {
       return true;
-    }else{
-      toastService.error('No tienes permisos para acceder a esta sección');
+    } else {
+      router.navigate(['/main']).then(() => {
+        toastService.error('No tienes permisos para acceder a esta sección', 'Error', {
+          timeOut: 5000
+        });
+      });
+      return false;
     }
   }
-  toastService.info('Por favor inicie sesión para continuar');
-  return router.navigate(['/login']);
+  // toastService.info('Usuario no está logueado', 'Información', {
+  //   timeOut: 5000
+  // });
+  router.navigate(['/login']);
+  return false;
 };
