@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgIf } from '@angular/common';
-import {FileUploadService} from "../../services/file-upload.service";
+import {FileUploadService} from "../../../services/file-upload.service";
 import {FormsModule} from "@angular/forms";
 
 @Component({

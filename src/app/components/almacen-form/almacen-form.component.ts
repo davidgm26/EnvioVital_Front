@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AlmacenService } from '../../services/almacen.service';
-import {SubirFotoComponent} from "../subir-foto/subir-foto.component";
+import {SubirFotoComponent} from "../Fotos/subir-foto/subir-foto.component";
 
 @Component({
   selector: 'app-almacen-form',

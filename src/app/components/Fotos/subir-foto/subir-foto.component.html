@@ -1,0 +1,8 @@
+<div>
+
+  <input type="file" (change)="onFileSelected($event)" />
+  <button (click)="onUpload()">Upload</button>
+  <div *ngIf="uploadResponse">
+    {{ uploadResponse }}
+  </div>
+</div>

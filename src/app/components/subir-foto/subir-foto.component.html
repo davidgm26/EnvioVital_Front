@@ -1,8 +1,0 @@
-<div>
-
-  <input type="file" (change)="onFileSelected($event)" /> // Esto es un input de tipo file que se encarga de seleccionar el archivo que se va a subir.
-  <button (click)="onUpload()">Upload</button> // Este botón se encarga de subir el archivo seleccionado.
-  <div *ngIf="uploadResponse"> // Este div se encarga de mostrar la respuesta del servidor.
-    {{ uploadResponse }}
-  </div>
-</div>

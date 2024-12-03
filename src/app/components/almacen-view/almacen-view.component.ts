@@ -6,7 +6,9 @@ import { AlmacenService } from '../../services/almacen.service';
 import { AlmacenFormComponent } from "../almacen-form/almacen-form.component";
 import { CambiarPassComponent } from "../cambiar-pass/cambiar-pass.component";
 import {NgClass, NgIf, NgStyle} from "@angular/common";
-import {SubirFotoComponent} from "../subir-foto/subir-foto.component";
+import {SubirFotoComponent} from "../Fotos/subir-foto/subir-foto.component";
+import {MostrarFotoComponent} from "../Fotos/mostrar-foto/mostrar-foto.component";
+
 
 
 
@@ -14,7 +16,15 @@ import {SubirFotoComponent} from "../subir-foto/subir-foto.component";
   selector: 'app-almacen-view',
   templateUrl: './almacen-view.component.html',
   standalone: true,
-  imports: [ListaEventosAlmacenComponent, AlmacenFormComponent, CambiarPassComponent, NgClass, NgIf, SubirFotoComponent],
+  imports: [
+    ListaEventosAlmacenComponent,
+    AlmacenFormComponent,
+    CambiarPassComponent,
+    NgClass,
+    NgIf,
+    SubirFotoComponent,
+    MostrarFotoComponent
+  ],
   styleUrls: ['./almacen-view.component.css']
 })
 export class AlmacenViewComponent implements OnInit {

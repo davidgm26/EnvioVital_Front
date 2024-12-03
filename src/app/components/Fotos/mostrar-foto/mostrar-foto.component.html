@@ -1,0 +1,6 @@
+<div *ngIf="photoUrl; else noPhoto">
+  <img [src]="photoUrl" alt="Foto del almacén o conductor" />
+</div>
+<ng-template #noPhoto>
+  No se encontró la foto.
+</ng-template>
