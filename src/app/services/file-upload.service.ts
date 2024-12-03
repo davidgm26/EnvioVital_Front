@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -14,6 +14,20 @@ export class FileUploadService {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.http.post<string>(this.apiUrl, formData, { responseType: 'text' as 'json' });
+    // Obtener el token del almacenamiento local
+    const token = localStorage.getItem('token');
+
+    // Configurar las cabeceras. No es necesario incluir Content-Type aquí.
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      ContentType: 'multipart/form-data',
+  });
+
+    // Realizar la solicitud POST
+    return this.http.post<string>(this.apiUrl, formData, {
+      headers: headers, // Pasamos el token en el header
+      reportProgress: true, // Útil si quieres mostrar progreso en la carga
+      responseType: 'text' as 'json',
+    });
   }
 }

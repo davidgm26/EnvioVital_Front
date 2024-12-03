@@ -3,13 +3,26 @@
   <div class="flex flex-col md:flex-row items-start md:items-center bg-white p-6 rounded-lg shadow-xl">
     <!-- Parte del Icono y Nombre (Izquierda) -->
     <div class="flex flex-col items-center w-full md:w-1/4 mb-4 md:mb-0 md:mr-8">
-      <div
-        class="w-32 h-32 rounded-full flex items-center justify-center mb-4 relative overflow-hidden"
-        [ngStyle]="{'background-image': fotoUrl ? 'url(' + fotoUrl + ')' : '', 'background-size': 'cover', 'background-position': 'center'}">
-        <!-- Mostrar el botón de subida si no hay foto -->
-        <ng-container *ngIf="!fotoUrl">
-          <app-upload (photoUploaded)="onPhotoUploaded($event)"></app-upload>
-        </ng-container>
+      <!-- Círculo para Mostrar la Foto o Subir Nueva -->
+      <div class="relative w-32 rounded-full overflow-hidden">
+        <label for="photoUpload" class="cursor-pointer flex items-center justify-center w-full h-full">
+          <img
+            *ngIf="fotoUrl"
+            [src]="fotoUrl"
+            alt="Foto de usuario"
+            class="w-full h-full object-cover rounded-full"
+          />
+          <div *ngIf="!fotoUrl" class="text-blue-300 text-lg flex items-center justify-center">
+            <span>Subir Foto</span>
+          </div>
+        </label>
+        <input
+          id="photoUpload"
+          type="file"
+          (change)="onPhotoSelected($event)"
+          class="hidden"
+          accept="image/*"
+        />
       </div>
 
 

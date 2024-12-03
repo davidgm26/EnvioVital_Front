@@ -7,6 +7,8 @@ import { AlmacenFormComponent } from "../almacen-form/almacen-form.component";
 import { CambiarPassComponent } from "../cambiar-pass/cambiar-pass.component";
 import {NgClass, NgIf, NgStyle} from "@angular/common";
 import {UploadComponent} from "../upload/upload.component";
+import { FileUploadService } from '../../services/file-upload.service';
+
 
 @Component({
   selector: 'app-almacen-view',
@@ -30,7 +32,9 @@ export class AlmacenViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private almacenService: AlmacenService
+    private almacenService: AlmacenService,
+    private fileUploadService: FileUploadService
+
   ) {}
 
   ngOnInit(): void {
@@ -102,10 +106,23 @@ export class AlmacenViewComponent implements OnInit {
     this.reloadData();
   }
 
-  onPhotoUploaded(url: string): void {
-    this.fotoUrl = url; // Actualiza la URL de la foto
-    console.log('URL de la foto cargada:', url);
+  onPhotoSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.fileUploadService.uploadFile(file).subscribe({
+        next: (response) => {
+          // Asume que el backend devuelve directamente la URL
+          this.fotoUrl = response;
+          console.log('Archivo subido exitosamente:', this.fotoUrl);
+        },
+        error: (error) => {
+          console.error('Error al subir el archivo:', error);
+        }
+      });
+    }
   }
+
 
 
 
