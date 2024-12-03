@@ -1,0 +1,7 @@
+.upload-container {
+  text-align: center;
+  margin: 20px;
+}
+input[type="file"] {
+  margin: 10px 0;
+}
