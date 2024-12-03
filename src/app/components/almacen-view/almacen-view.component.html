@@ -3,31 +3,15 @@
   <div class="flex flex-col md:flex-row items-start md:items-center bg-white p-6 rounded-lg shadow-xl">
     <!-- Parte del Icono y Nombre (Izquierda) -->
     <div class="flex flex-col items-center w-full md:w-1/4 mb-4 md:mb-0 md:mr-8">
-      <!-- Círculo para Mostrar la Foto o Subir Nueva -->
-      <div class="relative w-32 rounded-full overflow-hidden">
-        <label for="photoUpload" class="cursor-pointer flex items-center justify-center w-full h-full">
-          <img
-            *ngIf="fotoUrl"
-            [src]="fotoUrl"
-            alt="Foto de usuario"
-            class="w-full h-full object-cover rounded-full"
-          />
-          <div *ngIf="!fotoUrl" class="text-blue-300 text-lg flex items-center justify-center">
-            <span>Subir Foto</span>
-          </div>
-        </label>
-        <input
-          id="photoUpload"
-          type="file"
-          (change)="onPhotoSelected($event)"
-          class="hidden"
-          accept="image/*"
-        />
+      <!-- Contenedor del icono y el componente de subir foto -->
+      <div class="w-32 h-32 bg-blue-500 text-white rounded-full flex items-center justify-center mb-4">
+        <app-subir-foto [username]="username"></app-subir-foto>
       </div>
 
-
+      <!-- Nombre de usuario -->
       <p class="text-xl font-semibold text-gray-800">{{ usuarioUsername }}</p>
     </div>
+
 
     <!-- Parte del NavTab y Contenido (Derecha) -->
     <div class="w-full md:w-3/4">
@@ -70,6 +54,7 @@
             <p><strong>Provincia</strong></p>
             <p>{{ provinciaNombre }}</p>
           </div>
+
           <div>
             <p><strong>Estado Activo</strong></p>
             <p>{{ almacen.esActivo ? 'Sí' : 'No' }}</p>

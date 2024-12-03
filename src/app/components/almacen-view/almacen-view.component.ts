@@ -6,18 +6,19 @@ import { AlmacenService } from '../../services/almacen.service';
 import { AlmacenFormComponent } from "../almacen-form/almacen-form.component";
 import { CambiarPassComponent } from "../cambiar-pass/cambiar-pass.component";
 import {NgClass, NgIf, NgStyle} from "@angular/common";
-import {UploadComponent} from "../upload/upload.component";
-import { FileUploadService } from '../../services/file-upload.service';
+import {SubirFotoComponent} from "../subir-foto/subir-foto.component";
+
 
 
 @Component({
   selector: 'app-almacen-view',
   templateUrl: './almacen-view.component.html',
   standalone: true,
-  imports: [ListaEventosAlmacenComponent, AlmacenFormComponent, CambiarPassComponent, NgClass, NgIf, UploadComponent, NgStyle],
+  imports: [ListaEventosAlmacenComponent, AlmacenFormComponent, CambiarPassComponent, NgClass, NgIf, SubirFotoComponent],
   styleUrls: ['./almacen-view.component.css']
 })
 export class AlmacenViewComponent implements OnInit {
+  username!: string;
   almacen: any = {};
   usuarioUsername: string = '';
   almacenId!: number;
@@ -33,7 +34,6 @@ export class AlmacenViewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private almacenService: AlmacenService,
-    private fileUploadService: FileUploadService
 
   ) {}
 
@@ -45,6 +45,11 @@ export class AlmacenViewComponent implements OnInit {
       this.cargarDatosAlmacen();
     } else {
       this.redirigirAInicio();
+    }
+
+    const storedUsername = localStorage.getItem('username'); // Almacenamos el nombre de usuario en el localStorage
+    if (storedUsername) {
+      this.username = storedUsername; // Si existe, lo asignamos a la variable
     }
   }
 
@@ -106,22 +111,12 @@ export class AlmacenViewComponent implements OnInit {
     this.reloadData();
   }
 
-  onPhotoSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      this.fileUploadService.uploadFile(file).subscribe({
-        next: (response) => {
-          // Asume que el backend devuelve directamente la URL
-          this.fotoUrl = response;
-          console.log('Archivo subido exitosamente:', this.fotoUrl);
-        },
-        error: (error) => {
-          console.error('Error al subir el archivo:', error);
-        }
-      });
-    }
-  }
+
+
+
+
+
+
 
 
 
