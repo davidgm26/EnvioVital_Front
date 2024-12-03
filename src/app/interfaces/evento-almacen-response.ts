@@ -1,4 +1,4 @@
-import { AlmacenRegistrado } from "./almacen-registrado";
+import { AlmacenResponse } from "./almacen-response";
 
 export interface EventoAlmacenResponse {
     id: number;
@@ -6,5 +6,5 @@ export interface EventoAlmacenResponse {
     idAlmacen: number;
     nombreAlmacen: string;
     nombreEvento: string;
-    almacen: AlmacenRegistrado;
+    almacen: AlmacenResponse;
 }

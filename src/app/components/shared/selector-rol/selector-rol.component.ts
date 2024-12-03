@@ -4,8 +4,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { NgFor } from '@angular/common';
-import { Rol } from '../../interfaces/rol';
-import { SelectorCardComponent } from '../shared/selector-card/selector-card.component';
+import { SelectorCardComponent } from '../selector-card/selector-card.component';
+import { Rol } from '../../../interfaces/rol';
+
 
 @Component({
   selector: 'app-selector-rol',

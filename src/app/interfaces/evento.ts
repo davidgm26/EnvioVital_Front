@@ -8,4 +8,3 @@ export interface Evento {
     provincia:   string;
     almacenes:   EventoAlmacenResponse[];
 }
-  

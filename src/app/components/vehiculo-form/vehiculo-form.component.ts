@@ -33,7 +33,7 @@ export class VehiculoFormComponent implements OnInit {
     return this.fb.group({
       marca: ['', Validators.required],
       modelo: ['', Validators.required],
-      matricula: ['', [Validators.required, Validators.pattern(/^[A-Z]{3}\d{3}[A-Z]{1}$/)]],
+      matricula: ['', [Validators.required, Validators.pattern(/^\d{4}[BCDFGHJKLMNPQRSTVWXYZ]{3}$/)]],
       idConductor: ['', Validators.required],
       idTipoVehiculo: ['', Validators.required]
     });
@@ -49,7 +49,7 @@ export class VehiculoFormComponent implements OnInit {
   }
 
   private obtenerTiposVehiculo(): void {
-    this.http.get<any[]>('http://localhost:8081/tiposVehiculo/lista').subscribe({
+    this.http.get<any[]>('/api/tiposVehiculo/lista').subscribe({
       next: (tipos) => {
         this.tiposVehiculo = tipos;
       },
@@ -65,7 +65,7 @@ export class VehiculoFormComponent implements OnInit {
 
     const datosAEnviar = this.formulario.value;
 
-    this.http.post('http://localhost:8081/vehiculos/guardar', datosAEnviar).subscribe({
+    this.http.post('/api/vehiculos/guardar', datosAEnviar).subscribe({
       next: () => {
         alert('Vehículo registrado exitosamente');
         this.router.navigate(['/']);

@@ -1,14 +1,14 @@
-<div class="card bg-white rounded-lg shadow-md overflow-hidden flex flex-col justify-between w-full max-w-xs mx-auto h-96">
-  <img src="" alt="Almacen" class="w-full h-48 object-cover">
-  <div class="p-8">
-    <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{{ almacen.nombre }}</div>
-    <p class="block mt-1 text-lg leading-tight font-medium text-black">{{ almacen.provincia }}</p>
-    <button
-      *ngIf="mostrarBoton"
-      class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      (click)="inscribirse()"
-    >
+<div class="card bg-white rounded-lg shadow-md overflow-hidden flex flex-col justify-between w-full max-w-xs mx-auto h-80">
+  <img src="/foto-almacen-defecto.png" alt="Almacen" class="w-full h-48 object-cover">
+
+  <div class="p-6 flex-grow flex flex-col justify-between">
+    <div>
+      <p class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{{ almacen.nombre }}</p>
+      <p class="block mt-1 text-sm leading-tight font-medium text-black">{{ almacen.provincia }}</p>
+    </div>
+    <button *ngIf="!usuarioInscrito" class="mt-0 text-white bg-yellow-500 hover:bg-yellow-600 rounded-full px-4 text-sm text-center" (click)="inscribirse()">
       Inscribirse
     </button>
+
   </div>
 </div>

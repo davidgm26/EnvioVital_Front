@@ -1,0 +1,43 @@
+<nav class="flex items-center justify-between w-full bg-gradient-to-r from-gray-100 to-gray-200 shadow-md border-b border-gray-200">
+    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center space-x-6">
+            <div class="bg-white rounded-full p-3 shadow-sm m-0">
+                <img 
+                    src="/logo_ev_1-removebg-preview.png" 
+                    alt="Logo" 
+                    class="h-16 w-16 object-contain"
+                >
+            </div>
+            <span class="text-2xl font-semibold text-gray-800">
+                Panel del Administrador
+            </span>
+        </div>
+        <button 
+            (click)="logOut()" 
+            class="px-4 py-2 bg-red-500 text-white rounded-md 
+                   hover:bg-red-600 transition duration-300 
+                   focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+        >
+            Cerrar Sesión
+        </button>
+    </div>
+</nav>  
+<ul class="flex justify-center space-x-4 md:space-x-6 my-4">
+    <li class="hover:bg-gray-200 rounded-full p-2 transition duration-300">
+        <a routerLink="gestion-usuarios" class="flex items-center">
+            <mat-icon aria-hidden="false" aria-label="Gestión de usuarios transporte">directions_car</mat-icon>
+        </a>
+    </li>
+    <li class="hover:bg-gray-200 rounded-full p-2 transition duration-300">
+        <a routerLink="gestion-almacenes" class="flex items-center">
+            <mat-icon aria-hidden="false" aria-label="Gestión de Almacenes">warehouse</mat-icon>
+        </a>
+    </li>
+    <li class="hover:bg-gray-200 rounded-full p-2 transition duration-300">
+        <a routerLink="gestion-eventos" class="flex items-center">
+            <mat-icon aria-hidden="false" aria-label="Gestión de Eventos">calendar_today</mat-icon>
+        </a>
+    </li>
+</ul>
+
+<router-outlet></router-outlet>

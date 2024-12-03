@@ -24,8 +24,8 @@ export class AuthService {
     if (isPlatformBrowser(this.platformId) && localStorage.getItem('logged') === 'true') {
       return true;
     }
-    return false;
-  }
+    return false;
+  }
 
   getTokens(): string | null {
     if (isPlatformBrowser(this.platformId)) {

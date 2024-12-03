@@ -8,17 +8,18 @@ export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const toastService = inject(ToastrService);
 
-  if(authService.isUserLogged()){
-    if(localStorage.getItem('rol')=== 'CONDUCTOR' || localStorage.getItem('rol')=== 'ALMACEN'){
+  if (authService.isUserLogged()) {
+    if (localStorage.getItem('rol') === 'CONDUCTOR' || localStorage.getItem('rol') === 'ALMACEN') {
       return true;
-    }else{
+    } else {
       toastService.error('No tienes permisos para acceder a esta sección', 'Error', {
-        timeOut: 5000
+        timeOut: 5000,  // Tiempo en milisegundos
+        closeButton: true, // Opcional: agrega un botón de cerrar
+        progressBar: true // Opcional: muestra una barra de progreso
       });
     }
+  } else {
+
   }
-  toastService.info('Por favor inicie sesión para continuar','Inicie Sesion',{
-    timeOut: 1000
-  });
   return router.navigate(['/login']);
 };

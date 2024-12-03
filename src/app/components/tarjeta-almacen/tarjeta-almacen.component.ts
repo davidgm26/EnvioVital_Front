@@ -1,19 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { AlmacenRegistrado } from '../../interfaces/almacen-registrado';
 import { ConductorService } from '../../services/conductor.service';
 import { ToastrService } from 'ngx-toastr';
 import { error } from 'node:console';
+import { AlmacenService,  } from '../../services/almacen.service';
+import { AlmacenResponse } from '../../interfaces/almacen-response';
+import { ConductorResponse } from '../../interfaces/conductor-response';
 
 @Component({
   selector: 'app-tarjeta-almacen',
   templateUrl: './tarjeta-almacen.component.html',
   standalone: true,
   styleUrls: ['./tarjeta-almacen.component.css'],
-  imports: [CommonModule],
+  imports: [CommonModule,NgIf],
 })
 export class TarjetaAlmacenComponent implements OnInit {
-  @Input() almacen!: AlmacenRegistrado;
+  @Input() almacen!: AlmacenResponse;
   @Input() eventoAlmacenId!: number;
   mostrarBoton: boolean = false;
   conductorId: number | null = null;
@@ -38,7 +41,8 @@ export class TarjetaAlmacenComponent implements OnInit {
 
         next: (conductor: ConductorResponse) => {
           debugger;
-          this.conductorId = id;
+          this.conductorId = conductor.id;
+          this.comprobarInscripcion(this.eventoAlmacenId,this.conductorId!,this.almacen.id);
         },
         error: () => {
           this.toastr.error('No se pudo obtener el ID del conductor.', 'Error');
@@ -47,9 +51,6 @@ export class TarjetaAlmacenComponent implements OnInit {
     } else {
       this.toastr.error('No se encontró el ID del usuario.', 'Error');
     }
-
-    this.comprobarInscripcion(this.eventoAlmacenId,this.conductorId!);
-    console.log(this.usuarioInscrito);
   }
 
   inscribirse(): void {
@@ -59,7 +60,7 @@ export class TarjetaAlmacenComponent implements OnInit {
     }
 
     this.conductorService
-      .registrarConductorEnEvento(this.eventoAlmacenId, this.conductorId)
+      .registrarConductorEnEvento(this.eventoAlmacenId, this.conductorId,this.almacen.id)
       .subscribe({
         next: () => {
           this.toastr.success(
@@ -76,8 +77,8 @@ export class TarjetaAlmacenComponent implements OnInit {
       });
   }
 
-  comprobarInscripcion(idConductor: number,idEventoAlmacen: number): void {
-    this.conductorService.comprobarInscripcion(idEventoAlmacen, idConductor).subscribe({
+  comprobarInscripcion(idConductor: number,idEventoAlmacen: number,idAlmacen:number): void {
+    this.conductorService.comprobarInscripcion(idEventoAlmacen, idConductor,idAlmacen).subscribe({
       next: (resp) => {
         this.usuarioInscrito = resp;
       },
@@ -86,5 +87,7 @@ export class TarjetaAlmacenComponent implements OnInit {
       }
     })
 }
+
+
 
 }

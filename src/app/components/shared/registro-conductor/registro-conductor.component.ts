@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ConductorService} from "../../../services/conductor.service";
 import {CommonModule} from "@angular/common";
+import { NavbarFormComponent } from '../navbar-form/navbar-form.component';
+
 
 @Component({
   selector: 'app-registro-conductor',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule,CommonModule,NavbarFormComponent],
   templateUrl: './registro-conductor.component.html',
   styleUrls: ['./registro-conductor.component.css'],
   providers: [],
@@ -14,6 +16,7 @@ import {CommonModule} from "@angular/common";
 
 export class RegistroConductorComponent implements OnInit{
   registroForm: FormGroup;
+  rol = "CONDUCTOR/A"
 
   constructor(
     private fb: FormBuilder,
