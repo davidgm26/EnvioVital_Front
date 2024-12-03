@@ -19,9 +19,7 @@ export const authGuard: CanActivateFn = (route, state) => {
       });
     }
   } else {
-    toastService.info('Por favor inicie sesión para continuar', 'Inicie Sesión', {
-      timeOut: 5000
-    });
+
   }
   return router.navigate(['/login']);
 };

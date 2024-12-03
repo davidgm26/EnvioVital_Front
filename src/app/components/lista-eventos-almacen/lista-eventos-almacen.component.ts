@@ -6,6 +6,7 @@ import { MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Evento } from '../../interfaces/evento';
 import { environment } from '../../../env/environment';
+import { AlmacenService } from '../../services/almacen.service';
 
 
 
@@ -21,30 +22,22 @@ export class ListaEventosAlmacenComponent implements OnInit {
 
   displayedColumns: string[] = ['nombreEvento', 'descripcionEvento', 'nombreProvincia', 'estado', 'eliminar'];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private almacenService: AlmacenService
+  ) {}
 
   ngOnInit(): void {}
 
-  eliminarRegistro(id: number): void {
-    const confirmDelete = window.confirm('¿Seguro que quieres eliminar este registro?');
-
-    if (confirmDelete) {
-      const url = `${environment.apiUrl}/almacenes/eliminarRegistro/${id}`;
-
-      this.http.delete(url).subscribe(
-        (response: any) => {
-          console.log('Registro eliminado:', response);
-
-          this.eventos = this.eventos.filter(evento => evento.id !== id);
-          alert('Registro eliminado con éxito'); // Muestra una alerta si el registro se elimina correctamente
-        },
-        (error: any) => {
-          console.error('Error al eliminar el registro:', error);
-          alert('Hubo un error al eliminar el registro'); // Muestra una alerta si hay un error
-        }
-      );
-    } else {
-      console.log('Eliminación cancelada');
-    }
+  eliminarRegistro(id: number) {
+    this.almacenService.borrarAlmacenDeEvento(id).subscribe({
+      next: (response) => {
+        alert('Registro eliminado correctamente');
+        this.eventos = this.eventos.filter((evento) => evento.id !== id);
+      },
+      error: (error) => { 
+        alert('Error al eliminar el registro');
+      }
+    });
   }
+
 }

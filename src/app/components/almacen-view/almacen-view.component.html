@@ -22,8 +22,11 @@
         <li class="mr-6 mb-2 md:mb-0">
           <button (click)="activeTab = 'changePass'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'changePass'}" class="text-blue-600 hover:text-blue-800 font-semibold">Cambiar Contraseña</button>
         </li>
-        <li class="mb-2 md:mb-0">
+        <li class="mr-6 mb-2 md:mb-0">
           <button (click)="activeTab = 'events'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'events'}" class="text-blue-600 hover:text-blue-800 font-semibold">Eventos</button>
+        </li>
+        <li class="mb-2 md:mb-0">
+          <button (click)="activeTab = 'conductores'" [ngClass]="{'border-b-2 border-blue-500': activeTab === 'conductores'}" class="text-blue-600 hover:text-blue-800 font-semibold">Conductores</button>
         </li>
       </ul>
 

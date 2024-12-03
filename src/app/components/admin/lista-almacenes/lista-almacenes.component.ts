@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AlmacenService } from '../../../services/almacen.service';
 import { TarjetaAlmacenComponent } from '../../tarjeta-almacen/tarjeta-almacen.component';
-import { log } from 'node:console';
 import { ToastrService } from 'ngx-toastr';
 import { AlmacenResponse } from '../../../interfaces/almacen-response';
 
@@ -18,6 +17,7 @@ import { AlmacenResponse } from '../../../interfaces/almacen-response';
   styleUrls: ['./lista-almacenes.component.css']
 })
 export class ListaAlmacenesComponent implements OnInit {
+  eventoAlmacenId!: number;
   eventoId!: number;
   almacenes: AlmacenResponse[] = [];
 
@@ -37,7 +37,7 @@ export class ListaAlmacenesComponent implements OnInit {
       (almacenes) => {
         almacenes.forEach((almacen => {
           this.almacenes.push(almacen.almacen);
-          console.log(this.almacenes);
+          this.eventoAlmacenId = almacen.id;
         }));
       },
       (error) => {

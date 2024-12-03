@@ -8,12 +8,13 @@ import { DatePipe, NgClass, NgIf } from "@angular/common";
 import { VehiculoFormComponent } from "../vehiculo-form/vehiculo-form.component";
 import { ListaVehiculosComponent } from "../lista-vehiculos/lista-vehiculos.component";
 import { AlmacenResponse } from '../../interfaces/almacen-response';
+import { ListaConductoresComponent } from "../lista-conductores/lista-conductores.component";
 
 @Component({
   selector: 'app-conductor-view',
   templateUrl: './conductor-view.component.html',
   standalone: true,
-  imports: [ListaAlmacenesRegistradosComponent, ConductorFormComponent, CambiarPassComponent, NgClass, NgIf, DatePipe, VehiculoFormComponent, ListaVehiculosComponent],
+  imports: [ListaAlmacenesRegistradosComponent, ConductorFormComponent, CambiarPassComponent, NgClass, NgIf, DatePipe, VehiculoFormComponent, ListaVehiculosComponent, ListaConductoresComponent],
   styleUrls: ['./conductor-view.component.css']
 })
 export class ConductorViewComponent implements OnInit {
@@ -60,6 +61,7 @@ export class ConductorViewComponent implements OnInit {
   }
 
   private obtenerListaAlmacenes(): void {
+    debugger;
     this.conductorService.obtenerAlmacenesRegistrados(this.conductorId).subscribe({
       next: (almacenes) => {
         this.almacenes = almacenes;

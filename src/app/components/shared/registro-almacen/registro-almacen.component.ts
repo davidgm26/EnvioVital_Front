@@ -1,6 +1,6 @@
-import { Component, OnInit, signal } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import { NgFor } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {CommonModule, NgFor, NgIf} from '@angular/common';
 import { AlmacenService } from '../../../services/almacen.service';
 import { ProvinciaService } from '../../../services/provincia.service';
 import { NavbarFormComponent } from '../navbar-form/navbar-form.component';
@@ -12,10 +12,9 @@ import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'app-registro-almacen',
   standalone: true,
-    imports: [ReactiveFormsModule,NavbarFormComponent,MatOptionModule,MatSelectModule,MatFormFieldModule,MatInputModule,NgFor],
+    imports: [ReactiveFormsModule,NavbarFormComponent,MatOptionModule,MatSelectModule,MatFormFieldModule,MatInputModule,NgFor,NgIf],
   templateUrl: './registro-almacen.component.html',
   styleUrls: ['./registro-almacen.component.css'],
-  providers: [],
 })
 export class RegistroAlmacenComponent implements OnInit {
   registroForm: FormGroup;
@@ -55,15 +54,22 @@ export class RegistroAlmacenComponent implements OnInit {
     );
   }
   onSubmit(): void {
-    const formData = this.registroForm.value;
-    this.almacenRegistroService.guardarAlmacen(formData).subscribe({
-      next: (response) => {
-        console.log('Almacén registrado con éxito:', response);
-      },
-      error: (error) => {
-        console.error('Error al registrar el almacén:', error);
-      },
-    });
+    if (this.registroForm.valid) {
+      const formData = this.registroForm.value;
+      this.almacenRegistroService.guardarAlmacen(formData).subscribe({
+        next: (response) => {
+          console.log('Almacén registrado con éxito:', response);
+        },
+        error: (error) => {
+          console.error('Error al registrar el almacén:', error);
+        },
+      });
+    } else {
+      console.log('Formulario inválido, revisa los campos.');
+    }
+  }
+  public get usuario() {
+    return this.registroForm.get('usuario') as FormGroup;
   }
 
 }

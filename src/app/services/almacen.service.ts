@@ -36,7 +36,7 @@ export class AlmacenService {
   }
 
   guardarAlmacen(data: AlmacenResponse): Observable<any> {
-    return this.http.post<AlmacenResponse>(`${environment.apiUrl}/almacenes/guardar`, data,);
+    return this.http.post<AlmacenResponse>(`${environment.apiUrl}/almacenes/guardar`, data);
   }
 
   obtenerUsuarioPorId(id: number): Observable<any> {
@@ -68,5 +68,9 @@ export class AlmacenService {
 
   changeAlmacenState(id: number): Observable<AlmacenResponse> {
     return this.http.put<AlmacenResponse>(`${environment.apiUrl}/almacenes/estado/${id}`, {}, { headers: this.getAuthHeaders() });
+  }
+
+  borrarAlmacenDeEvento(id: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/almacenes/eliminarRegistro/${id}`, { headers: this.getAuthHeaders() });
   }
 }
