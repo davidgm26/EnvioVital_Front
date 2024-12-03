@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AlmacenRegistrado } from '../interfaces/almacen-registrado';
 import {ConductorRequestDTO} from "../interfaces/conductor-request-dto";
+import { environment } from '../../env/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -33,10 +34,6 @@ export class ConductorService {
     return this.http.put(`${this.apiUrl}/editar/${id}`, datos, { headers: this.getAuthHeaders() });
   }
 
-  obtenerProvincias(): Observable<any[]> {
-    return this.http.get<any[]>(this.provinciasUrl, { headers: this.getAuthHeaders() });
-  }
-
   obtenerUsuarioPorId(id: number): Observable<any> {
     return this.http.get(`${this.usuarioUrl}/${id}`, { headers: this.getAuthHeaders() });
   }
@@ -50,15 +47,13 @@ export class ConductorService {
   }
   guardarConductor(data: ConductorRequestDTO): Observable<any> {
     return this.http.post<ConductorRequestDTO>(`${this.apiUrl}/guardar`, data);
-    console.log(data)
   }
   registrarConductorEnEvento(eventoAlmacenId: number, conductorId: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/registrarse/${eventoAlmacenId}/${conductorId}`, null, { headers: this.getAuthHeaders() });
   }
-  obtenerIdConductorPorUsuario(idUsuario: number): Observable<number> {
-    return this.http.get<number>(`${this.apiUrl}/conductor/${idUsuario}`, {
-      headers: this.getAuthHeaders(),
-    });
+
+  comprobarInscripcion(idEventoAlmacen: number, idConductor:number): Observable<Boolean> {
+    return this.http.get<Boolean>(`${environment.apiUrl}/conductores/inscripcion/${idEventoAlmacen}/${idConductor}`, { headers: this.getAuthHeaders() });
   }
 
 

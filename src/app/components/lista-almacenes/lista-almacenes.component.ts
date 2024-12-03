@@ -18,6 +18,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./lista-almacenes.component.css']
 })
 export class ListaAlmacenesComponent implements OnInit {
+  eventoAlmacenId!: number;
   eventoId!: number;
   almacenes: AlmacenRegistrado[] = [];
 
@@ -37,7 +38,7 @@ export class ListaAlmacenesComponent implements OnInit {
       (almacenes) => {
         almacenes.forEach((almacen => {
           this.almacenes.push(almacen.almacen);
-          this.eventoId = almacen.idEvento;
+          this.eventoAlmacenId = almacen.id;
           console.log(this.almacenes);
         }));
       },
