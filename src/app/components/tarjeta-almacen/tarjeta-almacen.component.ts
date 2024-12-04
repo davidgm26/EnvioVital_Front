@@ -33,7 +33,7 @@ export class TarjetaAlmacenComponent implements OnInit {
     const rol = localStorage.getItem('rol');
     const usuarioId = localStorage.getItem('id'); // Usar clave correcta ("id")
 
-    
+
     this.mostrarBoton = rol === 'CONDUCTOR';
 
     if (usuarioId) {
@@ -60,13 +60,14 @@ export class TarjetaAlmacenComponent implements OnInit {
     }
 
     this.conductorService
-      .registrarConductorEnEvento(this.eventoAlmacenId, this.conductorId,this.almacen.id)
+      .registrarConductorEnEvento(this.eventoAlmacenId, this.conductorId, this.almacen.id)
       .subscribe({
         next: () => {
           this.toastr.success(
             `Te has inscrito exitosamente en el almacén ${this.almacen.nombre}.`,
             'Éxito'
           );
+          this.usuarioInscrito = true; // Actualizar el estado a inscrito
         },
         error: (error) => {
           this.toastr.error(

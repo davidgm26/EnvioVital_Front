@@ -43,10 +43,10 @@
         <div>
           <label class="block font-semibold mb-2">Provincia</label>
           <select
-            formControlName="idProvincia"
+            formControlName="provincia"
             class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
           >
-            <option *ngFor="let provincia of provincias" [value]="provincia.id">
+            <option *ngFor="let provincia of provincias" [value]="provincia.nombre">
               {{ provincia.nombre }}
             </option>
           </select>

@@ -9,6 +9,8 @@
     <button *ngIf="!usuarioInscrito" class="mt-0 text-white bg-yellow-500 hover:bg-yellow-600 rounded-full px-4 text-sm text-center" (click)="inscribirse()">
       Inscribirse
     </button>
-
+    <button *ngIf="usuarioInscrito" class="mt-0 text-white bg-gray-500 rounded-full px-4 text-sm text-center" disabled>
+      Ya inscrito
+    </button>
   </div>
 </div>

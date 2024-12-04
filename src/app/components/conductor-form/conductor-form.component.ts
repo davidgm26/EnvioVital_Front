@@ -30,7 +30,7 @@ export class ConductorFormComponent implements OnInit {
     const storedUserId = localStorage.getItem('id');
     if (storedUserId) {
       this.userId = Number(storedUserId);
-      this.obtenerConductorId();
+      this.cargarDatosConductor();
     } else {
       this.redirigirAInicio();
     }
@@ -53,28 +53,11 @@ export class ConductorFormComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  private obtenerConductorId(): void {
+  private cargarDatosConductor(): void {
     this.conductorService.obtenerConductorPorUsuario(this.userId).subscribe({
       next: (conductor) => {
         if (conductor) {
           this.conductorId = conductor.id;
-          this.cargarDatosConductor();
-        } else {
-          console.error('No conductor found for the given userId');
-          this.redirigirAInicio();
-        }
-      },
-      error: (error) => {
-        console.error('Error al obtener el conductor por usuario:', error);
-        this.redirigirAInicio();
-      }
-    });
-  }
-
-  private cargarDatosConductor(): void {
-    this.conductorService.obtenerConductorPorId(this.conductorId).subscribe({
-      next: (conductor) => {
-        if (conductor) {
           this.formulario.patchValue({
             nombre: conductor.nombre,
             apellidos: conductor.apellidos,
@@ -84,9 +67,15 @@ export class ConductorFormComponent implements OnInit {
             fechaNacimiento: conductor.fechaNacimiento,
             email: conductor.email
           });
+        } else {
+          console.error('No conductor found for the given userId');
+          this.redirigirAInicio();
         }
       },
-      error: (error) => console.error('Error al cargar los datos del conductor:', error)
+      error: (error) => {
+        console.error('Error al obtener el conductor por usuario:', error);
+        this.redirigirAInicio();
+      }
     });
   }
 
