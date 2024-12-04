@@ -31,20 +31,22 @@ export class TarjetaEventoComponent implements OnInit {
   ngOnInit(): void {
     if (typeof window !== 'undefined' && localStorage.getItem('logged') === 'true') {
       this.rol = localStorage.getItem('rol');
-      const storedUserId = localStorage.getItem('id');
-      if (storedUserId) {
-        const userId = Number(storedUserId);
-        this.almacenService.obtenerAlmacenPorUsuario(userId).subscribe({
-          next: (almacen) => {
-            this.idAlmacen = almacen.id;
-            if (this.evento) {
-              this.checkRegistrationStatus();
-            }
-          },
-          error: (error: any) => console.error('Error al obtener el almacén:', error)
-        });
-      } else {
-        console.error('No userId found in localStorage');
+      if (this.rol === 'ALMACEN') {
+        const storedUserId = localStorage.getItem('id');
+        if (storedUserId) {
+          const userId = Number(storedUserId);
+          this.almacenService.obtenerAlmacenPorUsuario(userId).subscribe({
+            next: (almacen) => {
+              this.idAlmacen = almacen.id;
+              if (this.evento) {
+                this.checkRegistrationStatus();
+              }
+            },
+            error: (error: any) => console.error('Error al obtener el almacén:', error)
+          });
+        } else {
+          console.error('No userId found in localStorage');
+        }
       }
     }
   }

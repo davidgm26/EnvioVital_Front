@@ -28,21 +28,23 @@ export class TarjetaAlmacenComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-    debugger;
     const rol = localStorage.getItem('rol');
     const usuarioId = localStorage.getItem('id'); // Usar clave correcta ("id")
+    const logged = localStorage.getItem('logged') === 'true';
 
+    if (!logged) {
+      this.toastr.warning('Inicia sesión para poder inscribirte', 'Error');
+      return;
+    }
 
     this.mostrarBoton = rol === 'CONDUCTOR';
 
     if (usuarioId) {
       this.conductorService.obtenerConductorPorId(+usuarioId).subscribe({
-
         next: (conductor: ConductorResponse) => {
           debugger;
           this.conductorId = conductor.id;
-          this.comprobarInscripcion(this.eventoAlmacenId,this.conductorId!,this.almacen.id);
+          this.comprobarInscripcion(this.eventoAlmacenId, this.conductorId!, this.almacen.id);
         },
         error: () => {
           this.toastr.error('No se pudo obtener el ID del conductor.', 'Error');
