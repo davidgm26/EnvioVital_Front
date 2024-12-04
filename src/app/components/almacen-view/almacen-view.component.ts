@@ -8,6 +8,8 @@ import { CambiarPassComponent } from "../cambiar-pass/cambiar-pass.component";
 import {NgClass, NgIf, NgStyle} from "@angular/common";
 import {SubirFotoComponent} from "../Fotos/subir-foto/subir-foto.component";
 import {MostrarFotoComponent} from "../Fotos/mostrar-foto/mostrar-foto.component";
+import {FotoUploaderComponent} from "../Fotos/foto-uploader/foto-uploader.component";
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 
 
 
@@ -23,7 +25,8 @@ import {MostrarFotoComponent} from "../Fotos/mostrar-foto/mostrar-foto.component
     NgClass,
     NgIf,
     SubirFotoComponent,
-    MostrarFotoComponent
+    MostrarFotoComponent,
+    FotoUploaderComponent
   ],
   styleUrls: ['./almacen-view.component.css']
 })
@@ -36,7 +39,7 @@ export class AlmacenViewComponent implements OnInit {
   activeTab: string = 'details';
   eventos: Evento[] = [];
   provinciaNombre: string = '';
-  fotoUrl: string | null = null; // URL de la imagen subida
+  fotoUrl: SafeUrl | null = null; // URL segura para mostrar la foto
 
   @Output() reloadDataEvent = new EventEmitter<void>();
 
@@ -44,6 +47,8 @@ export class AlmacenViewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private almacenService: AlmacenService,
+    private sanitizer: DomSanitizer // Necesario para sanitizar URLs
+
 
   ) {}
 
@@ -57,9 +62,9 @@ export class AlmacenViewComponent implements OnInit {
       this.redirigirAInicio();
     }
 
-    const storedUsername = localStorage.getItem('username'); // Almacenamos el nombre de usuario en el localStorage
+    const storedUsername = localStorage.getItem('username');
     if (storedUsername) {
-      this.username = storedUsername; // Si existe, lo asignamos a la variable
+      this.username = storedUsername;
     }
   }
 

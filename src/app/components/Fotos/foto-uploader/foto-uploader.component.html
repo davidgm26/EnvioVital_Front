@@ -1,0 +1,15 @@
+<div class="file-uploader">
+
+  <input type="file" (change)="onFileSelected($event)" />
+  <button (click)="uploadFile()">Subir Foto</button>
+
+  <hr />
+
+  <input type="text"  [(ngModel)]="username" />
+  <button (click)="getPhoto()">Mostrar Foto</button>
+
+  <div *ngIf="uploadedImageUrl">
+    <h3>Imagen:</h3>
+    <img [src]="uploadedImageUrl" alt="Foto subida" width="300" />
+  </div>
+</div>

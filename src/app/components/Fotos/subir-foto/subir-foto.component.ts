@@ -32,13 +32,13 @@ export class SubirFotoComponent {
       if (this.selectedFile) {                                                                      // Si hay un archivo seleccionado
         this.fileUploadService.uploadAlmacenFile(this.selectedFile).subscribe(                      // Se realiza la petición al servidor
           response => {                                                                        // Se recibe la respuesta
-            this.uploadResponse = response;                                                         // Se guarda la URL del archivo subido
+            this.uploadResponse = response;                                                         // Se guarda la URL del archivo subido, se guarda en la propiedad uploadResponse que es la que se muestra en la vista
           },
           error => {
             console.error('Error al subir el archivo', error);                                       // Se muestra un mensaje de error
           }
         );
-      }else if (this.uploadType === 'conductor') { // Si se está subiendo un archivo de conductor
+      }else if (this.uploadType === 'conductor') {                                                    // Si se está subiendo un archivo de conductor
         this.fileUploadService.uploadConductorFile(this.selectedFile).subscribe(                      // Se realiza la petición al servidor
           response => {                                                                          // Se recibe la respuesta
             this.uploadResponse = response;                                                           // Se guarda la URL del archivo subido

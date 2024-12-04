@@ -19,19 +19,32 @@ export class MostrarFotoComponent {
 
   ngOnInit(): void {
     if (this.username) {
-      this.fileUploadService.getAlmacenFoto(this.username)?.subscribe(
-        (response: string | null) => {
-          this.photoUrl = response;
+      this.fileUploadService.getAlmacenFoto(this.username)?.subscribe( // Se obtiene la foto del almacén
+        (response: string | null) => {  // Se recibe la respuesta
+          this.photoUrl = response;    // Se guarda la URL de la foto
+          const imgElement = document.createElement('img'); // Se crea un elemento de imagen
+          if (typeof this.photoUrl === "string") { // Si la URL de la imagen es un string
+            imgElement.src = this.photoUrl;
+          } // Se establece la URL de la imagen
+          document.body.appendChild(imgElement); // Se añade el elemento img al body
         },
         (error: any) => {
-          console.error('Error al obtener la foto', error);
+          console.error('Error al obtener la foto', error); // Se muestra un mensaje de error
         }
-      ) || this.fileUploadService.getConductorFoto(this.username).subscribe(
-        (response: string | null) => {
+
+
+
+      ) || this.fileUploadService.getConductorFoto(this.username).subscribe( // Se obtiene la foto del conductor
+        (response: string | null) => {   // Se recibe la respuesta
           this.photoUrl = response;
+          const imgElement = document.createElement('img'); // Se crea un elemento de imagen
+          if (typeof this.photoUrl === "string") { // Si la URL de la imagen es un string
+            imgElement.src = this.photoUrl;
+          } // Se establece la URL de la imagen
+          document.body.appendChild(imgElement); // Se añade el elemento img al body// Se guarda la URL de la foto
         },
-        (error: any) => {
-          console.error('Error al obtener la foto', error);
+        (error: any) => {                // Se muestra un mensaje de error
+          console.error('Error al obtener la foto', error);     // Se muestra un mensaje de error
         }
       );
     }
