@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ConductorService } from '../../services/conductor.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-conductor-form',
@@ -21,7 +22,8 @@ export class ConductorFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private conductorService: ConductorService
+    private conductorService: ConductorService,
+    private toastr: ToastrService
   ) {
     this.formulario = this.crearFormulario();
   }
@@ -89,10 +91,13 @@ export class ConductorFormComponent implements OnInit {
 
     this.conductorService.actualizarConductor(this.conductorId, datosAEnviar).subscribe({
       next: () => {
-        alert('Conductor actualizado exitosamente');
+        this.toastr.success('Conductor actualizado exitosamente');
         this.onSave.emit();
       },
-      error: (error) => console.error('Error al actualizar el conductor:', error)
+      error: (error) => {
+        console.error('Error al actualizar el conductor:', error);
+        this.toastr.error('Error al actualizar el conductor');
+      }
     });
   }
 

@@ -5,10 +5,8 @@ import { NgClass } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Evento } from '../../interfaces/evento';
-import { environment } from '../../../env/environment';
 import { AlmacenService } from '../../services/almacen.service';
-
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-lista-eventos-almacen',
@@ -23,21 +21,20 @@ export class ListaEventosAlmacenComponent implements OnInit {
   displayedColumns: string[] = ['nombreEvento', 'descripcionEvento', 'nombreProvincia', 'estado', 'eliminar'];
 
   constructor(private http: HttpClient,
-              private almacenService: AlmacenService
-  ) {}
+              private almacenService: AlmacenService,
+              private toastr: ToastrService) {}
 
   ngOnInit(): void {}
 
   eliminarRegistro(id: number) {
     this.almacenService.borrarAlmacenDeEvento(id).subscribe({
       next: (response) => {
-        alert('Registro eliminado correctamente');
+        this.toastr.success('Registro eliminado correctamente');
         this.eventos = this.eventos.filter((evento) => evento.id !== id);
       },
-      error: (error) => { 
-        alert('Error al eliminar el registro');
+      error: (error) => {
+        this.toastr.error('Error al eliminar el registro');
       }
     });
   }
-
 }

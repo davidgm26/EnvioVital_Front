@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AlmacenService } from '../../services/almacen.service';
 import { ProvinciaService } from '../../services/provincia.service';
 import { AlmacenResponse } from '../../interfaces/almacen-response';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-almacen-form',
@@ -27,7 +28,8 @@ export class AlmacenFormComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private almacenService: AlmacenService,
-    private provinciaService: ProvinciaService
+    private provinciaService: ProvinciaService,
+    private toastr: ToastrService
   ) {
     this.formulario = this.crearFormulario();
   }
@@ -135,10 +137,13 @@ export class AlmacenFormComponent implements OnInit {
 
     this.almacenService.actualizarAlmacen(this.almacenId, datosAEnviar).subscribe({
       next: () => {
-        alert("Almacén actualizado exitosamente");
+        this.toastr.success("Almacén actualizado exitosamente");
         this.onSave.emit(); // Emitir evento cuando se complete la operación
       },
-      error: (error) => console.error("Error al actualizar el almacén:", error)
+      error: (error) => {
+        console.error("Error al actualizar el almacén:", error);
+        this.toastr.error("Error al actualizar el almacén");
+      }
     });
   }
 

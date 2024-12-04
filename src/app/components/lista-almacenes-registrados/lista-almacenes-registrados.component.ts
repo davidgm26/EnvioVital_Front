@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { environment } from '../../../env/environment';
 import { AlmacenResponse } from '../../interfaces/almacen-response';
 import { ConductorService } from '../../services/conductor.service';
-import { error } from 'console';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-lista-almacenes-registrados',
@@ -22,25 +22,20 @@ export class ListaAlmacenesRegistradosComponent implements OnInit {
   displayedColumns: string[] = ['nombreAlmacen', 'direccionAlmacen', 'nombreEvento', 'descripcionEvento', 'nombreProvincia', 'estado', 'eliminar'];
 
   constructor(private http: HttpClient,
-    private conductorService: ConductorService
-  ) { }
-
-
+              private conductorService: ConductorService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void { }
 
   eliminarRegistro(id: number) {
     this.conductorService.eliminarConductorDeEventoAlmacen(id).subscribe({
       next: (response) => {
-        alert('Registro eliminado correctamente');
+        this.toastr.success('Registro eliminado correctamente');
         this.almacenes = this.almacenes.filter((almacen) => almacen.id !== id);
       },
-      error: (error) => { 
-        alert('Error al eliminar el registro');
+      error: (error) => {
+        this.toastr.error('Error al eliminar el registro');
       }
-    })
-
+    });
   }
-
-
 }

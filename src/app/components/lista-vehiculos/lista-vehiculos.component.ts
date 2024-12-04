@@ -5,6 +5,8 @@ import { NgClass } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { environment } from '../../../env/environment';
+import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lista-vehiculos',
@@ -18,30 +20,38 @@ export class ListaVehiculosComponent implements OnInit {
 
   displayedColumns: string[] = ['marca', 'modelo', 'matricula', 'eliminar'];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toastr: ToastrService) {}
 
   ngOnInit(): void {}
 
   eliminarVehiculo(id: number): void {
-    const confirmDelete = window.confirm('¿Seguro que quieres eliminar este vehículo?');
+    Swal.fire({
+      title: 'Confirmación',
+      text: '¿Seguro que quieres eliminar este vehículo?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+      toast: true,
+      position: 'top',
+      timer: 5000,
+      timerProgressBar: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const url = `${environment.apiUrl}/vehiculos/eliminar/${id}`;
 
-    if (confirmDelete) {
-      const url = `${environment.apiUrl}/vehiculos/eliminar/${id}`;
-
-      this.http.delete(url).subscribe(
-        (response: any) => {
-          console.log('Vehículo eliminado:', response);
-
-          this.vehiculos = this.vehiculos.filter(vehiculo => vehiculo.id !== id);
-          alert('Vehículo eliminado con éxito');
-        },
-        (error: any) => {
-          console.error('Error al eliminar el vehículo:', error);
-          alert('Hubo un error al eliminar el vehículo');
-        }
-      );
-    } else {
-      console.log('Eliminación cancelada');
-    }
+        this.http.delete(url).subscribe(
+          (response: any) => {
+            this.toastr.success('Vehículo eliminado con éxito');
+            this.vehiculos = this.vehiculos.filter(vehiculo => vehiculo.id !== id);
+          },
+          (error: any) => {
+            this.toastr.error('Hubo un error al eliminar el vehículo');
+          }
+        );
+      } else {
+        console.log('Eliminación cancelada');
+      }
+    });
   }
 }

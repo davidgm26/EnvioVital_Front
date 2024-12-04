@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { UsuarioService } from '../../services/usuario.service';
 import { Router } from '@angular/router';
 import { NgIf } from "@angular/common";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cambiar-pass',
@@ -23,7 +24,8 @@ export class CambiarPassComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.cambiarPassForm = this.fb.group({
       oldPassword: ['', [Validators.required]],
@@ -57,13 +59,14 @@ export class CambiarPassComponent implements OnInit {
       next: (response) => {
         this.successMessage = response.message;
         this.errorMessage = null;
-        window.alert('¡Contraseña cambiada exitosamente!');
+        this.toastr.success('¡Contraseña cambiada exitosamente!');
         this.router.navigate(['/']);
         this.cambiarPassForm.reset();
       },
       error: (error) => {
         this.errorMessage = error.error.message || 'Error cambiando la contraseña';
         this.successMessage = null;
+        this.toastr.error(this.errorMessage ?? 'Error desconocido');
       }
     });
   }

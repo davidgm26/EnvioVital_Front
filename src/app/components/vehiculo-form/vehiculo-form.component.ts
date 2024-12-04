@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-vehiculo-form',
@@ -19,7 +20,8 @@ export class VehiculoFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.formulario = this.crearFormulario();
   }
@@ -67,10 +69,13 @@ export class VehiculoFormComponent implements OnInit {
 
     this.http.post('/api/vehiculos/guardar', datosAEnviar).subscribe({
       next: () => {
-        alert('Vehículo registrado exitosamente');
+        this.toastr.success('Vehículo registrado exitosamente');
         this.router.navigate(['/']);
       },
-      error: (error) => console.error('Error al registrar el vehículo:', error)
+      error: (error) => {
+        console.error('Error al registrar el vehículo:', error);
+        this.toastr.error('Error al registrar el vehículo');
+      }
     });
   }
 }

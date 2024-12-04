@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
-import { environment } from '../../../env/environment';
 import { PopupComponent } from '../popup/popup.component';
 import { VehiculoService } from '../../services/vehiculo.service';
 import {
@@ -15,8 +14,9 @@ import {
 } from "@angular/material/table";
 import { MatIconButton } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
-import {NgIf} from "@angular/common";
-import {ConductorService} from "../../services/conductor.service";
+import { NgIf } from "@angular/common";
+import { ConductorService } from "../../services/conductor.service";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-lista-conductores',
@@ -47,7 +47,7 @@ export class ListaConductoresComponent implements OnInit {
 
   displayedColumns: string[] = ['nombre', 'apellidos', 'telefono', 'email', 'vehiculos'];
 
-  constructor(private http: HttpClient, public dialog: MatDialog, private vehiculoService: VehiculoService, private conductorService :ConductorService) {}
+  constructor(private http: HttpClient, public dialog: MatDialog, private vehiculoService: VehiculoService, private conductorService: ConductorService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.vehiculoService.obtenerTiposVehiculo().subscribe({
