@@ -53,10 +53,10 @@
             <p><strong>Provincia</strong></p>
             <p>{{ almacen.provincia }}</p>
           </div>
-          <div>
-            <p><strong>Estado Activo</strong></p>
-            <p>{{ almacen.esActivo ? 'Sí' : 'No' }}</p>
-          </div>
+<!--          <div>-->
+<!--            <p><strong>Estado Activo</strong></p>-->
+<!--            <p>{{ almacen.esActivo ? 'Sí' : 'No' }}</p>-->
+<!--          </div>-->
         </div>
       </div>
 
@@ -75,7 +75,7 @@
       <div *ngIf="activeTab === 'conductores'">
         <app-lista-conductores [conductores]="conductores"></app-lista-conductores>
       </div>
-      
+
     </div>
   </div>
 </div>

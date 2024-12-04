@@ -24,10 +24,14 @@ import {MatButton} from "@angular/material/button";
   styleUrls: ['./popup.component.css']
 })
 export class PopupComponent {
+  descripcion: string;
+
   constructor(
     public dialogRef: MatDialogRef<PopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) {
+    this.descripcion = data.context.descripcion;
+  }
 
   onClose(): void {
     this.dialogRef.close();

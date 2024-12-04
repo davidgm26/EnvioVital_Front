@@ -3,6 +3,7 @@
   <ng-container *ngIf="data.contentTemplate">
     <ng-container *ngTemplateOutlet="data.contentTemplate; context: data.context"></ng-container>
   </ng-container>
+  <p *ngIf="!data.contentTemplate">{{ descripcion }}</p>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onClose()">Cerrar</button>

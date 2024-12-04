@@ -101,7 +101,7 @@ export class AlmacenFormComponent implements OnInit {
         descripcion: this.almacen.descripcion,
         direccion: this.almacen.direccion,
         email: this.almacen.email,
-        esActivo: this.almacen.esActivo,
+        // esActivo: this.almacen.esActivo,
         provincia: this.almacen.provincia
       });
       this.nombreProvincia = this.almacen.provincia;
@@ -114,7 +114,7 @@ export class AlmacenFormComponent implements OnInit {
               descripcion: almacen.descripcion,
               direccion: almacen.direccion,
               email: almacen.email,
-              esActivo: almacen.esActivo,
+              // esActivo: almacen.esActivo,
               provincia: almacen.provincia
             });
             this.nombreProvincia = almacen.provincia;
@@ -145,6 +145,6 @@ export class AlmacenFormComponent implements OnInit {
   private prepararDatosAEnviar(): any {
     const { nombre, descripcion, direccion, email, esActivo, provincia } = this.formulario.value;
     const idProvincia = this.provincias.find(p => p.nombre === provincia)?.id;
-    return { id: this.almacenId, nombre, descripcion, direccion, email, esActivo, idProvincia };
+    return { id: this.almacenId, nombre, descripcion, direccion, email, idProvincia };
   }
 }

@@ -3,28 +3,30 @@ import { CommonModule, NgIf } from '@angular/common';
 import { AlmacenRegistrado } from '../../interfaces/almacen-registrado';
 import { ConductorService } from '../../services/conductor.service';
 import { ToastrService } from 'ngx-toastr';
-import { error } from 'node:console';
-import { AlmacenService,  } from '../../services/almacen.service';
+import { AlmacenService } from '../../services/almacen.service';
 import { AlmacenResponse } from '../../interfaces/almacen-response';
 import { ConductorResponse } from '../../interfaces/conductor-response';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupComponent } from '../popup/popup.component';
 
 @Component({
   selector: 'app-tarjeta-almacen',
   templateUrl: './tarjeta-almacen.component.html',
   standalone: true,
   styleUrls: ['./tarjeta-almacen.component.css'],
-  imports: [CommonModule,NgIf],
+  imports: [CommonModule, NgIf],
 })
 export class TarjetaAlmacenComponent implements OnInit {
   @Input() almacen!: AlmacenResponse;
   @Input() eventoAlmacenId!: number;
   mostrarBoton: boolean = false;
   conductorId: number | null = null;
-  usuarioInscrito!:  Boolean;
+  usuarioInscrito!: Boolean;
 
   constructor(
     private conductorService: ConductorService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +44,6 @@ export class TarjetaAlmacenComponent implements OnInit {
     if (usuarioId) {
       this.conductorService.obtenerConductorPorId(+usuarioId).subscribe({
         next: (conductor: ConductorResponse) => {
-          debugger;
           this.conductorId = conductor.id;
           this.comprobarInscripcion(this.eventoAlmacenId, this.conductorId!, this.almacen.id);
         },
@@ -80,17 +81,24 @@ export class TarjetaAlmacenComponent implements OnInit {
       });
   }
 
-  comprobarInscripcion(idConductor: number,idEventoAlmacen: number,idAlmacen:number): void {
-    this.conductorService.comprobarInscripcion(idEventoAlmacen, idConductor,idAlmacen).subscribe({
+  comprobarInscripcion(idConductor: number, idEventoAlmacen: number, idAlmacen: number): void {
+    this.conductorService.comprobarInscripcion(idEventoAlmacen, idConductor, idAlmacen).subscribe({
       next: (resp) => {
         this.usuarioInscrito = resp;
       },
       error: (error) => {
         console.error('peticion incorrecta');
       }
-    })
-}
+    });
+  }
 
-
-
+  openDialog(): void {
+    this.dialog.open(PopupComponent, {
+      data: {
+        title: 'Descripción del Almacén',
+        contentTemplate: null,
+        context: { descripcion: this.almacen.descripcion }
+      }
+    });
+  }
 }
