@@ -8,6 +8,7 @@ import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.comp
 import { EditarEventoComponent } from '../editar-evento/editar-evento.component';
 import { EventoRequest } from '../../../interfaces/evento-request';
 import { ToastrService } from 'ngx-toastr';
+import { CrearEventoComponent } from '../crear-evento/crear-evento.component';
 
 @Component({
   selector: 'app-gestion-eventos',
@@ -29,11 +30,13 @@ export class GestionEventosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.cargarEventos();
   }
 
   cargarEventos() {
-    this.eventoService.getAllEventos().subscribe({
+    debugger;
+  this.eventoService.getAllEventos().subscribe({
       next:(resp) => {
         this.listaEventos = resp;
       },
@@ -94,6 +97,29 @@ export class GestionEventosComponent implements OnInit {
         }
       }
     );
+  }
+
+  createEvento(){
+    this.dialog.open(CrearEventoComponent,{})
+    .afterClosed().subscribe({
+      next: (resp) => {
+        this.crearEvento(resp);
+      },
+      }) 
+    }
+  
+
+  crearEvento(body: EventoRequest){
+    this.eventoService.createEvento(body).subscribe({
+      next: (resp) => {
+        console.info('Evento creado con exito' + resp.nombre);
+        this.cargarEventos();
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  
   }
 
   peticionEditar(evento: Evento, body: EventoRequest) {
