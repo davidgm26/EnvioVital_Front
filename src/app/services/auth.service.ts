@@ -1,4 +1,4 @@
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID, EventEmitter } from '@angular/core';
 import { LoginRequest } from '../interfaces/login-request';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../env/environment';
@@ -10,6 +10,8 @@ import { isPlatformBrowser } from '@angular/common';
   providedIn: 'root'
 })
 export class AuthService {
+
+  loginStatus = new EventEmitter<boolean>();
 
   constructor(
     private http: HttpClient,
@@ -24,8 +26,8 @@ export class AuthService {
     if (isPlatformBrowser(this.platformId) && localStorage.getItem('logged') === 'true') {
       return true;
     }
-    return false;
-  }
+    return false;
+  }
 
   getTokens(): string | null {
     if (isPlatformBrowser(this.platformId)) {
@@ -45,12 +47,18 @@ export class AuthService {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('token', token);
       localStorage.setItem('logged', 'true');
+      this.emitLoginStatus(true);
     }
   }
 
   clearLocalStorage(): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.clear();
+      this.emitLoginStatus(false);
     }
+  }
+
+  emitLoginStatus(loggedIn: boolean): void {
+    this.loginStatus.emit(loggedIn);
   }
 }

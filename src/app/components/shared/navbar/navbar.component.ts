@@ -23,6 +23,10 @@ export class NavbarComponent implements OnInit {
     if (typeof window !== 'undefined' && localStorage.getItem('logged') === 'true') {
       this.logged = true;
     }
+
+    this.authService.loginStatus.subscribe((status: boolean) => {
+      this.logged = status;
+    });
   }
 
   openMenu(): void {
