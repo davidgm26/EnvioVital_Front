@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { EventoService } from "../../services/evento.service";
 import { AlmacenService} from "../../services/almacen.service";
 import { Evento } from "../../interfaces/evento";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-tarjeta-evento',
@@ -20,6 +21,7 @@ export class TarjetaEventoComponent implements OnInit {
   idAlmacen!: number;
   registrado: boolean = false;
   rol: string | null = null;
+  private toastr: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,11 +55,9 @@ export class TarjetaEventoComponent implements OnInit {
 
   checkRegistrationStatus(): void {
     if (this.evento && this.idAlmacen) {
-      console.log('Checking registration status...');
       this.almacenService.obtenerListaEventos(this.idAlmacen).subscribe({
         next: (eventos) => {
           this.registrado = eventos.some((evento: { idEvento: number; }) => evento.idEvento === this.evento!.id);
-          console.log('Registration status:', this.registrado);
         },
         error: (error: any) => console.error('Error al verificar registro:', error)
       });
@@ -66,17 +66,14 @@ export class TarjetaEventoComponent implements OnInit {
 
   registrarse(): void {
     if (this.evento && this.idAlmacen) {
-      console.log('Attempting to register...');
       this.almacenService.registrarseEnEvento(this.evento.id, this.idAlmacen).subscribe({
         next: () => {
-          console.log('Registration successful');
+          this.toastr.success('Registro con éxito', 'Éxito');
           this.registrado = true;
-          this.snackBar.open('Registro con éxito', 'Cerrar', { duration: 3000 });
         },
-        error: (error: any) => console.error('Error al registrarse:', error)
+        error: (error: any) => this.toastr.error('Error al registrarse', 'Error')
       });
     } else {
-      console.error('Evento or idAlmacen is not defined');
     }
   }
 }

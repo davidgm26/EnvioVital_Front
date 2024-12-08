@@ -1,6 +1,6 @@
 <div class="border-t border-gray-300 pt-8">
   <div class="overflow-x-auto bg-teal-500 p-4 rounded-lg shadow-md">
-    <table mat-table [dataSource]="eventos" class="min-w-full bg-white rounded-lg">
+    <table mat-table [dataSource]="eventos" class="min-w-full bg-white rounded-lg" *ngIf="eventos.length > 0">
       <ng-container matColumnDef="nombreEvento">
         <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Nombre Evento</th>
         <td mat-cell *matCellDef="let evento" class="py-2 px-4">{{ evento.nombreEvento }}</td>
@@ -35,5 +35,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <p class="text-center text-gray-500" *ngIf="eventos.length === 0">No hay almacenes disponibles.</p>
   </div>
 </div>

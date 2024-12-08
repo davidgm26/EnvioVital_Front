@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
-import { NgClass } from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Evento } from '../../interfaces/evento';
@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-lista-eventos-almacen',
   standalone: true,
-  imports: [MatTableModule, NgClass, MatIconButton, MatIconModule],
+  imports: [MatTableModule, NgClass, MatIconButton, MatIconModule, NgIf],
   templateUrl: './lista-eventos-almacen.component.html',
   styleUrls: ['./lista-eventos-almacen.component.css'],
 })

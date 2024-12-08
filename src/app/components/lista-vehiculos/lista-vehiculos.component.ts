@@ -50,7 +50,7 @@ export class ListaVehiculosComponent implements OnInit {
           }
         );
       } else {
-        console.log('Eliminación cancelada');
+        this.toastr.info('Operación cancelada');
       }
     });
   }

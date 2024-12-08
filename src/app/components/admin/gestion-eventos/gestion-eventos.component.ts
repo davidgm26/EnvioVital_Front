@@ -35,7 +35,6 @@ export class GestionEventosComponent implements OnInit {
   }
 
   cargarEventos() {
-    debugger;
   this.eventoService.getAllEventos().subscribe({
       next:(resp) => {
         this.listaEventos = resp;
@@ -105,9 +104,9 @@ export class GestionEventosComponent implements OnInit {
       next: (resp) => {
         this.crearEvento(resp);
       },
-      }) 
+      })
     }
-  
+
 
   crearEvento(body: EventoRequest){
     this.eventoService.createEvento(body).subscribe({
@@ -119,7 +118,7 @@ export class GestionEventosComponent implements OnInit {
         console.error(error);
       }
     });
-  
+
   }
 
   peticionEditar(evento: Evento, body: EventoRequest) {

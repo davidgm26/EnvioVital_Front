@@ -101,7 +101,6 @@ export class GestionUsuariosComponent implements OnInit {
   }
 
   peticionEditar(conductor: ConductorResponse, body: ConductorRequestDTO) {
-    debugger;
     this.conductorService.actualizarConductor(conductor.id, body).subscribe({
       next: (resp) => {
         const index = this.listaConductores.findIndex(c => c.id === conductor.id);

@@ -47,7 +47,6 @@ export class ConductorViewComponent implements OnInit {
   private cargarDatosConductor(): void {
     this.conductorService.obtenerConductorPorUsuario(this.userId).subscribe({
       next: (conductor) => {
-        console.log('Datos del conductor recibidos:', conductor);
         this.conductor = conductor;
         this.conductorId = conductor.id;
         this.usuarioUsername = conductor.nombre;
@@ -55,13 +54,11 @@ export class ConductorViewComponent implements OnInit {
         this.obtenerListaVehiculos();
       },
       error: (error) => {
-        console.error('Error al cargar los datos del conductor:', error);
       }
     });
   }
 
   private obtenerListaAlmacenes(): void {
-    debugger;
     this.conductorService.obtenerAlmacenesRegistrados(this.conductorId).subscribe({
       next: (almacenes) => {
         this.almacenes = almacenes;

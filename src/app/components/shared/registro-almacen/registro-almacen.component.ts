@@ -91,7 +91,7 @@ export class RegistroAlmacenComponent implements OnInit {
   }
 
   private handleInvalidForm(): void {
-    console.log('Formulario inválido, revisa los campos.');
+    this.toastr.error('Por favor, rellene todos los campos correctamente', 'Error');
     this.displayFormErrors();
   }
 

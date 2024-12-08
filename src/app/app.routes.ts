@@ -15,10 +15,11 @@ import { GestionEventosComponent } from './components/admin/gestion-eventos/gest
 import { GestionUsuariosComponent } from './components/admin/gestion-usuarios/gestion-usuarios.component';
 import { SelectorRolComponent } from './components/shared/selector-rol/selector-rol.component';
 import { adminGuard } from './guards/admin.guard';
+import { PoliticaPrivacidadComponent } from './components/politica-privacidad/politica-privacidad.component';
 
 export const routes: Routes = [
   {
-    path: '', 
+    path: '',
     component: NavbarComponent,
     children: [
       { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -28,20 +29,20 @@ export const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'evento/:id/almacenes', component: ListaAlmacenesComponent  },
       { path: 'perfil', canActivate: [authGuard], children: [
-        { path: 'conductor', component: ConductorViewComponent },
-        { path: 'almacen', component: AlmacenViewComponent },
-      ] 
-    },
+          { path: 'conductor', component: ConductorViewComponent },
+          { path: 'almacen', component: AlmacenViewComponent },
+        ]
+      },
     ]
   },
   {path:'register', component: SelectorRolComponent},
   { path: 'registro/conductor', component: RegistroConductorComponent },
   { path: 'registro/almacen', component: RegistroAlmacenComponent },
   {path: 'admin', canActivate: [adminGuard],component: AdminPanelComponent,children: [
-    {path: 'gestion-almacenes', component:GestionAlmacenesComponent },
-    {path: 'gestion-eventos', component: GestionEventosComponent},
-    {path: 'gestion-usuarios', component:GestionUsuariosComponent },
-  ]},
-  { path: '**', redirectTo: 'main' }, 
+      {path: 'gestion-almacenes', component:GestionAlmacenesComponent },
+      {path: 'gestion-eventos', component: GestionEventosComponent},
+      {path: 'gestion-usuarios', component:GestionUsuariosComponent },
+    ]},
+  { path: 'privacy-policy', component: PoliticaPrivacidadComponent },
+  { path: '**', redirectTo: 'main' }
 ];
-

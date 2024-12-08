@@ -3,7 +3,7 @@
 <div class="m-auto w-full max-w-3xl bg-blue-500 mt-10 p-6 rounded-lg shadow-lg text-white">
   <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" class="space-y-4">
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      <!-- Campo Nombre -->
+
       <div class="relative">
         <label for="nombre" class="block text-sm font-medium text-white">Nombre de almacen</label>
         <input id="nombre" formControlName="nombre" type="text" placeholder="Nombre" class="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
@@ -12,7 +12,7 @@
         </div>
       </div>
 
-      <!-- Campo Dirección -->
+
       <div class="relative">
         <label for="direccion" class="block text-sm font-medium text-white">Direccion</label>
         <input id="direccion" formControlName="direccion" type="text" placeholder="Introduzca la direccion" class="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <!-- Campo Provincia -->
+
       <div class="relative">
         <label for="provincia" class="block text-sm font-medium text-white">Provincia</label>
         <mat-select name="provincia" formControlName="idProvincia" placeholder="Escoge su provincia" class="bg-white form-control mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <!-- Campo Email -->
+
       <div class="relative">
         <label for="email" class="block text-sm font-medium text-white">Email</label>
         <input id="email" formControlName="email" type="email" placeholder="E-mail" class="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
@@ -43,10 +43,10 @@
         </div>
       </div>
 
-      <!-- Campo Descripción -->
+
       <div class="relative col-span-1 sm:col-span-2">
         <label for="descripcion" class="block text-sm font-medium text-white">Descripcion</label>
-        <textarea id="descripcion" formControlName="descripcion" placeholder="Introduzca la descripcion" class="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm h-32"></textarea>
+        <textarea id="descripcion" formControlName="descripcion" placeholder="Introduce que necesitará tu punto de recogida . 'Ej: Necesito conductores con furgonetas que puedan soportar alimentos frios' " class="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm h-32"></textarea>
         <div *ngIf="registroForm.get('descripcion')?.touched && registroForm.get('descripcion')?.errors" class="text-yellow-300 text-sm mt-1">
           <span *ngIf="registroForm.get('descripcion')?.errors?.['required']">La descripción es obligatoria.</span>
         </div>
@@ -55,7 +55,7 @@
 
     <fieldset formGroupName="usuario">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
-        <!-- Campo Nombre de Usuario -->
+
         <div class="relative">
           <label for="username" class="block text-sm font-medium text-white">Nombre de usuario</label>
           <input id="username" formControlName="username" type="text" placeholder="Nombre de usuario" class="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />

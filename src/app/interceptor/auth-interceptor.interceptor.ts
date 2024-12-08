@@ -4,7 +4,6 @@ import { inject } from "@angular/core";
 import { environment } from "../../env/environment";
 
 export const AuthInterceptor: HttpInterceptorFn = (request, next) => {
-debugger;
   const authService = inject(AuthService);
 
   const PUBLIC_URLS = [

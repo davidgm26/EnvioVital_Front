@@ -4,6 +4,8 @@ import { UsuarioService } from '../../services/usuario.service';
 import { Router } from '@angular/router';
 import { NgIf } from "@angular/common";
 import { ToastrService } from 'ngx-toastr';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSuffix } from "@angular/material/form-field";
 
 @Component({
   selector: 'app-cambiar-pass',
@@ -11,7 +13,9 @@ import { ToastrService } from 'ngx-toastr';
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    MatIconModule,
+    MatSuffix
   ],
   styleUrls: ['./cambiar-pass.component.css']
 })
@@ -20,6 +24,9 @@ export class CambiarPassComponent implements OnInit {
   cambiarPassForm: FormGroup;
   successMessage: string | null = null;
   errorMessage: string | null = null;
+  hideOldPassword: boolean = true;
+  hideNewPassword: boolean = true;
+  hideConfirmPassword: boolean = true;
 
   constructor(
     private fb: FormBuilder,
@@ -69,5 +76,17 @@ export class CambiarPassComponent implements OnInit {
         this.toastr.error(this.errorMessage ?? 'Error desconocido');
       }
     });
+  }
+
+  toggleOldPasswordVisibility() {
+    this.hideOldPassword = !this.hideOldPassword;
+  }
+
+  toggleNewPasswordVisibility() {
+    this.hideNewPassword = !this.hideNewPassword;
+  }
+
+  toggleConfirmPasswordVisibility() {
+    this.hideConfirmPassword = !this.hideConfirmPassword;
   }
 }

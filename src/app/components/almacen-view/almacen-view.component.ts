@@ -48,7 +48,6 @@ export class AlmacenViewComponent implements OnInit {
    cargarDatosAlmacen(): void {
     this.almacenService.obtenerAlmacenPorUsuario(this.userId).subscribe({
       next: (almacen) => {
-        console.log('Datos del almacén recibidos:', almacen);
         this.almacen = almacen;
         this.almacenId = almacen.id;
         this.usuarioUsername = almacen.nombre;
@@ -56,12 +55,11 @@ export class AlmacenViewComponent implements OnInit {
         this.obtenerListaConductores();
       },
       error: (error) => {
-        console.error('Error al cargar los datos del almacén:', error);
       }
     });
   }
 
-  
+
    obtenerProvinciaNombre(idProvincia: number): void {
     this.provinciaService.obtenerProvincias().subscribe({
       next: (provincias) => {
@@ -72,7 +70,7 @@ export class AlmacenViewComponent implements OnInit {
     });
   }
 
-  
+
    obtenerListaEventos(): void {
     this.almacenService.obtenerListaEventos(this.almacenId).subscribe({
       next: (eventos) => {

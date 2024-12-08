@@ -95,7 +95,6 @@ export class LoginComponent {
 
         },
         (error) => {
-          console.log(error.error.mensaje);
           Swal.fire('Error', error.error.mensaje, 'error');
         })
     } else {
