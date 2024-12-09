@@ -22,6 +22,11 @@
         <td mat-cell *matCellDef="let almacen" class="py-2 px-4">{{ almacen.descripcionEvento }}</td>
       </ng-container>
 
+      <ng-container matColumnDef="emailAlmacen">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Email Almacén</th>
+        <td mat-cell *matCellDef="let almacen" class="py-2 px-4">{{ almacen.emailAlmacen }}</td>
+      </ng-container>
+
       <ng-container matColumnDef="nombreProvincia">
         <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Provincia</th>
         <td mat-cell *matCellDef="let almacen" class="py-2 px-4">{{ almacen.nombreProvincia }}</td>
@@ -33,6 +38,8 @@
           {{ almacen.estado ? 'Activo' : 'Desactivado' }}
         </td>
       </ng-container>
+
+
       <ng-container matColumnDef="eliminar">
         <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Acciones</th>
         <td mat-cell *matCellDef="let almacen" class="py-2 px-4">

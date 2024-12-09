@@ -12,35 +12,31 @@ import { NgFor } from '@angular/common';
 @Component({
   selector: 'app-editar-almacen',
   standalone: true,
-  imports: [ReactiveFormsModule,MatSelectModule, MatFormFieldModule, MatInputModule,NgFor],
+  imports: [ReactiveFormsModule, MatSelectModule, MatFormFieldModule, MatInputModule, NgFor],
   templateUrl: './editar-almacen.component.html',
   styleUrl: './editar-almacen.component.css'
 })
 export class EditarAlmacenComponent implements OnInit {
   editForm: FormGroup;
-  provincias: Provincia [] = [];
-
-
+  provincias: Provincia[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public almacen: AlmacenResponse,
     private formBuilder: FormBuilder,
     private dialog: MatDialogRef<EditarAlmacenComponent>,
     private provinciaService: ProvinciaService
-  ) { 
+  ) {
     this.editForm = this.formBuilder.group({
-      nombre: [this.almacen.nombre,Validators.required],
-      idProvincia: [this.almacen.provincia, Validators.required],
+      nombre: [this.almacen.nombre, Validators.required],
+      provincia: [this.almacen.provincia, Validators.required],
       direccion: [this.almacen.direccion, Validators.required],
       descripcion: [this.almacen.descripcion, Validators.required],
       email: [this.almacen.email, Validators.required],
-  });
-
-
+    });
   }
 
   ngOnInit(): void {
-      this.cargarProvincias();
+    this.cargarProvincias();
   }
 
   cargarProvincias() {
@@ -59,10 +55,14 @@ export class EditarAlmacenComponent implements OnInit {
   }
 
   guardarCambios() {
-    if(this.editForm.valid){
-      this.dialog.close(this.editForm.value);
+    if (this.editForm.valid) {
+      const formValue = this.editForm.value;
+      const idProvincia = this.provincias.find(p => p.nombre === formValue.provincia)?.id;
+      const updatedAlmacen = {
+        ...formValue,
+        idProvincia
+      };
+      this.dialog.close(updatedAlmacen);
     }
   }
-
-
 }

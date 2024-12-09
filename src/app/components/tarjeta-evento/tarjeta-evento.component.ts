@@ -21,13 +21,13 @@ export class TarjetaEventoComponent implements OnInit {
   idAlmacen!: number;
   registrado: boolean = false;
   rol: string | null = null;
-  private toastr: any;
 
   constructor(
     private route: ActivatedRoute,
     private eventoService: EventoService,
     private almacenService: AlmacenService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -73,7 +73,6 @@ export class TarjetaEventoComponent implements OnInit {
         },
         error: (error: any) => this.toastr.error('Error al registrarse', 'Error')
       });
-    } else {
     }
   }
 }

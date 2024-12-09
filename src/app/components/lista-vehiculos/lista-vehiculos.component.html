@@ -1,6 +1,6 @@
 <div class="border-t border-gray-300 pt-8">
   <div class="overflow-x-auto bg-teal-500 p-4 rounded-lg shadow-md">
-    <table mat-table [dataSource]="vehiculos" class="min-w-full bg-white rounded-lg">
+    <table mat-table [dataSource]="vehiculos" class="min-w-full bg-white rounded-lg" *ngIf="vehiculos.length > 0">
 
       <ng-container matColumnDef="marca">
         <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Marca</th>
@@ -29,5 +29,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <p class="text-center text-gray-500" *ngIf="vehiculos.length === 0">Añade tus vehiculos para que el punto de recogida sepa con cuales podrás ayudar.</p>
   </div>
 </div>

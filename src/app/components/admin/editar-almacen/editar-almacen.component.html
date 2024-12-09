@@ -1,27 +1,27 @@
-<div class="form-containe max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md my-8">
-    <form action="" [formGroup]="editForm" class="edit-form space-y-6">
-        <div class="form-group">
-            <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre:</label>
-            <input type="text" name="name" placeholder="{{almacen.nombre}}" formControlName="nombre" class="form-control mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-        </div>
-        <div class="form-group">
-            <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripcion:</label>
-            <textarea name="descripcion" placeholder="{{almacen.descripcion}}" formControlName="descripcion" class="form-control mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" rows="4"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="provincia" class="block text-sm font-medium text-gray-700">Provincia:</label>
-            <mat-select name="idProvincia" formControlName="idProvincia" placeholder="{{almacen.provincia}}"  class="form-control mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <mat-option value="" disabled selected>Seleccione una provincia</mat-option>
-                <mat-option *ngFor="let provincia of provincias" [value]="provincia.id">{{provincia.nombre}}</mat-option>
-            </mat-select>
-        </div>
-        <div class="flex justify-end space-x-4">
-            <button type="submit" (click)="guardarCambios()" class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Aceptar
-            </button>
-            <button type="button" (click)="cancelar()" class="bg-gray-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                Cancelar
-            </button>
-        </div>
-    </form>
+<div class="form-container max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md my-8">
+  <form [formGroup]="editForm" class="edit-form space-y-6">
+    <div class="form-group">
+      <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre:</label>
+      <input type="text" name="nombre" formControlName="nombre" class="form-control mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+    </div>
+    <div class="form-group">
+      <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripcion:</label>
+      <textarea name="descripcion" formControlName="descripcion" class="form-control mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" rows="4"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="provincia" class="block text-sm font-medium text-gray-700">Provincia:</label>
+      <mat-select name="provincia" formControlName="provincia" class="form-control mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        <mat-option value="" disabled>Seleccione una provincia</mat-option>
+        <mat-option *ngFor="let provincia of provincias" [value]="provincia.nombre">{{provincia.nombre}}</mat-option>
+      </mat-select>
+    </div>
+    <div class="flex justify-end space-x-4">
+      <button type="submit" (click)="guardarCambios()" class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        Aceptar
+      </button>
+      <button type="button" (click)="cancelar()" class="bg-gray-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+        Cancelar
+      </button>
+    </div>
+  </form>
 </div>

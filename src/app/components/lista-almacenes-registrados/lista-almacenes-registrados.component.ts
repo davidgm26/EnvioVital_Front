@@ -19,7 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ListaAlmacenesRegistradosComponent implements OnInit {
   @Input() almacenes: AlmacenResponse[] = [];
 
-  displayedColumns: string[] = ['nombreAlmacen', 'direccionAlmacen', 'nombreEvento', 'descripcionEvento', 'nombreProvincia', 'estado', 'eliminar'];
+  displayedColumns: string[] = ['nombreAlmacen', 'direccionAlmacen', 'nombreEvento', 'descripcionEvento','emailAlmacen', 'nombreProvincia', 'estado',  'eliminar'];
 
   constructor(private http: HttpClient,
               private conductorService: ConductorService,

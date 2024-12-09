@@ -48,17 +48,15 @@ export class TarjetaAlmacenComponent implements OnInit {
           this.comprobarInscripcion(this.eventoAlmacenId, this.conductorId!, this.almacen.id);
         },
         error: () => {
-          this.toastr.error('No se pudo obtener el ID del conductor.', 'Error');
+          this.toastr.error('No se pudo registrar.', 'Error');
         },
       });
-    } else {
-      this.toastr.error('No se encontró el ID del usuario.', 'Error');
     }
   }
 
   inscribirse(): void {
     if (!this.conductorId) {
-      this.toastr.error('No se encontró el ID del conductor.', 'Error');
+      this.toastr.error('No se pudo registrar' ,'Error');
       return;
     }
 

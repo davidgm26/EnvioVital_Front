@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
-import { NgClass } from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { environment } from '../../../env/environment';
@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-lista-vehiculos',
   standalone: true,
-  imports: [MatTableModule, NgClass, MatIconButton, MatIconModule],
+  imports: [MatTableModule, NgClass, MatIconButton, MatIconModule, NgIf],
   templateUrl: './lista-vehiculos.component.html',
   styleUrls: ['./lista-vehiculos.component.css'],
 })
