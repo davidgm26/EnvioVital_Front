@@ -1,0 +1,40 @@
+<div class="container mx-auto p-4">
+  <div class="my-8 bg-gray-100 p-4 rounded shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+    <h3 class="text-center text-gray-700 italic font-bold">
+      <ng-container *ngIf="isLogged; else notLoggedText">
+        <ng-container *ngIf="isAlmacen; else conductorText">
+          <p class="text-center text-gray-700">
+            Aquí puedes gestionar los almacenes relacionados con tu evento. Recuerda que recibirás notificaciones cuando un conductor se registre para ayudarte.
+          </p>
+          <p class="text-center text-gray-700 text-sm">
+            <em>¡Gracias por tu compromiso para ayudar a quienes más lo necesitan!</em>
+          </p>
+        </ng-container>
+        <ng-template #conductorText>
+          <p class="text-center text-gray-700">
+            Pulsa en la foto del almacén para ver más información y regístrate para ayudar en los almacenes disponibles. Una vez inscrito, visita tu perfil
+            <a routerLink="/perfil/conductor" class="text-blue-500 hover:underline">aquí</a> para contactar con ellos.
+          </p>
+          <p class="text-center text-gray-700 text-sm">
+            <em>Tu ayuda es crucial. Conduce esperanza a cada almacén y transforma vidas.</em>
+          </p>
+        </ng-template>
+      </ng-container>
+      <ng-template #notLoggedText>
+        <p class="text-center text-gray-700">
+          Únete hoy mismo y ayuda a gestionar productos donados para emergencias.
+          <a routerLink="/register" class="text-blue-500 hover:underline">¡Regístrate!</a>
+        </p>
+        <p class="text-center text-gray-700 text-sm">
+          <em>La solidaridad comienza con un pequeño paso. ¡Haz el tuyo hoy!</em>
+        </p>
+      </ng-template>
+    </h3>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div *ngFor="let almacen of almacenes" class="col-span-1">
+      <app-tarjeta-almacen [almacen]="almacen" [eventoAlmacenId]="eventoAlmacenId"></app-tarjeta-almacen>
+    </div>
+  </div>
+  <p class="text-center text-gray-500" *ngIf="almacenes.length === 0">De momento no tenemos puntos de recogida disponibles . Visitanos próximamente .</p>
+</div>

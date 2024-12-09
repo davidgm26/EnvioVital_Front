@@ -1,0 +1,56 @@
+<div class="max-w-5xl mx-auto mt-10 space-y-8">
+  <div class="p-6 bg-gradient-to-r from-teal-400 to-teal-600 text-white rounded-lg shadow-xl">
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()" class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block font-semibold mb-2">Marca</label>
+          <input
+            type="text"
+            formControlName="marca"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+          />
+        </div>
+
+        <div>
+          <label class="block font-semibold mb-2">Modelo</label>
+          <input
+            type="text"
+            formControlName="modelo"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+          />
+        </div>
+
+        <div>
+          <label class="block font-semibold mb-2">Matrícula</label>
+          <input
+            type="text"
+            formControlName="matricula"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+          />
+          <div *ngIf="formulario.get('matricula')?.invalid && formulario.get('matricula')?.touched" class="text-red-500">
+            Matrícula inválida. Debe tener el formato 0000XXX.
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-semibold mb-2">Tipo de Vehículo</label>
+          <select
+            formControlName="idTipoVehiculo"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+          >
+            <option value="" disabled selected>Seleccione un tipo de vehículo</option>
+            <option *ngFor="let tipo of tiposVehiculo" [value]="tipo.id">{{ tipo.nombre }}</option>
+          </select>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-yellow-400 text-gray-800 font-semibold py-2 px-6 rounded-md hover:bg-yellow-500 transition duration-200"
+        [disabled]="formulario.invalid"
+      >
+        Registrar Vehículo
+      </button>
+    </form>
+  </div>
+</div>

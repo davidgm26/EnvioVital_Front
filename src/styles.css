@@ -1,3 +1,10 @@
+@import '@angular/material/prebuilt-themes/azure-blue.css';
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind  utilities;
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+ @apply min-h-screen;
+}
+
+

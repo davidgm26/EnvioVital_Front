@@ -1,0 +1,40 @@
+<div class="border-t border-gray-300 pt-8">
+  <div class="overflow-x-auto bg-teal-500 p-4 rounded-lg shadow-md">
+    <table mat-table [dataSource]="eventos" class="min-w-full bg-white rounded-lg" *ngIf="eventos.length > 0">
+      <ng-container matColumnDef="nombreEvento">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Nombre Evento</th>
+        <td mat-cell *matCellDef="let evento" class="py-2 px-4">{{ evento.nombreEvento }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="descripcionEvento">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Descripción Evento</th>
+        <td mat-cell *matCellDef="let evento" class="py-2 px-4">{{ evento.descripcionEvento }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="nombreProvincia">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Provincia</th>
+        <td mat-cell *matCellDef="let evento" class="py-2 px-4">{{ evento.nombreProvincia }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Estado</th>
+        <td mat-cell *matCellDef="let evento" class="py-2 px-4" [ngClass]="{'text-green-500': evento.estado, 'text-red-500': !evento.estado}">
+          {{ evento.estado ? 'Activo' : 'Desactivado' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="eliminar">
+        <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Acciones</th>
+        <td mat-cell *matCellDef="let evento" class="py-2 px-4">
+          <button mat-icon-button color="warn" (click)="eliminarRegistro(evento.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <p class="text-center text-gray-500" *ngIf="eventos.length === 0">No hay almacenes disponibles.</p>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="container mx-auto">
+  <div class="my-8 bg-gray-100 p-4 rounded shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+    <h3 class="text-center text-gray-700 italic font-bold">
+      <ng-container *ngIf="isLogged; else notLoggedText">
+        <ng-container *ngIf="isAlmacen; else conductorText">
+          <p class="text-center text-gray-700">
+            Inscríbete en un evento para comenzar a participar. Recibirás una notificación tan pronto como un conductor se registre para ayudarte con los envíos.
+          </p>
+          <p class="text-center text-gray-700 text-sm">
+            <em>¡Juntos podemos llevar esperanza a quienes más lo necesitan!</em>
+          </p>
+        </ng-container>
+        <ng-template #conductorText>
+          <p class="text-center text-gray-700">
+            Entra en los puntos de recogida y ayuda a todos los almacenes que puedas. Una vez inscrito, visita tu perfil
+            <a routerLink="/perfil/conductor" class="text-blue-500 hover:underline">aquí</a> para ponerte en contacto con ellos.
+          </p>
+          <p class="text-center text-gray-700 text-sm">
+            <em>Moviendo ayuda. Transformando vidas. ¡Tu esfuerzo puede marcar la diferencia!</em>
+          </p>
+        </ng-template>
+      </ng-container>
+      <ng-template #notLoggedText>
+        <p class="text-center text-gray-700">
+          Regístrate para unirte a nuestra comunidad solidaria. Ayuda a conectar a personas necesitadas con los recursos que pueden transformar sus vidas.
+          <a routerLink="/register" class="text-blue-500 hover:underline">¡Regístrate aquí!</a>
+        </p>
+      </ng-template>
+    </h3>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <app-tarjeta-evento *ngFor="let evento of eventos" [evento]="evento" class="w-full  rounded-lg transition duration-300 ease-in-out transform hover:scale-105"></app-tarjeta-evento>
+  </div>
+  <p class="text-center text-gray-500" *ngIf="eventos.length === 0">No hay eventos disponibles.</p>
+</div>

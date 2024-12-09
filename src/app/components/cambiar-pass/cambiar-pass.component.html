@@ -1,0 +1,94 @@
+<div class="max-w-5xl mx-auto mt-10 space-y-8">
+  <!-- Formulario de Cambio de Contraseña -->
+  <div class="p-6 bg-gradient-to-r from-teal-400 to-teal-600 text-white shadow-xl rounded-lg">
+    <form [formGroup]="cambiarPassForm" (ngSubmit)="onSubmit()">
+      <!-- Campo de contraseña antigua -->
+      <div class="mb-4">
+        <label class="block text-gray-100 font-medium mb-2" for="oldPassword">Contraseña Actual</label>
+        <div class="flex items-center border border-gray-300 rounded-md">
+          <input
+            [type]="hideOldPassword ? 'password' : 'text'"
+            id="oldPassword"
+            formControlName="oldPassword"
+            class="flex-grow px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+            placeholder="Introduce tu contraseña actual"
+          />
+          <mat-icon
+            matSuffix
+            (click)="toggleOldPasswordVisibility()"
+            class="cursor-pointer mr-3 text-white"
+          >
+            {{hideOldPassword ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
+        </div>
+        <div *ngIf="cambiarPassForm.get('oldPassword')?.invalid && cambiarPassForm.get('oldPassword')?.touched" class="text-red-500 text-sm">
+          Este campo es obligatorio.
+        </div>
+      </div>
+
+      <!-- Campo de nueva contraseña -->
+      <div class="mb-4">
+        <label class="block text-gray-100 font-medium mb-2" for="newPassword">Nueva Contraseña</label>
+        <div class="flex items-center border border-gray-300 rounded-md">
+          <input
+            [type]="hideNewPassword ? 'password' : 'text'"
+            id="newPassword"
+            formControlName="newPassword"
+            class="flex-grow px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+            placeholder="Introduce tu nueva contraseña"
+          />
+          <mat-icon
+            matSuffix
+            (click)="toggleNewPasswordVisibility()"
+            class="cursor-pointer mr-3 text-white"
+          >
+            {{hideNewPassword ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
+        </div>
+        <div *ngIf="cambiarPassForm.get('newPassword')?.invalid && cambiarPassForm.get('newPassword')?.touched" class="text-red-500 text-sm">
+          La contraseña debe tener al menos 8 caracteres.
+        </div>
+      </div>
+
+      <!-- Confirmar nueva contraseña -->
+      <div class="mb-4">
+        <label class="block text-gray-100 font-medium mb-2" for="confirmPassword">Confirmar Contraseña</label>
+        <div class="flex items-center border border-gray-300 rounded-md">
+          <input
+            [type]="hideConfirmPassword ? 'password' : 'text'"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            class="flex-grow px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+            placeholder="Repite tu nueva contraseña"
+          />
+          <mat-icon
+            matSuffix
+            (click)="toggleConfirmPasswordVisibility()"
+            class="cursor-pointer mr-3 text-white"
+          >
+            {{hideConfirmPassword ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
+        </div>
+        <div *ngIf="cambiarPassForm.hasError('passwordsDontMatch') && cambiarPassForm.get('confirmPassword')?.touched" class="text-red-500 text-sm">
+          Las contraseñas no coinciden.
+        </div>
+      </div>
+
+      <!-- Botón de envío -->
+      <button
+        type="submit"
+        class="w-full bg-yellow-400 text-gray-800 font-semibold py-2 px-6 rounded-md hover:bg-yellow-500 focus:outline-none focus:ring focus:ring-blue-500 transition duration-200"
+      >
+        Cambiar Contraseña
+      </button>
+    </form>
+
+    <!-- Mensajes de éxito y error -->
+    <div *ngIf="successMessage" class="mt-4 text-green-500 font-medium">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="mt-4 text-red-500 font-medium">
+      {{ errorMessage }}
+    </div>
+  </div>
+</div>
