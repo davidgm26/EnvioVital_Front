@@ -1,27 +1,85 @@
-# EnvioVitalFront
+# EnvioVital
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.1.
+## APP compuesta por lado servidor y lado cliente para la conexion entre almacenes y conductores para socorrer lugares catastroficos.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+¡Bienvenido a EnvioVital! Este proyecto tiene como objetivo desarrollar un sistema para la comunicación eficiente entre almacenes y conductores para colaborar en una zona catastrofica localizada en España, permitiendo administrar Eventos, Almacenes y conductores.
 
-## Code scaffolding
+## **Introducción**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+API programado en Java con [Spring Boot](https://spring.io/projects/spring-boot), antes de arrancar la API es importante crear la base de datos, ubicada en la carpeta resources.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Tecnologías utilizadas
 
-## Running unit tests
+- **Spring:** Se ha utilizado el framework de desarrollo de aplicaciones Java Spring para crear la API de backend y gestionar la lógica del negocio y la interacción con la base de datos.
+- **Angular:** Se ha utilizado el framework Angular para desarrollar la aplicación web que se conecta a la API y ofrece una interfaz de usuario completa.
+- **PostgreSQL:** Se utiliza la base de datos PostgreSQL.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Características
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Gestión de Eventos:Como administrador podrás registrar y administrar información sobre los eventos, como descripcion, ubicación y nombre
 
-## Further help
+- Gestión de Almacenes: Podrás mantener un registro de los conductores inscritos en tu almacen para un evento, incluyendo sus datos personales y lista de vehiculos.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Gestión de Conductores: Podrás inscribirte a almacenes para un evento especifico, gestionar tus datos personales y vehiculos.
+
+- Interfaz intuitiva: la interfaz de usuario ha sido diseñada de forma amigable y fácil de usar, permitiendo una navegación fluida y sencilla.
+  
+## Requisitos del sistema para desplegarlo.
+
+- Java 23 o superior.
+- Angular 18 (No aseguramos el correcto funcionamiento si se usa una versión inferior.)
+- PGAdmin o equivalentes
+
+## Instalación y configuración
+
+1. Clona este repositorio en tu máquina local.
+
+2. Ejecuta el comando npm i.
+
+3. Ejecta el proyecto de spring con el comando `ng serve --proxy-config .\src\app\proxy\proxy.conf.json`, ten en cuenta que debes de tener arrancado el back end
+
+4. Abre la app buscando en tu navegador `http://localhost:4200/`
+
+## Usuarios
+
+El proyecto cuenta con tres perfiles de usuario: Administrador, Conductor y  Almacen,  A continuación se detallan los usuarios predefinidos para cada perfil:
+
+### Perfil de Administrador
+
+
+Este usuario tiene privilegios de administrador y acceso completo a todas las funcionalidades de gestion de la aplicación.
+
+### Perfil de Conductor
+
+
+Este usuario tiene una lista de funcionalidades limitada a gestionar su perfil, y poder gestionar inscripciones propias a almacenes.
+
+### Perfil de Almacen
+
+
+Este usuario tiene una lista de funcionalidades limitada a gestionar su perfil, y poder gestionar inscripciones propias a eventos y conductores inscritos a él.
+
+---
+
+## Desarrollado por-
+
+- [Luis Marin Carmona](https://github.com/lmarinc)
+- [Alba Maria Vidal](https://github.com/amsafa)
+- [Pablo Padilla](https://github.com/Ppabetiko18)
+- [David Garcia](https://github.com/davidgm26)
+
+## Documentacion
+
+[Documentacion](https://drive.google.com/drive/folders/1NNvL3G1OE2V9uy3bORjVTl_nIWQOddP_?usp=drive_link)
+
+
+
+El proyecto Envío Vital ha sido desarrollado por el grupo 5 como proyecto educativo para las Asignaturas de Entorno Cliente, Entorno Servidor y diseño de interfaces  del Centro SAFA Ntra Señora de los Reyes
+
+
+
+¡Gracias por utilizar Envio Vital! Si tienes alguna pregunta o sugerencia, no dudes en contactarnos.
